@@ -1,0 +1,8 @@
+Inroduction text => Answer following question: $$
+Question text => How is data entered in @B$$
+Parameer type => list$$
+Variable name => B$$
+Variable values => Stack, Queue$$
+eq = x1$$
+List answer array => [Last In First Out,First In First Out]$$
+List answer table => Stack&& Queue

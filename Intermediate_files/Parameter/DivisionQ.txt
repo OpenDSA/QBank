@@ -1,0 +1,10 @@
+Inroduction text => Division$$
+Question text => @A/@B=?$$
+Parameer type => list$$
+Variable name => A$$
+Variable values => 15,30$$
+Variable name => B$$
+Variable values => 3,5$$
+eq = 2*x1+x2$$
+List answer array => [5,3,10,6]$$
+List answer table => 15##3&&15##5&&30##3&&30##5

@@ -1,0 +1,12 @@
+Inroduction text => You are to select one of the choices for an indexing structure when used under the conditions indicated. $$
+Question text => The system will @A, when stored @B, working on a @C..$$
+Parameer type => list$$
+Variable name => A$$
+Variable values => static database (no inserts or deletes), dynamic database (supports inserts and deletes)$$
+Variable name => B$$
+Variable values => on disk, in main memory$$
+Variable name => C$$
+Variable values => support range queries, perform exact mach queries only$$
+eq = 4x1+2x2+x3$$
+List answer array => [Linear Index,BPTree,Linear Index,Binary Search Tree (assume that it is balanced),Closed Hash Table,Closed Hash Table,Closed Hash Table,Closed Hash Table]$$
+List answer table => static database (no inserts or deletes)##on disk##support range queries&&static database (no inserts or deletes)##on disk## perform exact mach queries only&&static database (no inserts or deletes)## in main memory##support range queries&&static database (no inserts or deletes)## in main memory## perform exact mach queries only&& dynamic database (supports inserts and deletes)##on disk##support range queries&& dynamic database (supports inserts and deletes)##on disk## perform exact mach queries only&& dynamic database (supports inserts and deletes)## in main memory##support range queries&& dynamic database (supports inserts and deletes)## in main memory## perform exact mach queries only
