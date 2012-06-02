@@ -9,9 +9,14 @@ Your question has been saved!!
 
 /*This file saves an existing question that is edited by users into an existing intermediate format file and also calls a method to convert the intermdiate format to Khan Academy format*/
 
+
+$q_type = $_POST['q_type'];
+
+if( $q_type == "par")
+{
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
-$myFile = '/home/algoviz-beta/QBank/OpenDSA/Intermediate_files/'.$fileName.'.txt';
+$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/'.$fileName.'.txt';
 $fh = fopen($myFile, 'w');
 $stringData = "Inroduction text => ";
 $stringData .= $_POST['intro_text'];
@@ -219,13 +224,133 @@ fclose($fh);
 
 convertToKA();
 
+
+}
+else if($q_type== "grp"){
+
+$fileName = $_POST['file_name'];
+
+
+/*Intermediate file location*/
+$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$fileName.'.txt';
+$fh = fopen($myFile, 'w');
+
+$stringData = "Number of questions => ";
+$stringData .= $_POST['q_num'];
+$stringData .= "$$\n";
+
+$i=0;
+$count =(int)$_POST['q_num'];
+
+$var = $_POST[q_text.$i];
+
+
+while($i < $count){
+$stringData .= "Question text => ";
+$stringData .= $_POST[q_text.$i];
+
+$stringData .= "$$\nSolution => ";
+$stringData .= $_POST[s_text.$i];
+
+$stringData .= "$$\nChoice 1 => ";
+$stringData .= $_POST[c1_text.$i];
+$stringData .= "$$\nChoice 2 => ";
+$stringData .= $_POST[c2_text.$i];
+$stringData .= "$$\nChoice 3 => ";
+$stringData .= $_POST[c3_text.$i];
+$stringData .= "$$\nChoice 4 => ";
+$stringData .= $_POST[c4_text.$i];
+$stringData .= "$$\nChoice 5 => ";
+$stringData .= $_POST[c5_text.$i];
+
+$stringData .= "$$\nHint 1 => ";
+$stringData .= $_POST[h1_text.$i];
+$stringData .= "$$\nHint 2 => ";
+$stringData .= $_POST[h2_text.$i];
+$stringData .= "$$\nHint 3 => ";
+$stringData .= $_POST[h3_text.$i];
+$stringData .= "$$\nHint 4 => ";
+$stringData .= $_POST[h4_text.$i];
+$stringData .= "$$\n";
+
+$i++;
+
+
+}
+
+
+/*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
+fwrite($fh, $stringData);
+fclose($fh);
+$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/*.*';
+$execCmd = 'chmod 777 '.$pathQ;
+$output = shell_exec($execCmd);
+
+
+convertToKA1();
+}
+else
+{
+$fileName = $_POST['file_name'];
+
+
+/*Intermediate file location*/
+$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$fileName.'.txt';
+$fh = fopen($myFile, 'w');
+
+
+$stringData = "Question text => ";
+$stringData .= $_POST[q_text];
+
+$stringData .= "$$\nSolution => ";
+$stringData .= $_POST[s_text];
+
+$stringData .= "$$\nChoice 1 => ";
+$stringData .= $_POST[c1_text];
+$stringData .= "$$\nChoice 2 => ";
+$stringData .= $_POST[c2_text];
+$stringData .= "$$\nChoice 3 => ";
+$stringData .= $_POST[c3_text];
+$stringData .= "$$\nChoice 4 => ";
+$stringData .= $_POST[c4_text];
+$stringData .= "$$\nChoice 5 => ";
+$stringData .= $_POST[c5_text];
+
+$stringData .= "$$\nHint 1 => ";
+$stringData .= $_POST[h1_text];
+$stringData .= "$$\nHint 2 => ";
+$stringData .= $_POST[h2_text];
+$stringData .= "$$\nHint 3 => ";
+$stringData .= $_POST[h3_text];
+$stringData .= "$$\nHint 4 => ";
+$stringData .= $_POST[h4_text];
+$stringData .= "$$\n";
+
+
+
+
+/*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
+fwrite($fh, $stringData);
+fclose($fh);
+$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/*.*';
+$execCmd = 'chmod 777 '.$pathQ;
+$output = shell_exec($execCmd);
+
+
+convertToKA2();
+
+}
+
+
+
+
 /*Function that reads an intermediate file for a question and converts it into a Khan Academy compliant format*/
 
 function convertToKA() {
 $fileName = $_POST['file_name'];
 
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/OpenDSA/Intermediate_files/'.$fileName.'.txt';
+$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
 
@@ -328,7 +453,7 @@ $fh = fopen($myFile, 'r');
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
 $fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
@@ -487,6 +612,292 @@ $stringData.= "</div> </body></html>\n";
 fwrite($fh, $stringData);
 fclose($fh);
 }
+function convertToKA1() {
+$fileName = $_POST['file_name'];
+/*Intermediate file to be converted to KA format is specified below*/
+$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$fileName.'.txt';
+$fh = fopen($myFile, 'r');
+
+	$theData = "";
+	
+	while(($line=fgets($fh))!==false){
+		$theData.=$line;
+	}
+	fclose($fh);
+	
+	$contents = array();
+	$contents = explode("$$",$theData);
+	
+	$tent = array();
+	$tent = explode(" => ",$contents[0]);
+	$q_no = $tent[1]; 
+	$i=0;
+	$j=1;
+	$q_num= (int)$q_no;
+	
+$q_text = array();
+$s_text = array();
+$c1_text = array();
+$c2_text = array();
+$c3_text = array();
+$c4_text = array();
+$c5_text = array();
+
+$h1_text = array();
+$h2_text = array();
+$h3_text = array();
+$h4_text = array();
+
+
+
+while($i < $q_num)
+{
+
+$tent = explode(" => ",$contents[$j++]);
+$q_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$s_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c1_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c2_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c3_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c4_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c5_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h1_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h2_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h3_text[$i] = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h4_text[$i] = $tent[1];
+
+
+
+$i++;
+}
+
+
+/*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
+
+$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$fh = fopen($KAFile, 'w');
+$stringData = "<!DOCTYPE html>\n";
+$stringData.= "<html data-require=\"math\">\n";
+$stringData.= "<head>\n";
+$stringData.= "<title>\n";
+$stringData.= $fileName;
+$stringData.= "\n</title>\n";
+$stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
+</script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
+  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
+   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+\n";
+$stringData.= "</head><body><div class=\"exercise\">\n";
+$stringData.=  "<div class=\"vars\">\n";
+$stringData.=  "</div>\n";
+$stringData.= "<div class=\"problems\"> \n";
+$k = 0;
+while($k < $q_num){
+$stringData.= "<div id=\"problem-type-or-description\">\n";
+$stringData.= "<p class=\"question\">\n";
+$stringData.= $q_text[$k];
+$stringData.= "\n</p>\n";
+$stringData.= "<div class=\"solution\">\n";
+$stringData.= "<var>\"";
+$stringData.= $s_text[$k];
+$stringData.= "\"</var></div>\n";
+$stringData.= "<ul class =\"choices\" data-show=\"4\">\n";
+$stringData.= "<li><var>\"";
+$stringData.= $c1_text[$k];
+$stringData.= "\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c2_text[$k];
+$stringData.="\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c3_text[$k];
+$stringData.="\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c4_text[$k];
+$stringData.="\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c5_text[$k];
+$stringData.="\"</var></li>\n";
+$stringData.="</ul>";
+
+$stringData.= "<div class =\"hints\">\n";
+$stringData.= "<p>\"";
+$stringData.=$h1_text[$k];
+$stringData.="\"</p>\n";
+$stringData.="<p>\"";
+$stringData.=$h2_text[$k];
+$stringData.="\"</p>\n";
+$stringData.="<p>\"";
+$stringData.=$h3_text[$k];
+$stringData.="\"</p>\n";
+$stringData.="<p>\"";
+$stringData.=$h4_text[$k];
+$stringData.="\"</p>\n";
+
+$stringData.= "</div></div>";
+
+$k++;
+
+}
+
+
+
+$stringData.= "</div></div> </body></html>\n";
+
+fwrite($fh, $stringData);
+fclose($fh);
+$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
+$execCmd = 'chmod 777 '.$pathQ;
+$output = shell_exec($execCmd);
+}
+function convertToKA2() {
+$fileName = $_POST['file_name'];
+/*Intermediate file to be converted to KA format is specified below*/
+$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$fileName.'.txt';
+$fh = fopen($myFile, 'r');
+
+	$theData = "";
+	
+	while(($line=fgets($fh))!==false){
+		$theData.=$line;
+	}
+	fclose($fh);
+	
+	$contents = array();
+	$contents = explode("$$",$theData);
+	
+	$tent = array();
+	
+$j=0;
+
+
+$tent = explode(" => ",$contents[$j]);
+$q_text= $tent[1];
+$j++;
+$tent = explode(" => ",$contents[$j++]);
+$s_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c1_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c2_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c3_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c4_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$c5_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h1_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h2_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h3_text = $tent[1];
+
+$tent = explode(" => ",$contents[$j++]);
+$h4_text = $tent[1];
+
+
+
+
+/*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
+
+$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$fh = fopen($KAFile, 'w');
+$stringData = "<!DOCTYPE html>\n";
+$stringData.= "<html data-require=\"math\">\n";
+$stringData.= "<head>\n";
+$stringData.= "<title>\n";
+$stringData.= $fileName;
+$stringData.= "\n</title>\n";
+$stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
+</script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
+  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
+   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+\n";
+$stringData.= "</head><body><div class=\"exercise\">\n";
+$stringData.=  "<div class=\"vars\">\n";
+$stringData.=  "</div>\n";
+$stringData.= "<div class=\"problems\"> \n";
+
+$stringData.= "<div id=\"problem-type-or-description\">\n";
+$stringData.= "<p class=\"question\">\n";
+$stringData.= $q_text;
+$stringData.= "\n</p>\n";
+$stringData.= "<div class=\"solution\">\n";
+$stringData.= "<var>\"";
+$stringData.= $s_text;
+$stringData.= "\"</var></div>\n";
+$stringData.= "<ul class =\"choices\" data-show=\"4\">\n";
+$stringData.= "<li><var>\"";
+$stringData.= $c1_text;
+$stringData.= "\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c2_text;
+$stringData.="\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c3_text;
+$stringData.="\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c4_text;
+$stringData.="\"</var></li>\n";
+$stringData.="<li><var>\"";
+$stringData.=$c5_text;
+$stringData.="\"</var></li>\n";
+$stringData.="</ul>";
+
+$stringData.= "<div class =\"hints\">\n";
+$stringData.= "<p>\"";
+$stringData.=$h1_text;
+$stringData.="\"</p>\n";
+$stringData.="<p>\"";
+$stringData.=$h2_text;
+$stringData.="\"</p>\n";
+$stringData.="<p>\"";
+$stringData.=$h3_text;
+$stringData.="\"</p>\n";
+$stringData.="<p>\"";
+$stringData.=$h4_text;
+$stringData.="\"</p>\n";
+
+$stringData.= "</div></div>";
+
+
+$stringData.= "</div></div> </body></html>\n";
+
+fwrite($fh, $stringData);
+fclose($fh);
+$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
+$execCmd = 'chmod 777 '.$pathQ;
+$output = shell_exec($execCmd);
+}
+
 ?>
 
 </html>

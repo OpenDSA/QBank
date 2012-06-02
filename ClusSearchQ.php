@@ -18,64 +18,18 @@ List of existing question files:
 </h2>
 <?php
 
-
-//Displays list of existing questions on screen.
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter';
-$execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
-$output = shell_exec($execCmd);
-$filearray = explode(".txt", $output);
-echo "<table border=1 align=center CELLSPACING=1  CELLPADDING=2 width=20%>";
-echo "<h3>";
-echo "Parameterised Q";
-echo "</h3>";
-
-
-
-for($i=0; $i<sizeof($filearray); $i++){
-	
-	echo "<tr>";
-	echo "<td>";
-	echo "<p>";
-	echo $filearray[$i]; 
-	echo "<p>";
-	echo "</td>";
-	echo "</tr>";
-}
-echo "</table>";
-
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group';
-$execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
-$output = shell_exec($execCmd);
-$filearray = explode(".txt", $output);
-echo "<table border=1 align=center CELLSPACING=1  CELLPADDING=2 width=20%>";
-
-echo "<h3>";
-echo "Group Q";
-echo "</h3>";
-
-for($i=0; $i<sizeof($filearray); $i++){
-	
-	echo "<tr>";
-	echo "<td>";
-	echo "<p>";
-	echo $filearray[$i]; 
-	echo "<p>";
-	echo "</td>";
-	echo "</tr>";
-}
-echo "</table>";
-
 $pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
 echo "<table border=1 align=center CELLSPACING=1  CELLPADDING=2 width=20%>";
-
+	
+	
 echo "<h3>";
 echo "Simple Q";
 echo "</h3>";
 for($i=0; $i<sizeof($filearray); $i++){
-	
+	echo "<input id=\"q_type\" name=\"file_name\" type=\"hidden\" value=".$filearray[$i]." />";	
 	echo "<tr>";
 	echo "<td>";
 	echo "<p>";
@@ -91,16 +45,13 @@ echo "</table>";
 <input name="utf8" type="hidden" value="&#x2713;" /> 
 
 
-<h2>Select question type: </h2>
-<center>
-<input type="radio" name="radio1" value="par" />Parameterised Q
-<input type="radio" name="radio1" value="grp" />Group Q
-<input type="radio" name="radio1" value="simple" />Simple Q
-</center>
-<h2> Enter filename to edit: 
+<h3> Enter filename to view: 
 <input type="text" name="QFileName" maxlength="20"/> 
 
-<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="Modify"/>
+<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="View"/>
+</h3><p><h2>
+Select checkboxes to group questions:
+<input name="commit" type="button" value="Group" onclick= "location.href='Cluster.php'"/>
 </h2>
 </form>
  <p></p>

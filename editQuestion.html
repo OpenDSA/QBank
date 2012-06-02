@@ -92,10 +92,12 @@ function generateParOption(){
 
 	var e = document.getElementById('group_var');
 	var f = document.getElementById('par_var');
+	var g = document.getElementById('simple_var');
 	var f1 = document.getElementById('par_var2');
 	if(e.style.display == 'inline') {
 		e.style.display = 'none';		
 		f.style.display = 'none';
+		g.style.display = 'none';
 		f1.style.display = 'inline';
 	}
 	
@@ -580,10 +582,12 @@ function generateGroupOption(){
  
 	var e = document.getElementById('par_var');
 	var f = document.getElementById('group_var');
+	var g = document.getElementById('simple_var');
 	var f1 = document.getElementById('group_var2');
 	if(e.style.display == 'inline') {
 		e.style.display = 'none';
 		f.style.display = 'none';
+		g.style.display = 'none';
 		f1.style.display = 'inline';
 	}
 
@@ -636,6 +640,273 @@ function generateGroupOption(){
 			
 	
 	
+}
+
+function generateSimpleOption(){
+ 
+	var e = document.getElementById('par_var');
+	var f = document.getElementById('group_var');
+	var g = document.getElementById('simple_var');
+	var g1 = document.getElementById('simple_var2');
+	if(e.style.display == 'inline') {
+		e.style.display = 'none';
+		f.style.display = 'none';
+		g.style.display = 'none';
+		g1.style.display = 'inline';
+	}
+
+
+		
+		var tbl = document.createElement("table");
+		tbl.setAttribute("border",'2');
+
+		
+			
+			var row1 = document.createElement("tr");
+			var r1c1 = document.createElement("td");
+			r1c1.setAttribute("valign",'top');
+			var txt1 = document.createElement("i");
+			txt1.innerHTML = "Question:";
+			r1c1.appendChild(txt1);
+			row1.appendChild(r1c1);
+
+			var r1c2 = document.createElement("td");
+			var text1 = document.createElement("div");
+			text1.setAttribute("class",'field');
+			var textarea1 = document.createElement("textarea");
+			textarea1.setAttribute("class",'mark_it_up');
+			textarea1.setAttribute("cols",'80');
+			textarea1.setAttribute("id",'question_content');
+			textarea1.setAttribute("name",'q_text');
+			textarea1.setAttribute("rows",'4');
+			text1.appendChild(textarea1);
+			r1c2.appendChild(text1);
+			row1.appendChild(r1c2);
+			tbl.appendChild(row1);
+
+			var row2 = document.createElement("tr");
+			var r2c1 = document.createElement("td");
+			r2c1.setAttribute("valign",'top');
+			var txt2 = document.createElement("i");
+			txt2.innerHTML = "Solution";
+			r2c1.appendChild(txt2);
+			row2.appendChild(r2c1);
+
+			var r2c2 = document.createElement("td");
+			var text2 = document.createElement("div");
+			text2.setAttribute("class",'field');
+			var textarea2 = document.createElement("textarea");
+			textarea2.setAttribute("class",'mark_it_up');
+			textarea2.setAttribute("cols",'80');
+			textarea2.setAttribute("id",'solution');
+			textarea2.setAttribute("name",'s_text');
+			textarea2.setAttribute("rows",'4');
+			text2.appendChild(textarea2);
+			r2c2.appendChild(text2);
+			row2.appendChild(r2c2);
+			tbl.appendChild(row2);
+
+			var row3 = document.createElement("tr");
+			var r3c1 = document.createElement("td");
+			r3c1.setAttribute("valign",'top');
+			var txt3 = document.createElement("i");
+			txt3.innerHTML = "Choice 1";
+			r3c1.appendChild(txt3);
+			row3.appendChild(r3c1);
+
+			var r3c2 = document.createElement("td");
+			var text3 = document.createElement("div");
+			text3.setAttribute("class",'field');
+			var textarea3 = document.createElement("textarea");
+			textarea3.setAttribute("class",'mark_it_up');
+			textarea3.setAttribute("cols",'80');
+			textarea3.setAttribute("id",'choice1');
+			textarea3.setAttribute("name",'c1_text');
+			textarea3.setAttribute("rows",'1');
+			text3.appendChild(textarea3);
+			r3c2.appendChild(text3);
+			row3.appendChild(r3c2);
+			tbl.appendChild(row3);
+
+			var row4 = document.createElement("tr");
+			var r4c1 = document.createElement("td");
+			r4c1.setAttribute("valign",'top');
+			var txt4 = document.createElement("i");
+			txt4.innerHTML = "Choice 2";
+			r4c1.appendChild(txt4);
+			row4.appendChild(r4c1);
+
+			var r4c2 = document.createElement("td");
+			var text4 = document.createElement("div");
+			text4.setAttribute("class",'field');
+			var textarea4 = document.createElement("textarea");
+			textarea4.setAttribute("class",'mark_it_up');
+			textarea4.setAttribute("cols",'80');
+			textarea4.setAttribute("id",'choice2');
+			textarea4.setAttribute("name",'c2_text');
+			textarea4.setAttribute("rows",'1');
+			text4.appendChild(textarea4);
+			r4c2.appendChild(text4);
+			row4.appendChild(r4c2);
+			tbl.appendChild(row4);
+
+			var row5 = document.createElement("tr");
+			var r5c1 = document.createElement("td");
+			r5c1.setAttribute("valign",'top');
+			var txt5 = document.createElement("i");
+			txt5.innerHTML = "Choice 3";
+			r5c1.appendChild(txt5);
+			row5.appendChild(r5c1);
+
+			var r5c2 = document.createElement("td");
+			var text5 = document.createElement("div");
+			text5.setAttribute("class",'field');
+			var textarea5 = document.createElement("textarea");
+			textarea5.setAttribute("class",'mark_it_up');
+			textarea5.setAttribute("cols",'80');
+			textarea5.setAttribute("id",'choice3');
+			textarea5.setAttribute("name",'c3_text');
+			textarea5.setAttribute("rows",'1');
+			text5.appendChild(textarea5);
+			r5c2.appendChild(text5);
+			row5.appendChild(r5c2);
+			tbl.appendChild(row5);
+						
+			var row6 = document.createElement("tr");
+			var r6c1 = document.createElement("td");
+			r6c1.setAttribute("valign",'top');
+			var txt6 = document.createElement("i");
+			txt6.innerHTML = "Choice 4";
+			r6c1.appendChild(txt6);
+			row6.appendChild(r6c1);
+
+			var r6c2 = document.createElement("td");
+			var text6 = document.createElement("div");
+			text6.setAttribute("class",'field');
+			var textarea6 = document.createElement("textarea");
+			textarea6.setAttribute("class",'mark_it_up');
+			textarea6.setAttribute("cols",'80');
+			textarea6.setAttribute("id",'choice4');
+			textarea6.setAttribute("name",'c4_text');
+			textarea6.setAttribute("rows",'1');
+			text6.appendChild(textarea6);
+			r6c2.appendChild(text6);
+			row6.appendChild(r6c2);
+			tbl.appendChild(row6);
+						
+			var row7 = document.createElement("tr");
+			var r7c1 = document.createElement("td");
+			r7c1.setAttribute("valign",'top');
+			var txt7 = document.createElement("i");
+			txt7.innerHTML = "Choice 5";
+			r7c1.appendChild(txt7);
+			row7.appendChild(r7c1);
+
+			var r7c2 = document.createElement("td");
+			var text7 = document.createElement("div");
+			text7.setAttribute("class",'field');
+			var textarea7 = document.createElement("textarea");
+			textarea7.setAttribute("class",'mark_it_up');
+			textarea7.setAttribute("cols",'80');
+			textarea7.setAttribute("id",'choice5');
+			textarea7.setAttribute("name",'c5_text');
+			textarea7.setAttribute("rows",'1');
+			text7.appendChild(textarea7);
+			r7c2.appendChild(text7);
+			row7.appendChild(r7c2);
+			tbl.appendChild(row7);
+						
+var row8 = document.createElement("tr");
+			var r8c1 = document.createElement("td");
+			r8c1.setAttribute("valign",'top');
+			var txt8 = document.createElement("i");
+			txt8.innerHTML = "Hint 1";
+			r8c1.appendChild(txt8);
+			row8.appendChild(r8c1);
+
+			var r8c2 = document.createElement("td");
+			var text8 = document.createElement("div");
+			text8.setAttribute("class",'field');
+			var textarea8 = document.createElement("textarea");
+			textarea8.setAttribute("class",'mark_it_up');
+			textarea8.setAttribute("cols",'80');
+			textarea8.setAttribute("id",'hint5');
+			textarea8.setAttribute("name",'h1_text');
+			textarea8.setAttribute("rows",'1');
+			text8.appendChild(textarea8);
+			r8c2.appendChild(text8);
+			row8.appendChild(r8c2);
+			tbl.appendChild(row8);
+
+var row9 = document.createElement("tr");
+			var r9c1 = document.createElement("td");
+			r9c1.setAttribute("valign",'top');
+			var txt9 = document.createElement("i");
+			txt9.innerHTML = "Hint 2";
+			r9c1.appendChild(txt9);
+			row9.appendChild(r9c1);
+
+			var r9c2 = document.createElement("td");
+			var text9 = document.createElement("div");
+			text9.setAttribute("class",'field');
+			var textarea9 = document.createElement("textarea");
+			textarea9.setAttribute("class",'mark_it_up');
+			textarea9.setAttribute("cols",'80');
+			textarea9.setAttribute("id",'hint2');
+			textarea9.setAttribute("name",'h2_text');
+			textarea9.setAttribute("rows",'1');
+			text9.appendChild(textarea9);
+			r9c2.appendChild(text9);
+			row9.appendChild(r9c2);
+			tbl.appendChild(row9);
+
+var row10 = document.createElement("tr");
+			var r10c1 = document.createElement("td");
+			r10c1.setAttribute("valign",'top');
+			var txt10 = document.createElement("i");
+			txt10.innerHTML = "Hint 3";
+			r10c1.appendChild(txt10);
+			row10.appendChild(r10c1);
+
+			var r10c2 = document.createElement("td");
+			var text10 = document.createElement("div");
+			text10.setAttribute("class",'field');
+			var textarea10 = document.createElement("textarea");
+			textarea10.setAttribute("class",'mark_it_up');
+			textarea10.setAttribute("cols",'80');
+			textarea10.setAttribute("id",'hint3');
+			textarea10.setAttribute("name",'h3_text');
+			textarea10.setAttribute("rows",'1');
+			text10.appendChild(textarea10);
+			r10c2.appendChild(text10);
+			row10.appendChild(r10c2);
+			tbl.appendChild(row10);
+
+var row11 = document.createElement("tr");
+			var r11c1 = document.createElement("td");
+			r11c1.setAttribute("valign",'top');
+			var txt11 = document.createElement("i");
+			txt11.innerHTML = "Hint 4";
+			r11c1.appendChild(txt11);
+			row11.appendChild(r11c1);
+
+			var r11c2 = document.createElement("td");
+			var text11 = document.createElement("div");
+			text11.setAttribute("class",'field');
+			var textarea11 = document.createElement("textarea");
+			textarea11.setAttribute("class",'mark_it_up');
+			textarea11.setAttribute("cols",'80');
+			textarea11.setAttribute("id",'hint4');
+			textarea11.setAttribute("name",'h4_text');
+			textarea11.setAttribute("rows",'1');
+			text11.appendChild(textarea11);
+			r11c2.appendChild(text11);
+			row11.appendChild(r11c2);
+			tbl.appendChild(row11);
+
+
+			document.getElementById('var7').appendChild(tbl);
+			
 }
 //For range type of variable, checks if a min value entered is an integer else shows an error message.
 function minValidation(obj){
@@ -887,15 +1158,22 @@ function generateType(place, variable, variable1) {
 	radioHtml2 += "Parameterised question";
 	radioHtml2 += '</div>';
 
-	var radioHtml1 = '<div id="group_var" style="display:inline"> <input type="radio" name="radio1" value="group" onClick="generateGroupOption()"';
+	
+var radioHtml4 = '<div id="simple_var" style="display:inline"> <input type="radio" name="radio1" value="simple" onClick="generateSimpleOption()"';
+    radioHtml4 += '/> ';
+	radioHtml4 += "Simple question ";
+	radioHtml4 += '</div>';
+	var radioHtml5 = '<div id="simple_var2" style="display:none">';
+	radioHtml5 += "Simple question";
+	radioHtml5 += '</div>';
+
+var radioHtml1 = '<div id="group_var" style="display:inline"> <input type="radio" name="radio1" value="grp" onClick="generateGroupOption()"';
     radioHtml1 += '/> ';
 	radioHtml1 += "Group question ";
 	radioHtml1 += '</div>';
 	var radioHtml3 = '<div id="group_var2" style="display:none">';
 	radioHtml3 += "Group question";
 	radioHtml3 += '</div>';
-
-
 
 	
     var radioFragment = document.createElement('div');
@@ -906,11 +1184,18 @@ function generateType(place, variable, variable1) {
     radioFragment2.innerHTML = radioHtml2;
 	var radioFragment3 = document.createElement('div');
     radioFragment3.innerHTML = radioHtml3;
+	var radioFragment4 = document.createElement('div');
+    radioFragment4.innerHTML = radioHtml4;
+	var radioFragment5 = document.createElement('div');
+    radioFragment5.innerHTML = radioHtml5;
 
-    document.getElementById(place).appendChild(radioFragment);
+    	document.getElementById(place).appendChild(radioFragment);
 	document.getElementById(place).appendChild(radioFragment1);
 	document.getElementById(place).appendChild(radioFragment2);
 	document.getElementById(place).appendChild(radioFragment3);
+	document.getElementById(place).appendChild(radioFragment4);
+	document.getElementById(place).appendChild(radioFragment5);
+
 
 }
 </script>
@@ -982,7 +1267,7 @@ function generateType(place, variable, variable1) {
 
 	
 <div id="var7" name="var7">
-			</div>
+</div>
 	 <p>   
 <div id="var6" name="var6">
 	</div> 
