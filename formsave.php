@@ -187,7 +187,7 @@ while(isset($var1))
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
 fwrite($fh, $stringData);
 fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/*.*';
+$pathQ = './Intermediate_files/Parameter/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
 
@@ -199,7 +199,7 @@ else if($option1== "grp"){
 
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
 $fh = fopen($myFile, 'w');
 
 $stringData = "Number of questions => ";
@@ -247,7 +247,7 @@ $i++;
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
 fwrite($fh, $stringData);
 fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/*.*';
+$pathQ = './Intermediate_files/Group/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
 
@@ -261,7 +261,7 @@ else
 
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Simple/'.$fileName.'.txt';
 $fh = fopen($myFile, 'w');
 
 
@@ -299,7 +299,7 @@ $stringData .= "$$\n";
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
 fwrite($fh, $stringData);
 fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/*.*';
+$pathQ = './Intermediate_files/Simple/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
 convertToKA2();
@@ -312,7 +312,7 @@ convertToKA2();
 function convertToKA() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
 
@@ -414,7 +414,7 @@ $fh = fopen($myFile, 'r');
 	}
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$KAFile = './Exercises/'.$fileName.'KA.html';
 $fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
@@ -424,8 +424,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
-   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+  <script>urlBaseOverride = \"../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script src=\"../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -574,7 +574,7 @@ $stringData.= "</div> </body></html>\n";
 
 fwrite($fh, $stringData);
 fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
+$pathQ = './Exercises/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
 }
@@ -582,7 +582,7 @@ $output = shell_exec($execCmd);
 function convertToKA1() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
 	$theData = "";
@@ -661,7 +661,7 @@ $i++;
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$KAFile = './Exercises/'.$fileName.'KA.html';
 $fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
@@ -671,8 +671,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
-   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+  <script>urlBaseOverride = \"../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script src=\"../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -732,7 +732,7 @@ $stringData.= "</div></div> </body></html>\n";
 
 fwrite($fh, $stringData);
 fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
+$pathQ = './Exercises/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
 }
@@ -740,7 +740,7 @@ $output = shell_exec($execCmd);
 function convertToKA2() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Simple/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
 	$theData = "";
@@ -806,8 +806,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
-   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+  <script>urlBaseOverride = \"../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script src=\"../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -861,7 +861,7 @@ $stringData.= "</div></div> </body></html>\n";
 
 fwrite($fh, $stringData);
 fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
+$pathQ = './Exercises/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
 }
