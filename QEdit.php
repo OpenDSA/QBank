@@ -39,7 +39,7 @@ if($type == 'par'){
 	echo "<input id=\"q_type\" name=\"file_name\" type=\"hidden\" value=".$qName." />";	
 	
 echo "<input id=\"q_type\" name=\"q_type\" type=\"hidden\" value=\"par\" />";	
-	$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/'.$qName.'.txt';
+	$myFile = './Intermediate_files/Parameter/'.$qName.'.txt';
 	if(!file_exists($myFile)) {
 echo "<h2>";
 		die("Please go back and enter a valid question file name!!!!");
@@ -287,7 +287,7 @@ else if ($type == 'grp'){
 	echo "<input id=\"q_type\" name=\"q_type\" type=\"hidden\" value=\"grp\" />";	
 
 	echo "<input id=\"q_type\" name=\"file_name\" type=\"hidden\" value=".$qName." />"; 	
-	$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$qName.'.txt';
+	$myFile = './Intermediate_files/Group/'.$qName.'.txt';
 	if(!file_exists($myFile)) {
 	echo "<h2>";
 		die("Please go back and enter a valid question file name!!!!");
@@ -494,7 +494,7 @@ else
 {
 	echo "<input id=\"q_type\" name=\"q_type\" type=\"hidden\" value=\"simple\" />";	
 	echo "<input id=\"q_type\" name=\"file_name\" type=\"hidden\" value=".$qName." />";	
-	$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$qName.'.txt';
+	$myFile = './Intermediate_files/Simple/'.$qName.'.txt';
 	if(!file_exists($myFile)) {
 	echo "<h2>";
 		die("Please go back and enter a valid question file name!!!!");

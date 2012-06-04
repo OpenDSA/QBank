@@ -18,7 +18,7 @@ List of existing question files:
 </h2>
 <?php
 
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple';
+$pathQ = './Intermediate_files/Simple';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);

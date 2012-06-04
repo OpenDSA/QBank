@@ -20,7 +20,7 @@ List of existing question files:
 
 
 //Displays list of existing questions on screen.
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter';
+$pathQ = './Intermediate_files/Parameter';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
@@ -43,7 +43,7 @@ for($i=0; $i<sizeof($filearray); $i++){
 }
 echo "</table>";
 
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group';
+$pathQ = './Intermediate_files/Group';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
@@ -65,7 +65,7 @@ for($i=0; $i<sizeof($filearray); $i++){
 }
 echo "</table>";
 
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple';
+$pathQ = './Intermediate_files/Simple';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);

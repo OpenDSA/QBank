@@ -20,7 +20,7 @@ List of existing question files:
 
 
 //Displays list of existing questions on screen.
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files';
+$pathQ = './Intermediate_files';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
