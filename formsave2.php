@@ -453,7 +453,7 @@ $fh = fopen($myFile, 'r');
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '../OpenDSA/Exercises/'.$fileName.'KA.html';
+$KAFile = './Exercises/'.$fileName.'KA.html';
 $fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";

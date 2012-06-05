@@ -424,8 +424,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
-   <script src=\"../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
+   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -671,8 +671,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
-   <script src=\"../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
+   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -796,7 +796,7 @@ $h4_text = $tent[1];
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$KAFile = './Exercises/'.$fileName.'KA.html';
 $fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
@@ -806,8 +806,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
-   <script src=\"../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
+   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";

@@ -1137,67 +1137,6 @@ function getAnsTable(){
 		document.getElementsByName('answerTable').item(0).setAttribute("value",ans_tab);
 }
 
-function generateType(place, variable, variable1) {
-
-	var e = document.getElementById(variable);
-	var f = document.getElementById(variable1);
-	if(e.style.display == 'inline') {
-		e.style.display = 'none';
-		f.style.display = 'inline';
-	}
-	else {
-		e.style.display = 'inline';
-		f.style.display = 'none';
-	}
-
-    var radioHtml = '<div id="par_var" style="display:inline"> <input type="radio" name="radio1" value="par" onClick="generateParOption()"';
-    radioHtml += '/>';
-	radioHtml += "Parameterised question";
-	radioHtml += '</div>';
-	var radioHtml2 = '<div id="par_var2" style="display:none">';
-	radioHtml2 += "Parameterised question";
-	radioHtml2 += '</div>';
-
-	
-var radioHtml4 = '<div id="simple_var" style="display:inline"> <input type="radio" name="radio1" value="simple" onClick="generateSimpleOption()"';
-    radioHtml4 += '/> ';
-	radioHtml4 += "Simple question ";
-	radioHtml4 += '</div>';
-	var radioHtml5 = '<div id="simple_var2" style="display:none">';
-	radioHtml5 += "Simple question";
-	radioHtml5 += '</div>';
-
-var radioHtml1 = '<div id="group_var" style="display:inline"> <input type="radio" name="radio1" value="grp" onClick="generateGroupOption()"';
-    radioHtml1 += '/> ';
-	radioHtml1 += "Group question ";
-	radioHtml1 += '</div>';
-	var radioHtml3 = '<div id="group_var2" style="display:none">';
-	radioHtml3 += "Group question";
-	radioHtml3 += '</div>';
-
-	
-    var radioFragment = document.createElement('div');
-    radioFragment.innerHTML = radioHtml;
-	var radioFragment1 = document.createElement('div');
-    radioFragment1.innerHTML = radioHtml1;
-	var radioFragment2 = document.createElement('div');
-    radioFragment2.innerHTML = radioHtml2;
-	var radioFragment3 = document.createElement('div');
-    radioFragment3.innerHTML = radioHtml3;
-	var radioFragment4 = document.createElement('div');
-    radioFragment4.innerHTML = radioHtml4;
-	var radioFragment5 = document.createElement('div');
-    radioFragment5.innerHTML = radioHtml5;
-
-    	document.getElementById(place).appendChild(radioFragment);
-	document.getElementById(place).appendChild(radioFragment1);
-	document.getElementById(place).appendChild(radioFragment2);
-	document.getElementById(place).appendChild(radioFragment3);
-	document.getElementById(place).appendChild(radioFragment4);
-	document.getElementById(place).appendChild(radioFragment5);
-
-
-}
 </script>
 
   <script type="text/javascript">
@@ -1241,21 +1180,34 @@ var radioHtml1 = '<div id="group_var" style="display:inline"> <input type="radio
      </div>
        </td>
            </tr>
- <tr>	
+ 	<tr>	
 	       <td valign="top">
 			<div id="variable2" style="display:inline">
-				<a href="#" style="cursor:pointer" onClick="generateType('var5', 'variable2', 'variable3')" >Select the type of question </a>
-			</div>
-			<div id="variable3" style="display:none">
-				Question Type:
+				Select the type of question 
 			</div>
 		</td>
 	   
-       <td>
+       	<td>
 			<div id="var5" name="var5">
+			<div id="par_var" style="display:inline"> 
+				<input type="radio" name="radio1" value="par" onClick="generateParOption()"/>Parameterised question
 			</div>
-	   </td>
-    </tr>
+			<div id="par_var2" style="display:none">Parameterised question</div>
+
+	
+			<div id="simple_var" style="display:inline"> 
+				<input type="radio" name="radio1" value="simple" onClick="generateSimpleOption()"/> Simple question
+			</div>
+			<div id="simple_var2" style="display:none">Simple question</div>
+	
+			<div id="group_var" style="display:inline"> 
+				<input type="radio" name="radio1" value="grp" onClick="generateGroupOption()"/>Group question 
+			</div>
+			<div id="group_var2" style="display:none">Group question</div>
+	
+			</div>
+		</td>
+    	</tr>
  
 	      
 	</table>

@@ -20,7 +20,7 @@ List of existing converted Khan Academy question files:
 
 
 //Displays list of existing questions on screen.
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises';
+$pathQ = './Exercises';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".html", $output);
