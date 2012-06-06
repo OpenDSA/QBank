@@ -31,7 +31,7 @@ echo "</h3>";
 
 
 
-for($i=0; $i<sizeof($filearray); $i++){
+for($i=0; $i<sizeof($filearray)-1; $i++){
 	
 	echo "<tr>";
 	echo "<td>";
@@ -53,7 +53,7 @@ echo "<h3>";
 echo "Group Q";
 echo "</h3>";
 
-for($i=0; $i<sizeof($filearray); $i++){
+for($i=0; $i<sizeof($filearray)-1; $i++){
 	
 	echo "<tr>";
 	echo "<td>";
@@ -74,7 +74,7 @@ echo "<table border=1 align=center CELLSPACING=1  CELLPADDING=2 width=20%>";
 echo "<h3>";
 echo "Simple Q";
 echo "</h3>";
-for($i=0; $i<sizeof($filearray); $i++){
+for($i=0; $i<sizeof($filearray)-1; $i++){
 	
 	echo "<tr>";
 	echo "<td>";

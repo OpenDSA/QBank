@@ -1,0 +1,11 @@
+Question text => What is the cost of search operation on a properly tuned hash system of size n?$$
+Solution => <code>\Theta(1)</code>$$
+Choice 1 => <code>O(n^2)</code>$$
+Choice 2 => <code>O(n)</code>$$
+Choice 3 => <code>O(\log n)</code>$$
+Choice 4 => <code>\Theta(1)</code>$$
+Choice 5 => $$
+Hint 1 => $$
+Hint 2 => $$
+Hint 3 => $$
+Hint 4 => $$
