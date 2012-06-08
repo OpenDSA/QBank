@@ -3,10 +3,10 @@
 	$qName = $_POST['QFileName'];
 	$qName = trim($qName);
 	
-	$myFile1 = '.Exercises/'.$qName.'.html';
+	$myFile1 = '/home/algoviz-beta/QBank/Exercises/'.$qName.'.html';
+	$myFile = '/QBank/Exercises/'.$qName.'.html';
 
 
-	$myFile = './Exercises/'.$qName.'.html';
 	if(!file_exists($myFile1)) {
 
 echo "<html>";
@@ -41,6 +41,6 @@ echo "</html>";
 	}
 	else {
 		header("Location: $myFile");
-}
+	}
  
 ?>

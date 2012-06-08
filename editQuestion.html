@@ -189,11 +189,13 @@ function generateParOption(){
 
 			tbl.appendChild(row3);
 
+
+
 			var row4 = document.createElement("tr");
 			var r4c1 = document.createElement("td");
 			r4c1.setAttribute("valign",'top');
        		var txtd4 = document.createElement("div");
-			txtd4.setAttribute("id",'variable2');
+			txtd4.setAttribute("id",'variable3');
 			txtd4.setAttribute("style",'display:inline');
 			var txta4 = document.createElement("a");			
 			txta4.setAttribute("href",'#');
@@ -201,13 +203,14 @@ function generateParOption(){
 			txta4.innerHTML = "Add an answer";
 			txta4.setAttribute("onClick",'generateAnswer()');
 			txtd4.appendChild(txta4);
-			r4c1.appendChild(txtd4);
+			
 			
 			var txtd5 = document.createElement("div");
-			txtd5.setAttribute("id",'variable3');
+			txtd5.setAttribute("id",'variable4');
 			txtd5.setAttribute("style",'display:none');
-			txtd5.innerHTML = "Answer:";			
+			txtd5.innerHTML = "Answer:";
 			r4c1.appendChild(txtd4);
+			r4c1.appendChild(txtd5);
 			row4.appendChild(r4c1);
 
 			var r4c2 = document.createElement("td");
@@ -993,8 +996,8 @@ function addRangeVariable(){
 //Based on the variable type selected, generated textboxes to add an answer: for range type a textbox to write answer function and for list type a table to enter answer for each combination.
 function generateAnswer(){
 
-	var e1 = document.getElementById('variable2');
-	var f1 = document.getElementById('variable3');
+	var e1 = document.getElementById('variable3');
+	var f1 = document.getElementById('variable4');
 	if(e1.style.display == 'inline') {
 		e1.style.display = 'none';
 		f1.style.display = 'inline';
@@ -1212,18 +1215,18 @@ function getAnsTable(){
 	      
 	</table>
 	
-	 <div>
-		<input type="hidden" name="answerTable">
-	</div>
-
-
 	
 <div id="var7" name="var7">
 </div>
 	 <p>   
 <div id="var6" name="var6">
-	</div> 
+</div> 
    
+	 <div>
+		<input type="hidden" name="answerTable">
+	</div>
+
+
 <span id="newText">
   
   <div class="actions">
