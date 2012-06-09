@@ -30,7 +30,9 @@ for($i=0; $i<sizeof($filearray); $i++){
 	echo "<tr>";
 	echo "<td>";
 	echo "<p>";
+	echo "<a href=\"/QBank/Exercises/$filearray[$i].html\";>";
 	echo $filearray[$i]; 
+	echo "</a>";
 	echo "<p>";
 	echo "</td>";
 	echo "</tr>";
@@ -41,10 +43,10 @@ echo "</table>";
 <form accept-charset="UTF-8" action="KAView.php" autocomplete="off" class="question_edit" id="question_edit" method="post"><div style="margin:0;padding:0;display:inline">
 <input name="utf8" type="hidden" value="&#x2713;" /> 
 
-<h2> Enter filename to view: 
+<!-- <h2> Enter filename to view: 
 <input type="text" name="QFileName" maxlength="20"/> 
 
-<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="View"/>
+<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="View"/> -->
 </h2>
 </form>
  <p></p>
