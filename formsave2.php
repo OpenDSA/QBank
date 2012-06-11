@@ -704,8 +704,13 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-   <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script type=\"text/javascript\"
+   src=\"http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js\">
+</script>
+ <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
    <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+<script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
+<link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -718,10 +723,20 @@ $stringData.= "<p class=\"question\">\n";
 $stringData.= $q_text[$k];
 $stringData.= "\n</p>\n";
 $stringData.= "<div class=\"solution\">\n";
+$pos = strpos($s_text[$k],'<code>');
+
+if($pos === false) {
 $stringData.= "<var>\"";
 $stringData.= $s_text[$k];
 $stringData.= "\"</var></div>\n";
 
+}
+else {
+$stringData.= "<var>";
+$stringData.= $s_text[$k];
+$stringData.= "</var></div>\n";
+
+}
 
 $show =2;
 $val5= $c5_text[$k];
@@ -743,32 +758,94 @@ $show =2;
 $stringData.= "<ul class =\"choices\" data-show=\"";
 $stringData.= $show;
 $stringData.="\">\n";
+$pos1 = strpos($c1_text[$k],'<code>');
+
+if($pos1 === false) {
 $stringData.= "<li><var>\"";
 $stringData.= $c1_text[$k];
 $stringData.= "\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c2_text[$k];
-$stringData.="\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c1_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+
+
+
+$pos2 = strpos($c2_text[$k],'<code>');
+
+if($pos2 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c2_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c2_text[$k];
+$stringData.= "</var></li>\n";
+
+}
 
 
 if ($val3 != ""){
-$stringData.="<li><var>\"";
-$stringData.=$c3_text[$k];
-$stringData.="\"</var></li>\n";
+$pos3 = strpos($c3_text[$k],'<code>');
+
+if($pos3 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c3_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c3_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+
 }
 
 if ($val4 != ""){
-$stringData.="<li><var>\"";
-$stringData.=$c4_text[$k];
-$stringData.="\"</var></li>\n";
+
+$pos4 = strpos($c4_text[$k],'<code>');
+
+if($pos4 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c4_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c4_text[$k];
+$stringData.= "</var></li>\n";
+
+}
 }
 
 if ($val5 != ""){
-$stringData.="<li><var>\"";
-$stringData.=$c5_text[$k];
-$stringData.="\"</var></li>\n";
+
+$pos5 = strpos($c5_text[$k],'<code>');
+
+if($pos5 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c5_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c5_text[$k];
+$stringData.= "</var></li>\n";
+
+}
 }
 $stringData.="</ul>";
+
 
 
 $stringData.= "<div class =\"hints\">\n";
@@ -882,8 +959,13 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-   <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script type=\"text/javascript\"
+   src=\"http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js\">
+</script>
+ <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
    <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+<script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
+<link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -895,9 +977,19 @@ $stringData.= "<p class=\"question\">\n";
 $stringData.= $q_text;
 $stringData.= "\n</p>\n";
 $stringData.= "<div class=\"solution\">\n";
-$stringData.= "<var>\"";
+
+$pos = strpos($s_text,'<code>');
+
+if($pos === false) {
+ $stringData.= "<var>\"";
 $stringData.= $s_text;
 $stringData.= "\"</var></div>\n";
+}
+else {
+ $stringData.= "<var>";
+$stringData.= $s_text;
+$stringData.= "</var></div>\n";
+}
 
 $show =2;
 $val5= $c5_text;
@@ -919,32 +1011,91 @@ $show =2;
 $stringData.= "<ul class =\"choices\" data-show=\"";
 $stringData.= $show;
 $stringData.="\">\n";
+$pos1 = strpos($c1_text,'<code>');
+
+if($pos1 === false) {
 $stringData.= "<li><var>\"";
 $stringData.= $c1_text;
 $stringData.= "\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c2_text;
-$stringData.="\"</var></li>\n";
 
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c1_text;
+$stringData.= "</var></li>\n";
+
+}
+
+
+$pos2 = strpos($c2_text,'<code>');
+
+if($pos2 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c2_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c2_text;
+$stringData.= "</var></li>\n";
+
+}
 
 if ($val3 != ""){
-$stringData.="<li><var>\"";
-$stringData.=$c3_text;
-$stringData.="\"</var></li>\n";
+
+$pos3 = strpos($c3_text,'<code>');
+
+if($pos3 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c3_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c3_text;
+$stringData.= "</var></li>\n";
+
+}
+
 }
 
 if ($val4 != ""){
-$stringData.="<li><var>\"";
-$stringData.=$c4_text;
-$stringData.="\"</var></li>\n";
+$pos4 = strpos($c4_text,'<code>');
+
+if($pos4 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c4_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c4_text;
+$stringData.= "</var></li>\n";
+
+}
 }
 
 if ($val5 != ""){
-$stringData.="<li><var>\"";
-$stringData.=$c5_text;
-$stringData.="\"</var></li>\n";
+$pos5 = strpos($c5_text,'<code>');
+
+if($pos5 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c5_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c5_text;
+$stringData.= "</var></li>\n";
+
+}
 }
 $stringData.="</ul>";
+
 
 $stringData.= "<div class =\"hints\">\n";
 $v1= $h1_text;
