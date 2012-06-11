@@ -272,6 +272,8 @@ $stringData  = "Question text => ";
 $stringData .= $_POST['q_text'];
 
 
+
+
 $stringData .= "$$\nSolution => ";
 $stringData .= $_POST['s_text'];
 
@@ -426,8 +428,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-    <script>urlBaseOverride = "../../../OpenDSA/OpenDSA/ODSAkhan-exercises/";</script>
-   <script src="../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js"></script>
+    <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/ \";</script>
+   <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
 
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
@@ -674,8 +676,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-    <script>urlBaseOverride = "../../../OpenDSA/OpenDSA/ODSAkhan-exercises/";</script>
-   <script src="../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js"></script>
+    <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
 
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
@@ -810,8 +812,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-    <script>urlBaseOverride = "../../../OpenDSA/OpenDSA/ODSAkhan-exercises/";</script>
-   <script src="../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js"></script>
+    <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
+   <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
 
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
