@@ -721,37 +721,81 @@ $stringData.= "<div class=\"solution\">\n";
 $stringData.= "<var>\"";
 $stringData.= $s_text[$k];
 $stringData.= "\"</var></div>\n";
-$stringData.= "<ul class =\"choices\" data-show=\"4\">\n";
+
+
+$show =2;
+$val5= $c5_text[$k];
+$val4= $c4_text[$k];
+$val3= $c3_text[$k];
+if( $val5 == "")
+{
+$show =4;
+}
+if($val4 == "")
+{
+$show =3;
+}
+if($val3 == "")
+{
+$show =2;
+}
+
+$stringData.= "<ul class =\"choices\" data-show=\"";
+$stringData.= $show;
+$stringData.="\">\n";
 $stringData.= "<li><var>\"";
 $stringData.= $c1_text[$k];
 $stringData.= "\"</var></li>\n";
 $stringData.="<li><var>\"";
 $stringData.=$c2_text[$k];
 $stringData.="\"</var></li>\n";
+
+
+if ($val3 != ""){
 $stringData.="<li><var>\"";
 $stringData.=$c3_text[$k];
 $stringData.="\"</var></li>\n";
+}
+
+if ($val4 != ""){
 $stringData.="<li><var>\"";
 $stringData.=$c4_text[$k];
 $stringData.="\"</var></li>\n";
+}
+
+if ($val5 != ""){
 $stringData.="<li><var>\"";
 $stringData.=$c5_text[$k];
 $stringData.="\"</var></li>\n";
+}
 $stringData.="</ul>";
 
+
 $stringData.= "<div class =\"hints\">\n";
+$v1= $h1_text[$k];
+if ($v1 != ""){
 $stringData.= "<p>\"";
 $stringData.=$h1_text[$k];
 $stringData.="\"</p>\n";
+}
+$v2= $h2_text[$k];
+if ($v2 != ""){
 $stringData.="<p>\"";
 $stringData.=$h2_text[$k];
 $stringData.="\"</p>\n";
+}
+$v3= $h3_text[$k];
+if ($v3 != ""){
 $stringData.="<p>\"";
 $stringData.=$h3_text[$k];
 $stringData.="\"</p>\n";
+}
+$v4= $h4_text[$k];
+if ($v4 != ""){
 $stringData.="<p>\"";
 $stringData.=$h4_text[$k];
 $stringData.="\"</p>\n";
+}
 
 $stringData.= "</div></div>";
 
@@ -854,37 +898,80 @@ $stringData.= "<div class=\"solution\">\n";
 $stringData.= "<var>\"";
 $stringData.= $s_text;
 $stringData.= "\"</var></div>\n";
-$stringData.= "<ul class =\"choices\" data-show=\"4\">\n";
+
+$show =2;
+$val5= $c5_text;
+$val4= $c4_text;
+$val3= $c3_text;
+if( $val5 == "")
+{
+$show =4;
+}
+if($val4 == "")
+{
+$show =3;
+}
+if($val3 == "")
+{
+$show =2;
+}
+
+$stringData.= "<ul class =\"choices\" data-show=\"";
+$stringData.= $show;
+$stringData.="\">\n";
 $stringData.= "<li><var>\"";
 $stringData.= $c1_text;
 $stringData.= "\"</var></li>\n";
 $stringData.="<li><var>\"";
 $stringData.=$c2_text;
 $stringData.="\"</var></li>\n";
+
+
+if ($val3 != ""){
 $stringData.="<li><var>\"";
 $stringData.=$c3_text;
 $stringData.="\"</var></li>\n";
+}
+
+if ($val4 != ""){
 $stringData.="<li><var>\"";
 $stringData.=$c4_text;
 $stringData.="\"</var></li>\n";
+}
+
+if ($val5 != ""){
 $stringData.="<li><var>\"";
 $stringData.=$c5_text;
 $stringData.="\"</var></li>\n";
+}
 $stringData.="</ul>";
 
 $stringData.= "<div class =\"hints\">\n";
+$v1= $h1_text;
+if ($v1 != ""){
 $stringData.= "<p>\"";
 $stringData.=$h1_text;
 $stringData.="\"</p>\n";
+}
+$v2= $h2_text;
+if ($v2 != ""){
 $stringData.="<p>\"";
 $stringData.=$h2_text;
 $stringData.="\"</p>\n";
+}
+$v3= $h3_text;
+if ($v3 != ""){
 $stringData.="<p>\"";
 $stringData.=$h3_text;
 $stringData.="\"</p>\n";
+}
+$v4= $h4_text;
+if ($v4 != ""){
 $stringData.="<p>\"";
 $stringData.=$h4_text;
 $stringData.="\"</p>\n";
+}
+
 
 $stringData.= "</div></div>";
 
