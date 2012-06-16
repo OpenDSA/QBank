@@ -1,10 +1,22 @@
 <html>
 
-Your question has been saved!!
+<head>
+<title>Saved the question - QBank</title>  
+  
+<meta name="Description" content="A bank of community-written homework and test questions where authors get credit and access is completely free.">
+<link href="new.css" rel="stylesheet" type="text/css" />
 
+<table border ="1" width="100%">
+<tr>
+  <td border="1" align="center" width="10%"><a href="index.php"><img src="QBank.png" href = /></a></td>
+  <td align="left width="90%"><h1>QBank - Question banking made easy with parameterization. </h1></td>
+</tr>
+</table>  
 
-<img src="example.php" >
-
+</head>
+<h2>
+Your question has been saved sucessfully!!!
+</h2>
 <?
 
 /*This file saves an existing question that is edited by users into an existing intermediate format file and also calls a method to convert the intermdiate format to Khan Academy format*/

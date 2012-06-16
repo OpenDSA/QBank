@@ -9,7 +9,7 @@
 
 <table border ="1" width="100%">
 <tr>
-  <td border="1" align="center" width="10%"><a href="index.html"><img src="QBank.png" href = /></a></td>
+  <td border="1" align="center" width="10%"><a href="index.php"><img src="QBank.png" href = /></a></td>
   <td align="left width="90%"><h1>QBank - Question banking made easy with parameterization. </h1></td>
 </tr>
 </table>  

@@ -19,7 +19,7 @@ echo "<link href=\"new.css\" rel=\"stylesheet\" type=\"text/css\" />";
 
 echo "<table border =\"1\" width=\"100%\">";
 echo "<tr>";
-  echo "<td border=\"1\" align=\"center\" width=\"10%\"><a href=\"index.html\"><img src=\"QBank.png\" href = /></a></td>
+  echo "<td border=\"1\" align=\"center\" width=\"10%\"><a href=\"index.php\"><img src=\"QBank.png\" href = /></a></td>
   <td align=\"left\" width=\"90%\"><h1>QBank - Question banking made easy with parameterization. </h1></td>
 </tr>
 </table>  ";
