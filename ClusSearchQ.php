@@ -35,27 +35,30 @@ echo "<table border=1 align=center width=20%>";
 	
 	
 for($i=0; $i<sizeof($filearray)-1; $i++){
+	echo "<html>";
+	echo "<form method=\"post\">";
 	echo "<tr>";
-	echo "<td>";
+	echo "<td width=\"50%\">";
+	echo "<input type=\"hidden\" name=\"radio2\" value=\"grp\" />";
+	echo "<input type=\"hidden\" name=\"QFileName2\" value=\"$filearray[$i]\"/> ";
 	echo "<p>";
 	echo $filearray[$i]; 
 	echo "<p>";
 	echo "</td>";
+
+	echo "<td width=\"50%\">";
+	echo "<p>";
+	echo "<button type=\"submit\" formaction=\"ClusterV2.php\">View</button>";
+	
+	echo "<p>";
+	echo "</td>";
 	echo "</tr>";
+	echo "</form>";
+	echo "</html>";
+
 
 }
 
-echo "<tr>";
-echo "<td>";
-echo "<i> Enter a filename to preview:</i> ";
-echo "<input type=\"text\" name=\"QFileName2\" maxlength=\"20\"/>";
-echo "<input type=\"hidden\" name=\"radio2\" value=\"grp\" />";
-
-echo "<button type=\"submit\" formaction=\"ClusterV2.php\">View</button>";
-
-echo "<p>";
-echo "</td>";
-echo "</tr>";
 
 
 echo "</table>";
@@ -78,28 +81,27 @@ echo "<input type=\"text\" name=\"FileName\" maxlength=\"20\"/>";
 
 echo "<input name=\"file_size\" type=\"hidden\" value=\"".sizeof($filearray)."\" />";	
 for($i=0; $i<sizeof($filearray)-1; $i++){
+
+	echo "<html>";
+	echo "<form method=\"post\">";
 	echo "<tr>";
-	echo "<td>";
+	echo "<td width=\"50%\">";
+	echo "<input type=\"hidden\" name=\"radio1\" value=\"simple\" />";
+	echo "<input type=\"hidden\" name=\"QFileName\" value=\"$filearray[$i]\"/> ";
 	echo "<p>";
 	echo "<input type=\"checkbox\" name=\"f_name[]\" value=".$filearray[$i]." />";
 	echo $filearray[$i]; 
 	echo "<p>";
 	echo "</td>";
+	echo "<td width=\"50%\">";
+	echo "<p>";
+	echo "<button type=\"submit\" formaction=\"Qview.php\">View</button>";
+	echo "<p>";
+	echo "</td>";
 	echo "</tr>";
-
+	echo "</form>";
+	echo "</html>";
 }
-echo "<tr>";
-echo "<td>";
-echo "<i> Enter a filename to preview:</i> ";
-echo "<input type=\"text\" name=\"QFileName\" maxlength=\"20\"/>";
-echo "<input type=\"hidden\" name=\"radio1\" value=\"simple\" />";
-
-echo "<input class=\"ui-state-default ui-corner-all submitButton\" data-disable-with=\"Saving...\" id=\"save_button\" name=\"commit\" type=\"submit\" value=\"View\"/>";
-echo "<p>";
-echo "</td>";
-echo "</tr>";
-
-
 echo "</table>";
 ?>
 
