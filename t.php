@@ -4,26 +4,14 @@
 <body>
 
 <?
-$qName = $_GET['t'];
 
+	$qName = $_POST['QFileName'];
+	$qName = trim($qName);
 
-echo "hi";
-
-
-echo "hi";
-
-
-echo "hi";
-
-
-
-echo "hi";
-
-echo "hi";
-
+	$type = $_POST['radio1'];
 
 echo $qName;
-
+echo $type;
 ?>
 
 </body>

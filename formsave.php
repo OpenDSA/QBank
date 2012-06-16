@@ -50,8 +50,7 @@ if ($option){
 	$stringData .= $option;
 }
 
-if($option == "range")
-{
+if($option == "range") {
 $i = 1;
 $var_name = "range";
 $var_name .= $i;
@@ -59,39 +58,36 @@ $var_name .= "_name";
 $var1 = $_POST[$var_name];
 
 /*Populating the intermediate file below*/
-while(isset($var1))
-{
-	$stringData .= "$$\nVariable name => ";
-	$stringData .= $var1;
-	$stringData .= "$$\nVariable min value => ";
-	$val_name = "range";
-	$val_name .= $i;
-	$val_name .= "_min";
-	$val1 = $_POST[$val_name];
-	$stringData .= $val1;
+	while(isset($var1)) {
+		$stringData .= "$$\nVariable name => ";
+		$stringData .= $var1;
+		$stringData .= "$$\nVariable min value => ";
+		$val_name = "range";
+		$val_name .= $i;
+		$val_name .= "_min";
+		$val1 = $_POST[$val_name];
+		$stringData .= $val1;
 	
-	$stringData .= "$$\nVariable max value => ";
-	$val_name = "range";
-	$val_name .= $i;
-	$val_name .= "_max";
-	$val1 = $_POST[$val_name];
-	$stringData .= $val1;
+		$stringData .= "$$\nVariable max value => ";
+		$val_name = "range";
+		$val_name .= $i;
+		$val_name .= "_max";
+		$val1 = $_POST[$val_name];
+		$stringData .= $val1;
 	
-	$i++;
+		$i++;
 	
-	$var_name = "range";
-	$var_name .= $i;
-	$var_name .= "_name";
-	$var1 = $_POST[$var_name];
+		$var_name = "range";
+		$var_name .= $i;
+		$var_name .= "_name";
+		$var1 = $_POST[$var_name];
 
+	}
+$ans_name = $_POST['range_ans'];
+$stringData .= "$$\nRange answer string => ";
+$stringData .= $ans_name;
 }
-	$ans_name = $_POST['range_ans'];
-	$stringData .= "$$\nRange answer string => ";
-	$stringData .= $ans_name;
-	
-	
 
-}
 else if($option =="list") 
 {
 
@@ -104,37 +100,39 @@ $var_name .= "_name";
 $var1 = $_POST[$var_name];
 
 
-while(isset($var1))
-{
-	$stringData .= "$$\nVariable name => ";
-	$stringData .= $var1;
-	$stringData .= "$$\nVariable values => ";
-	$val_name = "list";
-	$val_name .= $j;
-	$val_name .= "_val";
-	$val1 = $_POST[$val_name];
-	$stringData .= $val1;
+	while(isset($var1))
+	{
+		$stringData .= "$$\nVariable name => ";
+		$stringData .= $var1;
+		$stringData .= "$$\nVariable values => ";
+		$val_name = "list";
+		$val_name .= $j;
+		$val_name .= "_val";
+		$val1 = $_POST[$val_name];
+		$stringData .= $val1;
 	
-	$listarray = explode(",", $val1);
+		$listarray = explode(",", $val1);
 	
-	$colarray= array($j-1 => sizeof($listarray));
-	$varsize = array_merge($varsize, $colarray);
+		$colarray= array($j-1 => sizeof($listarray));
+		$varsize = array_merge($varsize, $colarray);
 	
 	
-	$j++;
+		$j++;
 	
-	$var_name = "list";
-	$var_name .= $j;
-	$var_name .= "_name";
-	$var1 = $_POST[$var_name];
+		$var_name = "list";
+		$var_name .= $j;
+		$var_name .= "_name";
+		$var1 = $_POST[$var_name];
 
-}
+	}
 
 /*Code for createing equation that computes index of answer in the answer array*/
 
-	$eq = "x".sizeof($varsize);
-	$i = sizeof($varsize)-1;
-	$coef1 = 1;
+$eq = "x".sizeof($varsize);
+$i = sizeof($varsize)-1;
+$coef1 = 1;
+
+
 	while($i>0){
 		
 		$coef1 = $coef1*$varsize[$i];
@@ -144,15 +142,17 @@ while(isset($var1))
 
 	}
 	
-	$stringData .= "$$\n";
-	$stringData .= "eq = ".$eq;
+$stringData .= "$$\n";
+$stringData .= "eq = ".$eq;
 		
 
-	$m = 0;
-	$var_nam = "ans";
-	$var_nam .= $m;
-	$var1 = $_POST[$var_nam];
-	$tempvar = "";
+$m = 0;
+$var_nam = "ans";
+$var_nam .= $m;
+$var1 = $_POST[$var_nam];
+$tempvar = "";
+
+
 	if(isset($var1)){
 	
 		$tempvar .= "[";
@@ -174,14 +174,14 @@ while(isset($var1))
 
 	}
 
-	$tempvar .= "]";
-	$stringData .= "$$\nList answer array => ";
-	$stringData .= $tempvar;
+$tempvar .= "]";
+$stringData .= "$$\nList answer array => ";
+$stringData .= $tempvar;
 	
-	$stringData .= "$$\nList answer table => ";
-	$ans_tab = $_POST['answerTable'];
-	$stringData .= $ans_tab;
-	$stringData .= "\n";
+$stringData .= "$$\nList answer table => ";
+$ans_tab = $_POST['answerTable'];
+$stringData .= $ans_tab;
+$stringData .= "\n";
 	
 
 }
@@ -199,51 +199,51 @@ convertToKA();
 
 else if($option1== "grp"){
 
-$fileName = $_POST['file_name'];
-/*Intermediate file location*/
-$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+	$fileName = $_POST['file_name'];
+	/*Intermediate file location*/
+	$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
+	$fh = fopen($myFile, 'w');
 
-$stringData = "Number of questions => ";
-$stringData .= $_POST['group_ques'];
-$stringData .= "$$\n";
+	$stringData = "Number of questions => ";
+	$stringData .= $_POST['group_ques'];
+	$stringData .= "$$\n";
 
-$i=0;
-$count =(int)$_POST['group_ques'];
+	$i=0;
+	$count =(int)$_POST['group_ques'];
 
-while($i < $count){
-$stringData .= "Question text => ";
-$stringData .= $_POST['q_text'.$i];
-
-
-$stringData .= "$$\nSolution => ";
-$stringData .= $_POST['s_text'.$i];
-
-$stringData .= "$$\nChoice 1 => ";
-$stringData .= $_POST['c1_text'.$i];
-$stringData .= "$$\nChoice 2 => ";
-$stringData .= $_POST['c2_text'.$i];
-$stringData .= "$$\nChoice 3 => ";
-$stringData .= $_POST['c3_text'.$i];
-$stringData .= "$$\nChoice 4 => ";
-$stringData .= $_POST['c4_text'.$i];
-$stringData .= "$$\nChoice 5 => ";
-$stringData .= $_POST['c5_text'.$i];
-
-$stringData .= "$$\nHint 1 => ";
-$stringData .= $_POST['h1_text'.$i];
-$stringData .= "$$\nHint 2 => ";
-$stringData .= $_POST['h2_text'.$i];
-$stringData .= "$$\nHint 3 => ";
-$stringData .= $_POST['h3_text'.$i];
-$stringData .= "$$\nHint 4 => ";
-$stringData .= $_POST['h4_text'.$i];
-$stringData .= "$$\n";
-
-$i++;
+		while($i < $count){
+			$stringData .= "Question text => ";
+			$stringData .= $_POST['q_text'.$i];
 
 
-}
+			$stringData .= "$$\nSolution => ";
+			$stringData .= $_POST['s_text'.$i];
+
+			$stringData .= "$$\nChoice 1 => ";
+			$stringData .= $_POST['c1_text'.$i];
+			$stringData .= "$$\nChoice 2 => ";
+			$stringData .= $_POST['c2_text'.$i];
+			$stringData .= "$$\nChoice 3 => ";
+			$stringData .= $_POST['c3_text'.$i];
+			$stringData .= "$$\nChoice 4 => ";
+			$stringData .= $_POST['c4_text'.$i];
+			$stringData .= "$$\nChoice 5 => ";
+			$stringData .= $_POST['c5_text'.$i];
+
+			$stringData .= "$$\nHint 1 => ";
+			$stringData .= $_POST['h1_text'.$i];
+			$stringData .= "$$\nHint 2 => ";
+			$stringData .= $_POST['h2_text'.$i];
+			$stringData .= "$$\nHint 3 => ";
+			$stringData .= $_POST['h3_text'.$i];
+			$stringData .= "$$\nHint 4 => ";
+			$stringData .= $_POST['h4_text'.$i];
+			$stringData .= "$$\n";
+	
+			$i++;
+
+
+		}		
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
@@ -252,7 +252,6 @@ fclose($fh);
 $pathQ = './Intermediate_files/Group/*.*';
 $execCmd = 'chmod 777 '.$pathQ;
 $output = shell_exec($execCmd);
-
 
 convertToKA1();
 }
@@ -327,34 +326,36 @@ $fh = fopen($myFile, 'r');
 	}
 	fclose($fh);
 	
-	$contents = array();
-	$contents = explode("$$",$theData);
-	$int_text ="";
-	$qt_text ="";
-	$tent = array();
-	$tent = explode(" => ",$contents[0]);
+$contents = array();
+$contents = explode("$$",$theData);
+$int_text ="";
+$qt_text ="";
+$tent = array();
+$tent = explode(" => ",$contents[0]);
+	
 	if(strcmp($tent[0], "Inroducion text")==0){
-	 $int_text = $tent[1];
+		 $int_text = $tent[1];
 	}
-	$tent = explode(" => ",$contents[1]);
-	$qt_text = $tent[1];
 	
-	$tent = explode(" => ",$contents[2]);
-	$var_type = $tent[1];
+$tent = explode(" => ",$contents[1]);
+$qt_text = $tent[1];
+
+$tent = explode(" => ",$contents[2]);
+$var_type = $tent[1];
 	
-	$var_num=0;
-	$file_line = 3;
+$var_num=0;
+$file_line = 3;
 	
-	$range_name = array();
-	$range_min = array();
-	$range_max = array();
-	$range_ans = "";
+$range_name = array();
+$range_min = array();
+$range_max = array();
+$range_ans = "";
 	
-	$list_name = array();
-	$list_val = array();
-	$list_ans = "";
-	$list_ans_tab = "";
-	$eq = "";
+$list_name = array();
+$list_val = array();
+$list_ans = "";
+$list_ans_tab = "";
+$eq = "";
 
 /*Code to handle mapping of "range of values" of variables and the answer string to Khan Academy format*/
 	if($var_type == "range"){
@@ -381,7 +382,9 @@ $fh = fopen($myFile, 'r');
 		}
 			
 /* Code to handle mapping of "valid list of variable values" to Khan Academy format. */
-	}elseif($var_type == "list"){
+	}
+	
+	elseif($var_type == "list"){
 		$tent = explode(" => ",$contents[$file_line]);
 		$tent[0]=trim($tent[0]);
 		$file_line++;
@@ -555,24 +558,24 @@ for($i=0; $i<sizeof($range_name); $i++) {
 $stringData.= $new_qtxt;
 $stringData.= "</p>\n";
 
-if($var_type == "list"){
-$stringData.= "<div class=\"solution\">";
-$stringData.= "<var>ANSWER[INDEX]</var> </div>";
-$stringData.= "<ul class=\"choices\" data-category=\"true\">";
-for($i=0;$i<sizeof($list_new_ans);$i++){
-	$stringData.= " <li><var>";
-	$stringData.= A.($i+1);
-	$stringData.= "</var> </li>";
-}
-$stringData.= "</ul>";
-}
+	if($var_type == "list"){
+		$stringData.= "<div class=\"solution\">";
+		$stringData.= "<var>ANSWER[INDEX]</var> </div>";
+		$stringData.= "<ul class=\"choices\" data-category=\"true\">";
+			for($i=0;$i<sizeof($list_new_ans);$i++){
+				$stringData.= " <li><var>";
+				$stringData.= A.($i+1);
+				$stringData.= "</var> </li>";
+			}
+		$stringData.= "</ul>";
+	}
 
-elseif($var_type == "range"){
-$stringData.= "<div class=\"solution\">";
-$stringData.= "<var>";
-$stringData.= $range_ans;
-$stringData.= "</var> </div>";
-}
+	elseif($var_type == "range"){
+		$stringData.= "<div class=\"solution\">";
+		$stringData.= "<var>";
+		$stringData.= $range_ans;
+		$stringData.= "</var> </div>";
+	}
 
 $stringData.= "</div></div>";
 $stringData.= "</div> </body></html>\n";
@@ -585,27 +588,29 @@ $output = shell_exec($execCmd);
 }
 
 function convertToKA1() {
+
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
 $myFile = './Intermediate_files/Group/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
-	$theData = "";
+$theData = "";
 	
 	while(($line=fgets($fh))!==false){
 		$theData.=$line;
 	}
-	fclose($fh);
+
+fclose($fh);
 	
-	$contents = array();
-	$contents = explode("$$",$theData);
+$contents = array();
+$contents = explode("$$",$theData);
 	
-	$tent = array();
-	$tent = explode(" => ",$contents[0]);
-	$q_no = $tent[1]; 
-	$i=0;
-	$j=1;
-	$q_num= (int)$q_no;
+$tent = array();
+$tent = explode(" => ",$contents[0]);
+$q_no = $tent[1]; 
+$i=0;
+$j=1;
+$q_num= (int)$q_no;
 	
 $q_text = array();
 $s_text = array();
@@ -622,46 +627,43 @@ $h4_text = array();
 
 
 
-while($i < $q_num)
-{
+	while($i < $q_num){
 
-$tent = explode(" => ",$contents[$j++]);
-$q_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$q_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$s_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$s_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$c1_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$c1_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$c2_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$c2_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$c3_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$c3_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$c4_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$c4_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$c5_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$c5_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$h1_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$h1_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$h2_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$h2_text[$i] = $tent[1];
+	
+		$tent = explode(" => ",$contents[$j++]);
+		$h3_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$h3_text[$i] = $tent[1];
+		$tent = explode(" => ",$contents[$j++]);
+		$h4_text[$i] = $tent[1];
 
-$tent = explode(" => ",$contents[$j++]);
-$h4_text[$i] = $tent[1];
-
-
-
-$i++;
-}
+		$i++;
+	}
 
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
@@ -674,6 +676,7 @@ $stringData.= "<head>\n";
 $stringData.= "<title>\n";
 $stringData.= $fileName;
 $stringData.= "\n</title>\n";
+
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
    <script type=\"text/javascript\"
@@ -684,50 +687,51 @@ $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/
 <script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
 <link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
+
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
 $stringData.=  "</div>\n";
 $stringData.= "<div class=\"problems\"> \n";
 $k = 0;
-while($k < $q_num){
-$stringData.= "<div id=\"problem-type-or-description\">\n";
-$stringData.= "<p class=\"question\">\n";
-$stringData.= $q_text[$k];
-$stringData.= "\n</p>\n";
-$stringData.= "<div class=\"solution\">\n";
 
 
-$pos = strpos($s_text[$k],'<code>');
+	while($k < $q_num){
+		$stringData.= "<div id=\"problem-type-or-description\">\n";
+		$stringData.= "<p class=\"question\">\n";
+		$stringData.= $q_text[$k];
+		$stringData.= "\n</p>\n";
+		$stringData.= "<div class=\"solution\">\n";
 
-if($pos === false) {
-$stringData.= "<var>\"";
-$stringData.= $s_text[$k];
-$stringData.= "\"</var></div>\n";
 
-}
-else {
-$stringData.= "<var>";
-$stringData.= $s_text[$k];
-$stringData.= "</var></div>\n";
+		$pos = strpos($s_text[$k],'<code>');
 
-}
+		if($pos === false) {
+		$stringData.= "<var>\"";
+		$stringData.= $s_text[$k];
+		$stringData.= "\"</var></div>\n";
+
+	}
+
+	else {
+		$stringData.= "<var>";
+		$stringData.= $s_text[$k];
+		$stringData.= "</var></div>\n";
+	}
 
 $show =2;
 $val5= $c5_text[$k];
 $val4= $c4_text[$k];
 $val3= $c3_text[$k];
-if( $val5 == "")
-{
-$show =4;
-}
-if($val4 == "")
-{
-$show =3;
-}
-if($val3 == "")
-{
-$show =2;
-}
+
+	if( $val5 == ""){
+		$show =4;
+	}
+	if($val4 == ""){
+		$show =3;
+	}
+	if($val3 == ""){
+		$show =2;
+	}
 
 $stringData.= "<ul class =\"choices\" data-show=\"";
 $stringData.= $show;

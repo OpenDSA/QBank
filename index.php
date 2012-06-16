@@ -39,67 +39,44 @@
 <table border="1" width="100%" height = "400px"> 
 
   <div style=" clear:both ">
-  <tr>  
+  	<tr>  
 	 <div style="clear:both; float:right">
-      	<td width="50%"> <div class="infoBox">
-         <h2>Create Question</h2>
-         Contribute a parameterized question in any subject area!
-        	 <div style="font-size:20px; padding-top: 10px;">
-           	<a href="editQuestion.html">&gt;&gt; Write a question!</a>
-		 </div>
-       </div>
-</td>
-<td width="50%">
+      		<td width="50%"> 
+		<div class="infoBox">
+         	<h2><a href="editQuestion.html">Create Question &gt;&gt;</a></h2>
+         	Contribute a parameterized question in any subject area!
+ 	 	</div>
+		</td>
 
-
-<div class="infoBox">
-         <h2>Cluster Simple => Group questions</h2>
-         Create Group questions from exiting Simple questions
-         <div style="font-size:20px; padding-top: 10px">
-           <a href="ClusSearchQ.php">&gt;&gt; Cluster Exercises</a>
-         </div>
-       </div>
-       
-</td>
+		<td width="50%">
+		<div class="infoBox">
+         	<h2> <a href="ClusSearchQ.php">Group questions &gt;&gt;</a></h2>
+        	Create Group questions from exiting Simple questions
+      		</div>
+       	</td>
 	</div>
-  </tr>
-<tr>
+  	</tr>
+
+	<tr>
 	<div style="clear:both">
-       <td><div class="infoBox">
-         <h2>View and Delete a question</h2>
-         View and delete a question
-         <div style="font-size:20px; padding-top: 10px">
-           <a href="viewQ.php">&gt;&gt;View and Delete a question!</a>
-         </div>
-       </div>
-</td>
-<td>
-       <div class="infoBox">
-         <h2>KhanAcademy exercises</h2>
-         View created questions in Khan Acadedmy 
-         <div style="font-size:20px; padding-top: 10px">
-           <a href="KAsearchQ.php">&gt;&gt; Khan Academy Exercises</a>
-         </div>
-       
-</td>
-</tr>
+       	<td>
+		<div class="infoBox">
+         	<h2><a href="viewQ.php">Edit or Delete a question &gt;&gt;</a></h2>
+         	View and delete a question
+      		</div>
+		</td>
+
+		<td>
+       	<div class="infoBox">
+         	<h2><a href="KAsearchQ.php">KhanAcademy exercises &gt;&gt; </a></h2>
+         	View created questions in Khan Acadedmy 
+      		</div>
+		</td>
+	</div>
+	</tr>
 </div>
-<tr>
-<div style="clear:both">
-<td>
-       <div class="infoBox">
-         <h2>Find and Edit question</h2>
-         Search for and edit existing questions.
-         	<div style="font-size:20px; padding-top: 10px">
-          	 <a href="searchQ.php">&gt;&gt; Search and edit a question!</a>
-		</div>
-       </div>
-</td>
-     </div>
-</tr>
-    </div>
 </table>
-  </div>
+</div>
 
 
   <style type="text/css">

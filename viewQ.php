@@ -16,6 +16,8 @@
 <h2>
 List of existing question files:
 </h2>
+
+
 <?php
 
 //Displays list of existing questions on screen.
@@ -31,14 +33,25 @@ echo "</h3>";
 
 
 for($i=0; $i<sizeof($filearray)-1; $i++){
-	
+	echo "<html>";
+	echo "<form method=\"post\">";
 	echo "<tr>";
-	echo "<td>";
+	echo "<td width=\"50%\">";
 	echo "<p>";
 	echo $filearray[$i]; 
+       echo "<input type=\"hidden\" name=\"radio1\" value=\"par\" />";
+	echo "<input type=\"hidden\" name=\"QFileName\" value=\"$filearray[$i]\"/> ";
+	echo "<p>";
+	echo "</td>";
+	echo "<td width=\"50%\">";
+	echo "<p>";
+	echo "<button type=\"submit\" formaction=\"Qview.php\">View/Delete</button>";
+	echo "<button type=\"submit\" formaction=\"QEdit.php\">Edit</button>";
 	echo "<p>";
 	echo "</td>";
 	echo "</tr>";
+	echo "</form>";
+	echo "</html>";
 }
 echo "</table>";
 
@@ -53,14 +66,26 @@ echo "Group Q";
 echo "</h3>";
 
 for($i=0; $i<sizeof($filearray)-1; $i++){
-	
+	echo "<html>";
+	echo "<form method=\"post\">";
 	echo "<tr>";
-	echo "<td>";
+	echo "<td width=\"50%\">";
 	echo "<p>";
 	echo $filearray[$i]; 
+ 	echo "<input type=\"hidden\" name=\"radio1\" value=\"grp\" />";
+	echo "<input type=\"hidden\" name=\"QFileName\" value=\"$filearray[$i]\"/> ";
+	echo "<p>";
+	echo "</td>";
+	echo "<td width=\"50%\">";
+	echo "<p>";
+	echo "<button type=\"submit\" formaction=\"Qview.php\">View/Delete</button>";
+	echo "<button type=\"submit\" formaction=\"QEdit.php\">Edit</button>";
 	echo "<p>";
 	echo "</td>";
 	echo "</tr>";
+	echo "</form>";
+	echo "</html>";
+
 }
 echo "</table>";
 
@@ -74,34 +99,31 @@ echo "<h3>";
 echo "Simple Q";
 echo "</h3>";
 for($i=0; $i<sizeof($filearray)-1; $i++){
-	
+	echo "<html>";
+	echo "<form method=\"post\">";
 	echo "<tr>";
-	echo "<td>";
+	echo "<td width=\"50%\">";
+	echo "<input type=\"hidden\" name=\"radio1\" value=\"simple\" />";
+	echo "<input type=\"hidden\" name=\"QFileName\" value=\"$filearray[$i]\"/> ";
 	echo "<p>";
 	echo $filearray[$i]; 
 	echo "<p>";
 	echo "</td>";
+	echo "<td width=\"50%\">";
+	echo "<p>";
+	echo "<button type=\"submit\" formaction=\"Qview.php\">View/Delete</button>";
+	echo "<button type=\"submit\" formaction=\"QEdit.php\">Edit</button>";
+
+	echo "<p>";
+	echo "</td>";
 	echo "</tr>";
+	echo "</form>";
+	echo "</html>";
+
 }
 echo "</table>";
 ?>
 
-<form accept-charset="UTF-8" action="Qview.php" autocomplete="off" class="question_edit" id="question_edit" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /> 
-
-<h2>Select question type: </h2>
-<center>
-<input type="radio" name="radio1" value="par" />Parameterised Q
-<input type="radio" name="radio1" value="grp" />Group Q
-<input type="radio" name="radio1" value="simple" />Simple Q
-</center>
-<h2> Enter filename to edit: 
-<input type="text" name="QFileName" maxlength="20"/> 
-
-<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="View"/>
-</h2>
-
-
-</form>
  <p></p>
 
     <div id="footer" style="float:center">

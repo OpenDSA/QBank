@@ -2,7 +2,7 @@
   
 <body>
    
-<form  method="GET" action="t.php">
+<form  method="POST" action="t.php">
 
 
       
