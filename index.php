@@ -156,9 +156,9 @@
    <p></p>
 
     <div id="footer" style="float:center">
-     	  <a href="index.html">Features</a> | 
-         <a href="index.html">About QBank</a> | 
-         <a href="index.html">Contact Us</a>
+     	  <a href="index.php">Features</a> | 
+         <a href="index.php">About QBank</a> | 
+         <a href="index.php">Contact Us</a>
       </div>
 
 
