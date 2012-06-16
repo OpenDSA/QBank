@@ -463,8 +463,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-   <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
-   <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+   <script>urlBaseOverride = \"../Lib/ODSAkhan-exercises/\";</script>
+   <script src=\"../Lib/ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -707,8 +707,8 @@ $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/
    <script type=\"text/javascript\"
    src=\"http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js\">
 </script>
- <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
-   <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+ <script>urlBaseOverride = \"../Lib/ODSAkhan-exercises/\";</script>
+   <script src=\"../Lib/ODSAkhan-exercises/khan-exercise.js\"></script>
 <script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
 <link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
@@ -962,8 +962,8 @@ $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/
    <script type=\"text/javascript\"
    src=\"http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js\">
 </script>
- <script>urlBaseOverride = \"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/\";</script>
-   <script src=\"../../../OpenDSA/OpenDSA/ODSAkhan-exercises/khan-exercise.js\"></script>
+ <script>urlBaseOverride = \"../Lib/ODSAkhan-exercises/\";</script>
+   <script src=\"../Lib/ODSAkhan-exercises/khan-exercise.js\"></script>
 <script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
 <link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
