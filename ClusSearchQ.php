@@ -20,7 +20,6 @@ You are creating a question from existing Simple questions
 </h2>
 
 
-<form accept-charset="UTF-8" action="ClusterV1.php" autocomplete="off" class="question_edit" id="question_edit" method="post"><div style="margin:0;padding:0;display:inline">
 <input name="utf8" type="hidden" value="&#x2713;" /> 
 
 <?php
@@ -69,7 +68,9 @@ $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
 echo "<table border=1 align=center width=20%>";
 	
-	
+
+
+echo "<form method=\"post\">";	
 echo "<i>";
 echo "Update/Create Group question as(FileName): ";
 echo "</i>";
@@ -78,30 +79,21 @@ echo "<input type=\"text\" name=\"FileName\" maxlength=\"20\"/>";
 
 
 
-
 echo "<input name=\"file_size\" type=\"hidden\" value=\"".sizeof($filearray)."\" />";	
 for($i=0; $i<sizeof($filearray)-1; $i++){
 
-	echo "<html>";
-	echo "<form method=\"post\">";
+	
 	echo "<tr>";
 	echo "<td width=\"50%\">";
 	echo "<input type=\"hidden\" name=\"radio1\" value=\"simple\" />";
-	echo "<input type=\"hidden\" name=\"QFileName\" value=\"$filearray[$i]\"/> ";
 	echo "<p>";
 	echo "<input type=\"checkbox\" name=\"f_name[]\" value=".$filearray[$i]." />";
 	echo $filearray[$i]; 
 	echo "<p>";
 	echo "</td>";
-	echo "<td width=\"50%\">";
-	echo "<p>";
-	echo "<button type=\"submit\" formaction=\"Qview.php\">View</button>";
-	echo "<p>";
-	echo "</td>";
 	echo "</tr>";
-	echo "</form>";
-	echo "</html>";
-}
+	
+	}
 echo "</table>";
 ?>
 
@@ -110,10 +102,11 @@ echo "</table>";
 
 
 <h2>
-Select checkboxes to group questions:
 
+Select checkboxes to group questions:
 <button type="submit" formaction="Cluster.php">Group</button></h2>
 </form>
+
  <p></p>
 
     <div id="footer" style="float:center">
