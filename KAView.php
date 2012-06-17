@@ -3,7 +3,7 @@
 	$qName = $_POST['QFileName'];
 	$qName = trim($qName);
 	
-	$myFile1 = '/./QBank/Exercises/'.$qName.'.html';
+	$myFile1 = '/QBank/Exercises/'.$qName.'.html';
 	$myFile = '/QBank/Exercises/'.$qName.'.html';
 
 
