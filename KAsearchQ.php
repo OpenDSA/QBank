@@ -30,7 +30,7 @@ for($i=0; $i<sizeof($filearray); $i++){
 	echo "<tr>";
 	echo "<td>";
 	echo "<p>";
-	echo "<a href=\"/QBank/Exercises/$filearray[$i].html\";>";
+	echo "<a href=\"./Exercises/$filearray[$i].html\";>";
 	echo $filearray[$i]; 
 	echo "</a>";
 	echo "<p>";
