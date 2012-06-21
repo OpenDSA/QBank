@@ -61,12 +61,8 @@ $myFile1 = './Intermediate_files/Simple/'.$fileName[$i].'.txt';
 	$stringData .=$theData;
 
 	$myFile1 = './Intermediate_files/'.$grpName.'Temp.txt';
-	$fh = fopen($myFile1, 'a');
-	fwrite($fh, $theData);
-	fclose($fh);
-	$pathQ = './Intermediate_files/*.*';
-	$execCmd = 'chmod 777 '.$pathQ;
-	$output = shell_exec($execCmd);
+	file_put_contents($myFile1,$theData);
+
 	}
 }
 
@@ -113,36 +109,17 @@ $num = substr_count($stringData, 'Question');
 
 /*Intermediate file location*/
 $myFile3 = './Intermediate_files/Group/'.$grpName.'.txt';
-$fh = fopen($myFile3, 'w');
+
 
 $stringData1 = "Number of questions => ";
 $stringData1 .= $num;
 $stringData1 .= "$$\n";
+$stringData1 .= $stringData;
 
-
-fwrite($fh, $stringData1);
-fclose($fh);
-$pathQ = './Intermediate_files/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
-
-
-
-$myFile3 = './Intermediate_files/Group/'.$grpName.'.txt';
-$fh = fopen($myFile3, 'a');
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Intermediate_files/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
-
-
+file_put_contents($myFile3,$stringData1);
 
 
 convertToKA1();
-
-
-
 
 }
 
@@ -246,7 +223,7 @@ $i++;
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
 $KAFile = './Exercises/'.$grpName.'KA.html';
-$fh = fopen($KAFile, 'w');
+
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -438,11 +415,7 @@ $k++;
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($KAFile,$stringData);
 }
 
 

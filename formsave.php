@@ -37,7 +37,7 @@ if ($option){
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
 $myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+
 $stringData = "Inroduction text => ";
 $stringData .= $_POST['intro_text'];
 
@@ -187,11 +187,7 @@ $stringData .= "\n";
 }
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Intermediate_files/Parameter/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($myFile, $stringData);
 
 convertToKA();
 
@@ -202,7 +198,7 @@ else if($option1== "grp"){
 	$fileName = $_POST['file_name'];
 	/*Intermediate file location*/
 	$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
-	$fh = fopen($myFile, 'w');
+	
 
 	$stringData = "Number of questions => ";
 	$stringData .= $_POST['group_ques'];
@@ -247,11 +243,10 @@ else if($option1== "grp"){
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Intermediate_files/Group/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+
+file_put_contents($myFile,$stringData);
+
+
 
 convertToKA1();
 }
@@ -263,7 +258,7 @@ else
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
 $myFile = './Intermediate_files/Simple/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+
 
 
 
@@ -300,11 +295,8 @@ $stringData .= "$$\n";
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Intermediate_files/Simple/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+
+file_put_contents($myFile,$stringData);
 convertToKA2();
 }
 
@@ -422,7 +414,7 @@ $eq = "";
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
 $KAFile = './Exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
+
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -580,11 +572,8 @@ $stringData.= "</p>\n";
 $stringData.= "</div></div>";
 $stringData.= "</div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+
+file_put_contents($KAFile,$stringData);
 }
 
 function convertToKA1() {
@@ -669,7 +658,6 @@ $h4_text = array();
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
 $KAFile = './Exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -862,11 +850,7 @@ $k++;
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($KAFile,$stringData);
 }
 
 function convertToKA2() {
@@ -929,7 +913,6 @@ $h4_text = $tent[1];
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
 $KAFile = './Exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -1108,11 +1091,7 @@ $stringData.= "</div></div>";
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($KAFile,$stringData);
 }
 
 

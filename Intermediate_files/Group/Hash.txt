@@ -1,4 +1,5 @@
 Number of questions => 3$$
+
 Question text => Which of the following scenarios leads to linear running time for a random search hit in a linear-probing hash table?$$
 Solution => All keys hash to same index$$
 Choice 1 => All keys hash to same index$$

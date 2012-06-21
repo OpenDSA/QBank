@@ -29,7 +29,7 @@ if( $q_type == "par")
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
 $myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+
 $stringData = "Inroduction text => ";
 $stringData .= $_POST['intro_text'];
 
@@ -231,8 +231,7 @@ while(isset($var1))
 }
 
 
-fwrite($fh, $stringData);
-fclose($fh);
+file_put_contents($myFile, $stringData);
 
 convertToKA();
 
@@ -245,7 +244,7 @@ $fileName = $_POST['file_name'];
 
 /*Intermediate file location*/
 $myFile = './Intermediate_files/Group/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+
 
 $stringData = "Number of questions => ";
 $stringData .= $_POST['q_num'];
@@ -292,12 +291,7 @@ $i++;
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Intermediate_files/Group/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
-
+file_put_contents($myFile, $stringData);
 
 convertToKA1();
 }
@@ -342,15 +336,7 @@ $stringData .= "$$\n";
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Intermediate_files/Simple/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
-
-
-convertToKA2();
-
+file_put_contents($myFile, $stringData);
 }
 
 
@@ -363,7 +349,7 @@ $fileName = $_POST['file_name'];
 
 /*Intermediate file to be converted to KA format is specified below*/
 $myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
-$fh = fopen($myFile, 'r');
+
 
 
 
@@ -621,9 +607,10 @@ $stringData.= "</var> </div>";
 $stringData.= "</div></div>";
 $stringData.= "</div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
+file_put_contents($myFile, $stringData);
 }
+
+
 function convertToKA1() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
@@ -707,7 +694,7 @@ $i++;
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
 $KAFile = './Exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
+
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -896,12 +883,10 @@ $k++;
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($myFile, $stringData);
 }
+
+
 function convertToKA2() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
@@ -962,7 +947,7 @@ $h4_text = $tent[1];
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
 $KAFile = './Exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
+
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -1141,11 +1126,7 @@ $stringData.= "</div></div>";
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = './Exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($myFile, $stringData);
 }
 
 ?>
