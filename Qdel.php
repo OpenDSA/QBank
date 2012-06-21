@@ -162,6 +162,17 @@ for($i=0; $i<sizeof($filearray); $i++){
 }
 echo "</table>";
 ?>
+
+<div class="actions">
+  <center>
+      
+           &nbsp;&nbsp;&nbsp;&nbsp;
+	  
+       <input  id="back_button" name="back" type="button" value="Back" onclick="javascript:history.back(2)"/>
+
+      
+    </center>
+</div>
  <div id="footer" style="float:center">
      	  <a href="index.html">Features</a> | 
          <a href="index.html">About QBank</a> | 
