@@ -350,7 +350,7 @@ $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
 $myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
 
-
+$fh = fopen($myFile, 'r');
 
 
 
