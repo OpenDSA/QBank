@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html data-require="math">
+<head>
+	<title>{{title}}</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery
+	/1.7.1/jquery.min.js">
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/
+	jquery-ui.min.js"></script>
+   <script>urlBaseOverride = "../../../ODSAkhan-exercises/";</script>
+   <script src="../../../ODSAkhan-exercises/khan-exercise.js"></script>
+
+</head><body><div class="exercise">
+<div class="vars">
+	
+	{% for v in p.variable_set.all %}
+	<var id="{{v.var_id}}">"
+		{{v.var_value}}"</var>
+	{% endfor %}
+	
+	</var>
+</div>s
+<div class="problems"> <div id="problem-type-or-description">
+<p class="problem">
+<p class="question">
+
+{{question.question}}
+
+</p>
+<div class="solution">
+{{solution.solution}} </div>
+<ul class="choices" data-category="true"> 
+	{% for c in p.choice_set.all %}
+	<li><var>{{c.choice}}</var> </li>
+	{% endfor %}
+</ul>
+
+</div>
+
+<div class="hints">
+	{% for h in p.hint_set.all %}
+	<p>{{h.hint}}</var> </p>
+	{% endfor %}
+</ul>
+
+</div>
+
+
+
+</div></div>
+ </body></html>
+
+
+

@@ -1,0 +1,47 @@
+from qtool.models import *
+from django.forms import ModelForm
+
+from django import forms
+
+
+class VariableForm(ModelForm):
+	class Meta:
+		model = Variable
+		widgets = {
+          		'var_value': forms.Textarea(attrs={'rows':2, 'cols':20}),
+        	}
+		
+		exclude = ('problem',)
+
+
+class ProblemTemplateForm(ModelForm):
+        class Meta:
+	        model = ProblemTemplate
+		widgets = {
+          		'question': forms.Textarea(attrs={'rows':2, 'cols':20}),
+        	}
+		exclude = ('problem',)
+
+
+class AnswerForm(ModelForm):
+        class Meta:
+	        model = Answer
+		exclude = ('problem',)
+
+
+class ChoiceForm(ModelForm):
+        class Meta:
+	        model = Choice
+		exclude = ('problem',)
+
+
+class HintForm(ModelForm):
+        class Meta:
+	        model = Hint
+		exclude = ('problem',)
+
+
+class ProblemForm(ModelForm):
+	class Meta:
+		model = Problem
+	
