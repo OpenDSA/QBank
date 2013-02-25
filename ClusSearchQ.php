@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
 <head>
     <title>Question Find And Edit - QBank</title>  
@@ -7,53 +9,104 @@
 
 <table border ="1" width="100%">
 <tr>
-  <td border="1" align="center" width="10%"><a href="index.html"><img src="QBank.png" href = /></a></td>
+  <td border="1" align="center" width="10%"><a href="index.php"><img src="QBank.png" href = /></a></td>
   <td align="left width="90%"><h1>QBank - Question banking made easy with parameterization. </h1></td>
 </tr>
 </table>  
 
 </head>
 <h2>
-List of existing question files:
+You are creating a question from existing Simple questions
 </h2>
+
+
+<input name="utf8" type="hidden" value="&#x2713;" /> 
+
 <?php
 
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple';
+
+$pathQ = './Intermediate_files/Group';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
-echo "<table border=1 align=center CELLSPACING=1  CELLPADDING=2 width=20%>";
+echo "<table border=1 align=center width=20%>";
 	
 	
-echo "<h3>";
-echo "Simple Q";
-echo "</h3>";
-for($i=0; $i<sizeof($filearray); $i++){
-	echo "<input id=\"q_type\" name=\"file_name\" type=\"hidden\" value=".$filearray[$i]." />";	
+	
+for($i=0; $i<sizeof($filearray)-1; $i++){
+	echo "<html>";
+	echo "<form method=\"post\">";
 	echo "<tr>";
-	echo "<td>";
+	echo "<td width=\"50%\">";
+	echo "<input type=\"hidden\" name=\"radio2\" value=\"grp\" />";
+	echo "<input type=\"hidden\" name=\"QFileName2\" value=\"$filearray[$i]\"/> ";
 	echo "<p>";
 	echo $filearray[$i]; 
 	echo "<p>";
 	echo "</td>";
+
+	echo "<td width=\"50%\">";
+	echo "<p>";
+	echo "<button type=\"submit\" formaction=\"ClusterV2.php\">View</button>";
+	
+	echo "<p>";
+	echo "</td>";
 	echo "</tr>";
+	echo "</form>";
+	echo "</html>";
+
+
 }
+
+
+
+echo "</table>";
+
+$pathQ = './Intermediate_files/Simple';
+$execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
+$output = shell_exec($execCmd);
+$filearray = explode(".txt", $output);
+echo "<table border=1 align=center width=20%>";
+	
+
+
+echo "<form method=\"post\">";	
+echo "<i>";
+echo "Update/Create Group question as(FileName): ";
+echo "</i>";
+echo "<input type=\"text\" name=\"FileName\" maxlength=\"20\"/>"; 
+
+
+
+
+echo "<input name=\"file_size\" type=\"hidden\" value=\"".sizeof($filearray)."\" />";	
+for($i=0; $i<sizeof($filearray)-1; $i++){
+
+	
+	echo "<tr>";
+	echo "<td width=\"50%\">";
+	echo "<input type=\"hidden\" name=\"radio1\" value=\"simple\" />";
+	echo "<p>";
+	echo "<input type=\"checkbox\" name=\"f_name[]\" value=".$filearray[$i]." />";
+	echo $filearray[$i]; 
+	echo "<p>";
+	echo "</td>";
+	echo "</tr>";
+	
+	}
 echo "</table>";
 ?>
 
-<form accept-charset="UTF-8" action="QEdit.php" autocomplete="off" class="question_edit" id="question_edit" method="post"><div style="margin:0;padding:0;display:inline">
-<input name="utf8" type="hidden" value="&#x2713;" /> 
 
 
-<h3> Enter filename to view: 
-<input type="text" name="QFileName" maxlength="20"/> 
 
-<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="View"/>
-</h3><p><h2>
+
+<h2>
+
 Select checkboxes to group questions:
-<input name="commit" type="button" value="Group" onclick= "location.href='Cluster.php'"/>
-</h2>
+<button type="submit" formaction="Cluster.php">Group</button></h2>
 </form>
+
  <p></p>
 
     <div id="footer" style="float:center">

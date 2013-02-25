@@ -1,0 +1,11 @@
+Question text => What's the best way to climb a tree$$
+Solution => Hold on tight$$
+Choice 1 => use your tail$$
+Choice 2 => stand on your brother$$
+Choice 3 => Hold on tight$$
+Choice 4 => $$
+Choice 5 => $$
+Hint 1 => you don't have a tail!$$
+Hint 2 => $$
+Hint 3 => $$
+Hint 4 => $$

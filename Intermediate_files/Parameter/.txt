@@ -1,6 +1,0 @@
-Inroduction text => $$
-Question text => $$
-Parameer type => list$$
-eq = x0$$
-List answer array => ]$$
-List answer table => 

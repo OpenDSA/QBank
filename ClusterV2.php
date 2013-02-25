@@ -28,13 +28,11 @@
  <input id="question_type" name="question[type]" type="hidden" value="SimpleQuestion" />
 
 
-
-
- <?
-	$qName = $_POST['QFileName'];
+<?
+	$qName = $_POST['QFileName2'];
 	$qName = trim($qName);
 
-	$type = $_POST['radio1'];
+	$type = $_POST['radio2'];
 
 if($type == 'par'){
 
@@ -50,10 +48,7 @@ echo "<h2>";
 echo "</h2>";
 	}
 	else {
-
- echo "<h2>You are viewing a Parameterised question
- </h2>";
-
+	 echo "<h2>You are viewing a Parameterised question</h2>";
 
 	$fh = fopen($myFile, 'r');
 	
@@ -304,10 +299,7 @@ else if ($type == 'grp'){
 	echo "</h2>";
 	}
 	else {
- echo "<h2>You are viewing a Group question
- </h2>";
-
-
+	 echo "<h2>You are viewing a Group question</h2>";
 
 	$fh = fopen($myFile, 'r');
 	
@@ -515,11 +507,7 @@ else
 	echo "</h2>";
 	}
 	else {
- 
-
-echo "<h2>You are viewing a simple question
- </h2>";
-
+	 echo "<h2>You are viewing a Simple question</h2>";
 
 	$fh = fopen($myFile, 'r');
 	
@@ -681,11 +669,7 @@ echo" </table>";
 ?>
  <p>   
  
-<h2> Do you want to delete this question: 
-
-<input class="ui-state-default ui-corner-all submitButton" data-disable-with="Saving..." id="save_button" name="commit" type="submit" value="Delete"/>
-
-  <input  id="back_button" name="back" type="button" value="Back" onclick="javascript:history.back(1)"/>
+<h2>  <input  id="back_button" name="back" type="button" value="Back" onclick="javascript:history.back(1)"/>
 
 </h2>
 

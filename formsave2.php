@@ -1,10 +1,22 @@
 <html>
 
-Your question has been saved!!
+<head>
+<title>Saved the question - QBank</title>  
+  
+<meta name="Description" content="A bank of community-written homework and test questions where authors get credit and access is completely free.">
+<link href="new.css" rel="stylesheet" type="text/css" />
 
+<table border ="1" width="100%">
+<tr>
+  <td border="1" align="center" width="10%"><a href="index.php"><img src="QBank.png" href = /></a></td>
+  <td align="left width="90%"><h1>QBank - Question banking made easy with parameterization. </h1></td>
+</tr>
+</table>  
 
-<img src="example.php" >
-
+</head>
+<h2>
+Your question has been saved sucessfully!!!
+</h2>
 <?
 
 /*This file saves an existing question that is edited by users into an existing intermediate format file and also calls a method to convert the intermdiate format to Khan Academy format*/
@@ -16,8 +28,8 @@ if( $q_type == "par")
 {
 $fileName = $_POST['file_name'];
 /*Intermediate file location*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+$myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
+
 $stringData = "Inroduction text => ";
 $stringData .= $_POST['intro_text'];
 
@@ -219,8 +231,7 @@ while(isset($var1))
 }
 
 
-fwrite($fh, $stringData);
-fclose($fh);
+file_put_contents($myFile, $stringData);
 
 convertToKA();
 
@@ -232,8 +243,8 @@ $fileName = $_POST['file_name'];
 
 
 /*Intermediate file location*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$fileName.'.txt';
-$fh = fopen($myFile, 'w');
+$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
+
 
 $stringData = "Number of questions => ";
 $stringData .= $_POST['q_num'];
@@ -280,12 +291,7 @@ $i++;
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
-
+file_put_contents($myFile, $stringData);
 
 convertToKA1();
 }
@@ -295,7 +301,7 @@ $fileName = $_POST['file_name'];
 
 
 /*Intermediate file location*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Simple/'.$fileName.'.txt';
 $fh = fopen($myFile, 'w');
 
 
@@ -330,15 +336,7 @@ $stringData .= "$$\n";
 
 
 /*Following code assigns read, write and execute permission to the newly created intermediate file so that it can be edited later when the question is edited on the front-end*/
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
-
-
-convertToKA2();
-
+file_put_contents($myFile, $stringData);
 }
 
 
@@ -350,9 +348,9 @@ function convertToKA() {
 $fileName = $_POST['file_name'];
 
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter/'.$fileName.'.txt';
-$fh = fopen($myFile, 'r');
+$myFile = './Intermediate_files/Parameter/'.$fileName.'.txt';
 
+$fh = fopen($myFile, 'r');
 
 
 
@@ -453,7 +451,7 @@ $fh = fopen($myFile, 'r');
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
+$KAFile = './Exercises/'.$fileName.'KA.html';
 $fh = fopen($KAFile, 'w');
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
@@ -463,8 +461,8 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
-   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+   <script>urlBaseOverride = \"../../ODSAkhan-exercises/\";</script>
+   <script src=\"../../ODSAkhan-exercises/khan-exercise.js\"></script>
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -609,13 +607,14 @@ $stringData.= "</var> </div>";
 $stringData.= "</div></div>";
 $stringData.= "</div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
+file_put_contents($myFile, $stringData);
 }
+
+
 function convertToKA1() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Group/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
 	$theData = "";
@@ -694,8 +693,8 @@ $i++;
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
+$KAFile = './Exercises/'.$fileName.'KA.html';
+
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -704,8 +703,13 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
-   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+   <script type=\"text/javascript\"
+   src=\"http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js\">
+</script>
+ <script>urlBaseOverride = \"../../ODSAkhan-exercises/\";</script>
+   <script src=\"../../ODSAkhan-exercises/khan-exercise.js\"></script>
+<script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
+<link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -718,40 +722,156 @@ $stringData.= "<p class=\"question\">\n";
 $stringData.= $q_text[$k];
 $stringData.= "\n</p>\n";
 $stringData.= "<div class=\"solution\">\n";
+$pos = strpos($s_text[$k],'<code>');
+
+if($pos === false) {
 $stringData.= "<var>\"";
 $stringData.= $s_text[$k];
 $stringData.= "\"</var></div>\n";
-$stringData.= "<ul class =\"choices\" data-show=\"4\">\n";
+
+}
+else {
+$stringData.= "<var>";
+$stringData.= $s_text[$k];
+$stringData.= "</var></div>\n";
+
+}
+
+$show =2;
+$val5= $c5_text[$k];
+$val4= $c4_text[$k];
+$val3= $c3_text[$k];
+if( $val5 == "")
+{
+$show =4;
+}
+if($val4 == "")
+{
+$show =3;
+}
+if($val3 == "")
+{
+$show =2;
+}
+
+$stringData.= "<ul class =\"choices\" data-show=\"";
+$stringData.= $show;
+$stringData.="\">\n";
+$pos1 = strpos($c1_text[$k],'<code>');
+
+if($pos1 === false) {
 $stringData.= "<li><var>\"";
 $stringData.= $c1_text[$k];
 $stringData.= "\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c2_text[$k];
-$stringData.="\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c3_text[$k];
-$stringData.="\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c4_text[$k];
-$stringData.="\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c5_text[$k];
-$stringData.="\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c1_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+
+
+
+$pos2 = strpos($c2_text[$k],'<code>');
+
+if($pos2 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c2_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c2_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+
+
+if ($val3 != ""){
+$pos3 = strpos($c3_text[$k],'<code>');
+
+if($pos3 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c3_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c3_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+
+}
+
+if ($val4 != ""){
+
+$pos4 = strpos($c4_text[$k],'<code>');
+
+if($pos4 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c4_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c4_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+}
+
+if ($val5 != ""){
+
+$pos5 = strpos($c5_text[$k],'<code>');
+
+if($pos5 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c5_text[$k];
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c5_text[$k];
+$stringData.= "</var></li>\n";
+
+}
+}
 $stringData.="</ul>";
 
+
+
 $stringData.= "<div class =\"hints\">\n";
+$v1= $h1_text[$k];
+if ($v1 != ""){
 $stringData.= "<p>\"";
 $stringData.=$h1_text[$k];
 $stringData.="\"</p>\n";
+}
+$v2= $h2_text[$k];
+if ($v2 != ""){
 $stringData.="<p>\"";
 $stringData.=$h2_text[$k];
 $stringData.="\"</p>\n";
+}
+$v3= $h3_text[$k];
+if ($v3 != ""){
 $stringData.="<p>\"";
 $stringData.=$h3_text[$k];
 $stringData.="\"</p>\n";
+}
+$v4= $h4_text[$k];
+if ($v4 != ""){
 $stringData.="<p>\"";
 $stringData.=$h4_text[$k];
 $stringData.="\"</p>\n";
+}
 
 $stringData.= "</div></div>";
 
@@ -763,16 +883,14 @@ $k++;
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($myFile, $stringData);
 }
+
+
 function convertToKA2() {
 $fileName = $_POST['file_name'];
 /*Intermediate file to be converted to KA format is specified below*/
-$myFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple/'.$fileName.'.txt';
+$myFile = './Intermediate_files/Simple/'.$fileName.'.txt';
 $fh = fopen($myFile, 'r');
 
 	$theData = "";
@@ -828,8 +946,8 @@ $h4_text = $tent[1];
 
 /*Following code creates a new file in the Khan Academy format and writes the parameter values and answer function computed above into the file. The code creates an HTML file using PHP*/	
 
-$KAFile = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/'.$fileName.'KA.html';
-$fh = fopen($KAFile, 'w');
+$KAFile = './Exercises/'.$fileName.'KA.html';
+
 $stringData = "<!DOCTYPE html>\n";
 $stringData.= "<html data-require=\"math\">\n";
 $stringData.= "<head>\n";
@@ -838,8 +956,13 @@ $stringData.= $fileName;
 $stringData.= "\n</title>\n";
 $stringData.= "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">
 </script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>
-  <script>urlBaseOverride = \"../ODSAkhan-exercises/\";</script>
-   <script src=\"../ODSAkhan-exercises/khan-exercise.js\"></script>
+   <script type=\"text/javascript\"
+   src=\"http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js\">
+</script>
+ <script>urlBaseOverride = \"../../ODSAkhan-exercises/\";</script>
+   <script src=\"../../ODSAkhan-exercises/khan-exercise.js\"></script>
+<script src=\"http://algoviz.org/OpenDSA/JSAV/build/JSAV-min.js\"></script>    
+<link rel=\"stylesheet\" href=\"http://algoviz.org/OpenDSA/JSAV/css/JSAV.css\" type=\"text/css\" />
 \n";
 $stringData.= "</head><body><div class=\"exercise\">\n";
 $stringData.=  "<div class=\"vars\">\n";
@@ -851,51 +974,159 @@ $stringData.= "<p class=\"question\">\n";
 $stringData.= $q_text;
 $stringData.= "\n</p>\n";
 $stringData.= "<div class=\"solution\">\n";
-$stringData.= "<var>\"";
+
+$pos = strpos($s_text,'<code>');
+
+if($pos === false) {
+ $stringData.= "<var>\"";
 $stringData.= $s_text;
 $stringData.= "\"</var></div>\n";
-$stringData.= "<ul class =\"choices\" data-show=\"4\">\n";
+}
+else {
+ $stringData.= "<var>";
+$stringData.= $s_text;
+$stringData.= "</var></div>\n";
+}
+
+$show =2;
+$val5= $c5_text;
+$val4= $c4_text;
+$val3= $c3_text;
+if( $val5 == "")
+{
+$show =4;
+}
+if($val4 == "")
+{
+$show =3;
+}
+if($val3 == "")
+{
+$show =2;
+}
+
+$stringData.= "<ul class =\"choices\" data-show=\"";
+$stringData.= $show;
+$stringData.="\">\n";
+$pos1 = strpos($c1_text,'<code>');
+
+if($pos1 === false) {
 $stringData.= "<li><var>\"";
 $stringData.= $c1_text;
 $stringData.= "\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c2_text;
-$stringData.="\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c3_text;
-$stringData.="\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c4_text;
-$stringData.="\"</var></li>\n";
-$stringData.="<li><var>\"";
-$stringData.=$c5_text;
-$stringData.="\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c1_text;
+$stringData.= "</var></li>\n";
+
+}
+
+
+$pos2 = strpos($c2_text,'<code>');
+
+if($pos2 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c2_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c2_text;
+$stringData.= "</var></li>\n";
+
+}
+
+if ($val3 != ""){
+
+$pos3 = strpos($c3_text,'<code>');
+
+if($pos3 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c3_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c3_text;
+$stringData.= "</var></li>\n";
+
+}
+
+}
+
+if ($val4 != ""){
+$pos4 = strpos($c4_text,'<code>');
+
+if($pos4 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c4_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c4_text;
+$stringData.= "</var></li>\n";
+
+}
+}
+
+if ($val5 != ""){
+$pos5 = strpos($c5_text,'<code>');
+
+if($pos5 === false) {
+$stringData.= "<li><var>\"";
+$stringData.= $c5_text;
+$stringData.= "\"</var></li>\n";
+
+}
+else {
+$stringData.= "<li><var>";
+$stringData.= $c5_text;
+$stringData.= "</var></li>\n";
+
+}
+}
 $stringData.="</ul>";
 
+
 $stringData.= "<div class =\"hints\">\n";
+$v1= $h1_text;
+if ($v1 != ""){
 $stringData.= "<p>\"";
 $stringData.=$h1_text;
 $stringData.="\"</p>\n";
+}
+$v2= $h2_text;
+if ($v2 != ""){
 $stringData.="<p>\"";
 $stringData.=$h2_text;
 $stringData.="\"</p>\n";
+}
+$v3= $h3_text;
+if ($v3 != ""){
 $stringData.="<p>\"";
 $stringData.=$h3_text;
 $stringData.="\"</p>\n";
+}
+$v4= $h4_text;
+if ($v4 != ""){
 $stringData.="<p>\"";
 $stringData.=$h4_text;
 $stringData.="\"</p>\n";
+}
+
 
 $stringData.= "</div></div>";
 
 
 $stringData.= "</div></div> </body></html>\n";
 
-fwrite($fh, $stringData);
-fclose($fh);
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/QBank-exercises/*.*';
-$execCmd = 'chmod 777 '.$pathQ;
-$output = shell_exec($execCmd);
+file_put_contents($myFile, $stringData);
 }
 
 ?>

@@ -7,7 +7,7 @@
 
 <table border ="1" width="100%">
 <tr>
-  <td border="1" align="center" width="10%"><a href="index.html"><img src="QBank.png" href = /></a></td>
+  <td border="1" align="center" width="10%"><a href="index.php"><img src="QBank.png" href = /></a></td>
   <td align="left width="90%"><h1>QBank - Question banking made easy with parameterization. </h1></td>
 </tr>
 </table>  
@@ -20,7 +20,7 @@ List of existing question files:
 
 
 //Displays list of existing questions on screen.
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Parameter';
+$pathQ = './Intermediate_files/Parameter';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
@@ -31,7 +31,7 @@ echo "</h3>";
 
 
 
-for($i=0; $i<sizeof($filearray); $i++){
+for($i=0; $i<sizeof($filearray)-1; $i++){
 	
 	echo "<tr>";
 	echo "<td>";
@@ -43,7 +43,7 @@ for($i=0; $i<sizeof($filearray); $i++){
 }
 echo "</table>";
 
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Group';
+$pathQ = './Intermediate_files/Group';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
@@ -53,7 +53,7 @@ echo "<h3>";
 echo "Group Q";
 echo "</h3>";
 
-for($i=0; $i<sizeof($filearray); $i++){
+for($i=0; $i<sizeof($filearray)-1; $i++){
 	
 	echo "<tr>";
 	echo "<td>";
@@ -65,7 +65,7 @@ for($i=0; $i<sizeof($filearray); $i++){
 }
 echo "</table>";
 
-$pathQ = '/home/algoviz-beta/QBank/QBank/OpenDSA/Intermediate_files/Simple';
+$pathQ = './Intermediate_files/Simple';
 $execCmd = 'ls -rt '.$pathQ.' | tr " " "\t"';
 $output = shell_exec($execCmd);
 $filearray = explode(".txt", $output);
@@ -74,7 +74,7 @@ echo "<table border=1 align=center CELLSPACING=1  CELLPADDING=2 width=20%>";
 echo "<h3>";
 echo "Simple Q";
 echo "</h3>";
-for($i=0; $i<sizeof($filearray); $i++){
+for($i=0; $i<sizeof($filearray)-1; $i++){
 	
 	echo "<tr>";
 	echo "<td>";

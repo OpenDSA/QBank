@@ -1,4 +1,4 @@
-Inroduction text =>   Multiply following:$$
+Inroduction text =>    Multiply  the following:$$
 Question text => what is @A*@B$$
 Parameer type => range$$
 Variable name => A$$
