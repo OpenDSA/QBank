@@ -3,9 +3,9 @@
 <head>
     <title>QBANK</title>
     <style>
-
 	    
 html {
+	
 	background-color: #8596AA;
 }
 
@@ -18,11 +18,11 @@ body {
       border: 1px solid #ccc;
       background-color: #fff;
       box-shadow: 0px 0px 10px 10px #888888;
-      }
+}
    
 h1 {
 	color: #356397;
-      }
+}
 #footer{padding-top:25px;padding-bottom:1px;border-color:#000;text-align:center;font-family:sans-serif;font-size:10px;font-weight:normal;font-color:#000000;margin-top:10px;margin-bottom:20px;clear:both;color:#777}
 
 #footer a:link{color:#777;text-decoration:none}
@@ -64,39 +64,42 @@ a:active{color:#B22222}}
     padding: 70px 70px 70px;
     font-size: 12px;
     vertical-align: bottom;
-  }
+}
 
 </style>	    
-<meta name="Description" content="A bank of test questions">
+<meta name="Description" content="Problem Authoring Tool>
  
   
 </head>
 <body class="full-site">
    
-   <h1>QBank: Question Banking Made Easy</h1>
+   <h1>QBank: Problem Authoring Made Easy</h1>
    
-   <div id="container" class='full-site'>
+ <div id="container" class='full-site'>
  <div id="header">
 
-        <a href="/" class="banner1"></a>
-         <div id="header_right">
-        
-	 <div id="tabs"> 
+       <a href="/qtool/" class="banner1"></a>
+       <div id="header_right">
+        <div id="tabs"> 
                <ul>
                   <li >
                	   <a href="/qtool/">Home</a>
                	</li>
                	<li >
-               	   <a href="/qtool/problems/">Find questions</a>
+               	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
                </ul>
             </div>
+
          </div>
        
       </div>
@@ -115,14 +118,14 @@ a:active{color:#B22222}}
    <tr>
 	   <td nowrap>
 		   <div style="font-size:20px; padding-top: 10px; font-weight:bold;">
-			    Simple Question
-			   </div>
-		   </td>
-		   <td>
+			Simple Question
+		   </div>
+		</td>
+		<td>
       		 <div style="font-size:20px; padding-top: 10px; font-weight:bold;">
-		    Parameterised Question
+		    	Parameterised Question
 	      </div>
-	      </td>
+	      	</td>
       </tr>
 
     
@@ -131,17 +134,17 @@ a:active{color:#B22222}}
       <tr>
 	   <td nowrap style=" width:225px;">
 		   <div style="font-size:15px;  width: 215px; padding-top: 10px">
-			   Write a simple, multiple choice question in any subject area</div>
-		   </td>
-		   <td style=" text-align: center; ">
-			   <div style="font-size:10px; float:left; width: 115px; padding-top:10px">
-		
-		   Write a question specified with variables that can take  a list of values.
-	   </div>
+			   Write a simple, multiple choice question in any subject area.</div>
+	   </td>
+		<td style=" text-align: center; ">
+
+		   	<div style="font-size:10px; float:left; width: 115px; padding-top:10px">
+		   	Write a dynamic question with variables that can take  a list of values.
+	    	   	</div>
    	
-	      <div style="font-size:10px;float:right; width:115px; padding-top:10px">
-		      Write a question with variables that can take a range of values( Math problems)
-	      </div>
+	      		<div style="font-size:10px;float:right; width:115px; padding-top:10px">
+		      Write a dynamic question with variables that can take a range of values (Math problems)
+	      		</div>
 	      </td>
       </tr>   
 
@@ -151,16 +154,17 @@ a:active{color:#B22222}}
 	      
    <tr>
 	   <td nowrap style=" width:225px;">
-		   <div style="font-size:20px; padding-top: 10px;background:white" id="mydiv" onmouseover="this.style.background='#eeeeee';" onmouseout="this.style.background='white';">
-			   <a href="/qtool/simple/"> Multiple Choice Question</a>
-			   </div>
-		   </td>
-		   <td style="text-align:center; width:225px">
-      		 <div style="font-size:20px; padding-left: 30px; float:left; background:white" id="mydiv" onmouseover="this.style.background='#eeeeee';" onmouseout="this.style.background='white';">
-		      <a href="/qtool/list/">List</a>
+		<div style="font-size:20px; padding-top: 10px;background:white" id="mydiv" onmouseover="this.style.background='#eeeeee';" onmouseout="this.style.background='white';">
+		<a href="/qtool/simple/"> Multiple Choice Question</a>
+		</div>
+	   </td>
+	   <td style="text-align:center; width:225px">
+      		<div style="font-size:20px; padding-left: 30px; float:left; background:white" id="mydiv" onmouseover="this.style.background='#eeeeee';" onmouseout="this.style.background='white';">
+	      <a href="/qtool/list/">List</a>
 	      </div>
+
 	      <div style="font-size:20px; padding-right: 30px ; float:right; background:white" id="mydiv" onmouseover="this.style.background='#eeeeee';" onmouseout="this.style.background='white';">
-		      <a href="/qtool/range/">Range</a>
+		<a href="/qtool/range/">Range</a>
 	      </div>
 	      </td>
       </tr>
@@ -168,10 +172,10 @@ a:active{color:#B22222}}
 
 
       <tr>
-	       <td nowrap>
+	      <td nowrap>
 	      <div style="font-size:20px; padding-top: 10px; font-weight:bold;">
 		    Summative Question
-		      </div>
+		</div>
 	      </td>
 
       <td nowrap>
@@ -220,9 +224,9 @@ a:active{color:#B22222}}
   </div>
   </div> 
       	<div id="footer">
-         <a href="/sitelicense">About QBank</a> | 
-	 <a href="/about">Help</a> | 
-         <a href="/help/contact">Contact Us</a>
+         <a href="/qtool/">About QBank</a> | 
+	 <a href="/qtool/">Help</a> | 
+         <a href="/qtool/">Contact Us</a>
      	</div>
    
    

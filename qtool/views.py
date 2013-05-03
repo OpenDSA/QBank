@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 from django.template import RequestContext, loader,Context
 from django.forms.formsets import formset_factory, BaseFormSet
-from django.forms.models import inlineformset_factory
+from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.http import HttpResponse, HttpResponseRedirect
 from qtool.forms import *
 from qtool.models import *
@@ -90,61 +90,86 @@ def edit(request, problem_id):
 			super(RequiredFormSet, self).__init__(*args, **kwargs)
 			for form in self.forms:
 				form.empty_permitted = True
-	
-	class SensibleFormset(BaseFormSet):
-		def total_form_count(self):
-			"""Returns the total number of forms in this FormSet."""
-			if self.data or self.files:
-				return self.management_form.cleaned_data[TOTAL_FORM_COUNT]
-			else:
-				if self.initial_form_count() > 0:
-                			total_forms = self.initial_form_count()
-				else:
-                			total_forms = self.initial_form_count() + self.extra
-				if total_forms > self.max_num > 0:
-                			total_forms = self.max_num
-				return total_forms
-        		
-	
-	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate)
-	
-	AnswerInlineFormSet = inlineformset_factory(Problem, Answer, max_num =1)
-	VariableInlineFormSet = inlineformset_factory(Problem, Variable)
-	CommonIntroductionFormSet =  inlineformset_factory(Problem, CommonIntroduction, max_num =1 )
-	ChoiceInlineFormSet = inlineformset_factory(Problem, Choice,)
+	class MyInline(BaseInlineFormSet): 
+   		def __init__(self, *args, **kwargs): 
+			super(MyInline, self).__init__(*args, **kwargs) 
+			self.can_delete = False 
 
-	HintInlineFormSet = inlineformset_factory(Problem, Hint)
-		
-	ScriptInlineFormSet = inlineformset_factory(Problem, Script)
+	
+	
+	maxpt = max(0, len(ProblemTemplate.objects.filter(problem=problem)))
+	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate, max_num=maxpt)
+	maxa = max(0, len(Answer.objects.filter(problem=problem)))
+
+	AnswerInlineFormSet = inlineformset_factory(Problem, Answer, max_num =maxa)
+	maxv = max(0, len(Variable.objects.filter(problem=problem)))
+
+	VariableInlineFormSet = inlineformset_factory(Problem, Variable, max_num=maxv)
+	maxc = max(0, len(CommonIntroduction.objects.filter(problem=problem)))
+
+	CommonIntroductionFormSet =  inlineformset_factory(Problem, CommonIntroduction, max_num =maxc )
+	maxch = max(0, len(Choice.objects.filter(problem=problem)))
+
+	ChoiceInlineFormSet = inlineformset_factory(Problem, Choice, max_num=maxch, formset=MyInline)
+	maxh = max(0, len(Hint.objects.filter(problem=problem)))
+
+	HintInlineFormSet = inlineformset_factory(Problem, Hint, max_num=maxh)
+	maxs = max(0, len(Script.objects.filter(problem=problem)))
+
+	ScriptInlineFormSet = inlineformset_factory(Problem, Script, max_num=maxs)
+
 	if request.method == 'POST':
 		problem_form =ProblemForm(request.POST, instance=problem)
-		common_introduction_formset = CommonIntroductionForm(request.POST, instance=problem, prefix='common_intro')
 		problem_template_formset = ProblemTemplateInlineFormSet(request.POST,request.FILES, instance=problem, prefix='templates')
+		common_introduction_formset = CommonIntroductionForm(request.POST, request.FILES, prefix='common_intro', instance =problem)
+
 		answer_formset = AnswerInlineFormSet(request.POST, instance=problem, prefix='answer')
+
 		hint_formset = HintInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='hints')
-		choice_formset = ChoiceInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='choices')
-		script_formset = ScriptInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='scripts')
-		variable_formset = VariableInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='variables')
-		if problem_form.is_valid() and variable_formset.is_valid() and problem_template_formset.is_valid() and choice_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid() and script_formset.is_valid() and common_introduction_formset.is_valid():
+		choice_formset = ChoiceInlineFormSet(request.POST, request.FILES,  instance=problem, prefix='choices')
+		script_formset = ScriptInlineFormSet(request.POST, request.FILES,  instance=problem,  prefix='scripts')
+		variable_formset = VariableInlineFormSet(request.POST, request.FILES,instance=problem, prefix='variables')
+		
+		if problem_form.is_valid() and variable_formset.is_valid() and problem_template_formset.is_valid() and choice_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid() and script_formset.is_valid() and common_introduction_formset.is_valid() :
 			problem = problem_form.save()
-			problem_template_formset.save()
-			answer_formset.save()
-			common_introduction_formset.save()
-			
-			variable_formset.save()
-			hint_formset.save()
-			script_formset.save()
-			choice_formset.save() # Redirect to a 'success' page
+			answer_formset.save(commit = False)
+			common_introduction_formset.save(commit = False)
+			problem_template_formset.save(commit =False)
+			variable_formset.save(commit = False)
+
+
+			for form in hint_formset.forms:
+				hint = form.save(commit = False)
+				hint.problem = problem
+				hint.save()
+
+
+			for form in script_formset.forms:
+				script = form.save(commit = False)
+				script.problem = problem
+				script.save()
+
+
+			for form in choice_formset.forms:
+				choice = form.save(commit = False)
+				choice.problem = problem
+				choice.save()
 			return HttpResponseRedirect('/qtool/problems/')
 	else:
 		problem_form = ProblemForm(instance=problem)
-		choice_formset = ChoiceInlineFormSet(instance = problem, prefix='choices')
-		problem_template_formset = ProblemTemplateInlineFormSet(instance = problem, prefix='templates')
-		answer_formset = AnswerInlineFormSet(instance = problem, prefix='answer')
+		
+		problem_template_formset = ProblemTemplateInlineFormSet( instance=problem, prefix='templates')
+
+		choice_formset = ChoiceInlineFormSet(instance=problem, prefix='choices')
+		
+		answer_formset = AnswerInlineFormSet(instance=problem, prefix='answer')
+		
 		script_formset = ScriptInlineFormSet(instance=problem, prefix='scripts')
-		variable_formset = VariableInlineFormSet(instance = problem, prefix='variables')
-		common_introduction_formset = CommonIntroductionFormSet(instance = problem, prefix='common_intro')
-		hint_formset = HintInlineFormSet(instance=problem, prefix='hints')
+		variable_formset = VariableInlineFormSet(instance=problem, prefix='variables')
+		common_introduction_formset = CommonIntroductionFormSet(instance=problem, prefix='common_intro')
+		hint_formset = HintInlineFormSet( instance=problem, prefix='hints')
+
+		
 	c = {
 	'problem_form' : problem_form,
 	'choice_formset' : choice_formset,
@@ -153,7 +178,7 @@ def edit(request, problem_id):
 	'variable_formset' : variable_formset,
 	'script_formset' : script_formset,
 	'common_introduction_formset' : common_introduction_formset,
-	'hint_formset' : hint_formset,
+	'hint_formset' : hint_formset,	
     	}
 	c.update(csrf(request))
 	return render_to_response('qtool/edit.html', c)
@@ -182,9 +207,9 @@ def ka_details(request, problem_id):
 	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 	h = p.hint_set.all()
-
-	destination = open('/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
-	str ="<!DOCTYPE html><html data-require=\"math math-format word-problems spin\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script><script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>"
+	
+	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
+	str ="<!DOCTYPE html><html data-require=\"math math-format word-problems spin\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script><script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>"
 	for scr in p.script_set.all():
 		str += "<p>"
 		str += scr.script
@@ -208,18 +233,41 @@ def ka_details(request, problem_id):
 	str += "<div class=\"solution\"><var>"
 	str += s.solution
 	str += "</var></div>"
-	str += "<ul class =\"choices\">"
+
+	
 	for c in p.choice_set.all():
-		str += "<li><var>"
-		str += c.choice
-		str += "</var></li>"
-	str += "</ul>"
+
+		if c.choice == "":
+			break
+		else:
+			str += "<ul class =\"choices\">"
+			break
+
+	
+	for c in p.choice_set.all():
+
+		if not c.choice == "":
+			str += "<li><var>"
+			str += c.choice
+			str += "</var></li>"
+
+	for c in p.choice_set.all():
+
+		if c.choice == "":
+			break
+		else:
+			str += "</ul>"
+			break
+
+
 	str += "<div class=\"hints\">"
 	for h in p.hint_set.all():
+		str += "<p>"
 		str += h.hint
+		str += "</p>"
 	str += "</div>"
 	str += "</div></div></div></body></html>"	
-	destination.write(bytes(str,'UTF-8'))
+	destination.write(bytes(str))
 	destination.close()
 
 
@@ -240,7 +288,7 @@ def simple_details(request, problem_id):
 	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 	h = p.hint_set.all()
-	destination = open('/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
+	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
 	
 	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></head><body><div class=\"exercise\"><div class=\"vars\"></div><div class=\"problems\"><div id=\"problem-type-or-description\"><p class=\"question\">"
 	str += q.question
@@ -262,7 +310,7 @@ def simple_details(request, problem_id):
 	str += "</div>"
 	str += "</div></div></div></body></html>"	
 
-	destination.write(bytes(str,'UTF-8'))
+	destination.write(bytes(str))
 	destination.close()
 
 	context = Context({
@@ -275,6 +323,381 @@ def simple_details(request, problem_id):
 	})
 	return render_to_response('qtool/simple_details.html', context)
 
+def edit_ka(request, problem_id):
+
+	problem = get_object_or_404(Problem, id=problem_id)
+
+	class RequiredFormSet(BaseFormSet):
+		def __init__(self, *args, **kwargs):
+			super(RequiredFormSet, self).__init__(*args, **kwargs)
+			for form in self.forms:
+				form.empty_permitted = True
+	class MyInline(BaseInlineFormSet): 
+   		def __init__(self, *args, **kwargs): 
+			super(MyInline, self).__init__(*args, **kwargs) 
+			self.can_delete = False 
+
+	
+	
+	maxpt = max(0, len(ProblemTemplate.objects.filter(problem=problem)))
+	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate, max_num=maxpt)
+	maxa = max(0, len(Answer.objects.filter(problem=problem)))
+
+	AnswerInlineFormSet = inlineformset_factory(Problem, Answer, max_num =maxa)
+	maxv = max(0, len(Variable.objects.filter(problem=problem)))
+
+	VariableInlineFormSet = inlineformset_factory(Problem, Variable, max_num=maxv)
+	maxc = max(0, len(CommonIntroduction.objects.filter(problem=problem)))
+
+	CommonIntroductionFormSet =  inlineformset_factory(Problem, CommonIntroduction, max_num =maxc )
+	maxch = max(0, len(Choice.objects.filter(problem=problem)))
+
+	ChoiceInlineFormSet = inlineformset_factory(Problem, Choice, max_num=maxch, formset=MyInline)
+	maxh = max(0, len(Hint.objects.filter(problem=problem)))
+
+	HintInlineFormSet = inlineformset_factory(Problem, Hint, max_num=maxh)
+	maxs = max(0, len(Script.objects.filter(problem=problem)))
+
+	ScriptInlineFormSet = inlineformset_factory(Problem, Script, max_num=maxs)
+
+	if request.method == 'POST':
+		problem_form =ProblemForm(request.POST, instance=problem)
+		problem_template_formset = ProblemTemplateInlineFormSet(request.POST,request.FILES, instance=problem, prefix='templates')
+		common_introduction_formset = CommonIntroductionForm(request.POST, request.FILES, prefix='common_intro', instance =problem)
+
+		answer_formset = AnswerInlineFormSet(request.POST, instance=problem, prefix='answer')
+
+		hint_formset = HintInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='hints')
+		choice_formset = ChoiceInlineFormSet(request.POST, request.FILES,  instance=problem, prefix='choices')
+		script_formset = ScriptInlineFormSet(request.POST, request.FILES,  instance=problem,  prefix='scripts')
+		variable_formset = VariableInlineFormSet(request.POST, request.FILES,instance=problem, prefix='variables')
+		
+		if problem_form.is_valid() and variable_formset.is_valid() and problem_template_formset.is_valid() and choice_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid() and script_formset.is_valid() and common_introduction_formset.is_valid() :
+			problem = problem_form.save()
+			answer_formset.save(commit = False)
+			common_introduction_formset.save(commit = False)
+			problem_template_formset.save(commit =False)
+			variable_formset.save(commit = False)
+
+
+			for form in hint_formset.forms:
+				hint = form.save(commit = False)
+				hint.problem = problem
+				hint.save()
+
+
+			for form in script_formset.forms:
+				script = form.save(commit = False)
+				script.problem = problem
+				script.save()
+
+
+			for form in choice_formset.forms:
+				choice = form.save(commit = False)
+				choice.problem = problem
+				choice.save()
+			return HttpResponseRedirect('/qtool/problems/')
+	else:
+		problem_form = ProblemForm(instance=problem)
+		
+		problem_template_formset = ProblemTemplateInlineFormSet( instance=problem, prefix='templates')
+
+		choice_formset = ChoiceInlineFormSet(instance=problem, prefix='choices')
+		
+		answer_formset = AnswerInlineFormSet(instance=problem, prefix='answer')
+		
+		script_formset = ScriptInlineFormSet(instance=problem, prefix='scripts')
+		variable_formset = VariableInlineFormSet(instance=problem, prefix='variables')
+		common_introduction_formset = CommonIntroductionFormSet(instance=problem, prefix='common_intro')
+		hint_formset = HintInlineFormSet( instance=problem, prefix='hints')
+
+		
+	c = {
+	'problem_form' : problem_form,
+	'choice_formset' : choice_formset,
+	'problem_template_formset' :problem_template_formset,
+	'answer_formset': answer_formset,
+	'variable_formset' : variable_formset,
+	'script_formset' : script_formset,
+	'common_introduction_formset' : common_introduction_formset,
+	'hint_formset' : hint_formset,	
+    	}
+	c.update(csrf(request))
+	return render_to_response('qtool/edit.html', c)
+
+
+def edit_simple(request, problem_id):
+
+	problem = get_object_or_404(Problem, id=problem_id)
+
+	class RequiredFormSet(BaseFormSet):
+		def __init__(self, *args, **kwargs):
+			super(RequiredFormSet, self).__init__(*args, **kwargs)
+			for form in self.forms:
+				form.empty_permitted = True
+				
+	class MyInline(BaseInlineFormSet): 
+   		def __init__(self, *args, **kwargs): 
+			super(MyInline, self).__init__(*args, **kwargs) 
+			self.can_delete = False 
+
+	
+	
+	maxpt = max(0, len(ProblemTemplate.objects.filter(problem=problem)))
+	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate, max_num=maxpt)
+	
+	maxa = max(0, len(Answer.objects.filter(problem=problem)))
+	AnswerInlineFormSet = inlineformset_factory(Problem, Answer, max_num =maxa)
+
+	maxch = max(0, len(Choice.objects.filter(problem=problem)))
+	ChoiceInlineFormSet = inlineformset_factory(Problem, Choice, max_num=maxch, formset=MyInline)
+	
+	maxh = max(0, len(Hint.objects.filter(problem=problem)))
+	HintInlineFormSet = inlineformset_factory(Problem, Hint, max_num=maxh)
+	
+
+	if request.method == 'POST':
+		problem_form =ProblemForm(request.POST, instance=problem)
+		problem_template_formset = ProblemTemplateInlineFormSet(request.POST,request.FILES, instance=problem, prefix='templates')
+		
+
+		answer_formset = AnswerInlineFormSet(request.POST, instance=problem, prefix='answer')
+
+		hint_formset = HintInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='hints')
+		choice_formset = ChoiceInlineFormSet(request.POST, request.FILES,  instance=problem, prefix='choices')
+		
+		if problem_form.is_valid() and problem_template_formset.is_valid() and choice_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid():
+			problem = problem_form.save()
+			answer_formset.save(commit = False)
+			problem_template_formset.save(commit =False)
+			for form in hint_formset.forms:
+				hint = form.save(commit = False)
+				hint.problem = problem
+				hint.save()
+
+			for form in choice_formset.forms:
+				choice = form.save(commit = False)
+				choice.problem = problem
+				choice.save()
+			return HttpResponseRedirect('/qtool/problems/')
+	else:
+		problem_form = ProblemForm(instance=problem)
+		
+		problem_template_formset = ProblemTemplateInlineFormSet( instance=problem, prefix='templates')
+
+		choice_formset = ChoiceInlineFormSet(instance=problem, prefix='choices')
+		
+		answer_formset = AnswerInlineFormSet(instance=problem, prefix='answer')
+		hint_formset = HintInlineFormSet( instance=problem, prefix='hints')
+
+		
+	c = {
+	'problem_form' : problem_form,
+	'choice_formset' : choice_formset,
+	'problem_template_formset' :problem_template_formset,
+	'answer_formset': answer_formset,
+	'hint_formset' : hint_formset,	
+    	}
+	c.update(csrf(request))
+	return render_to_response('qtool/simple.html', c)
+
+def edit_list(request, problem_id):
+
+	problem = get_object_or_404(Problem, id=problem_id)
+
+	class RequiredFormSet(BaseFormSet):
+		def __init__(self, *args, **kwargs):
+			super(RequiredFormSet, self).__init__(*args, **kwargs)
+			for form in self.forms:
+				form.empty_permitted = True
+	class MyInline(BaseInlineFormSet): 
+   		def __init__(self, *args, **kwargs): 
+			super(MyInline, self).__init__(*args, **kwargs) 
+			self.can_delete = False 
+
+	
+	
+	maxpt = max(0, len(ProblemTemplate.objects.filter(problem=problem)))
+	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate, max_num=maxpt)
+	maxa = max(0, len(Answer.objects.filter(problem=problem)))
+
+	AnswerInlineFormSet = inlineformset_factory(Problem, Answer, max_num =maxa)
+	maxv = max(0, len(Variable.objects.filter(problem=problem)))
+
+	VariableInlineFormSet = inlineformset_factory(Problem, Variable, max_num=maxv)
+		
+	maxh = max(0, len(Hint.objects.filter(problem=problem)))
+
+	HintInlineFormSet = inlineformset_factory(Problem, Hint, max_num=maxh)
+	if request.method == 'POST':
+		problem_form =ProblemForm(request.POST, instance=problem)
+		problem_template_formset = ProblemTemplateInlineFormSet(request.POST,request.FILES, instance=problem, prefix='templates')
+
+		answer_formset = AnswerInlineFormSet(request.POST, instance=problem, prefix='answer')
+
+		hint_formset = HintInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='hints')
+		variable_formset = VariableInlineFormSet(request.POST, request.FILES,instance=problem, prefix='variables')
+		
+		if problem_form.is_valid() and variable_formset.is_valid() and problem_template_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid():
+			problem = problem_form.save()
+			answer_formset.save(commit = False)
+			problem_template_formset.save(commit =False)
+			variable_formset.save(commit = False)
+
+
+			for form in hint_formset.forms:
+				hint = form.save(commit = False)
+				hint.problem = problem
+				hint.save()
+
+
+			return HttpResponseRedirect('/qtool/problems/')
+	else:
+		problem_form = ProblemForm(instance=problem)
+		
+		problem_template_formset = ProblemTemplateInlineFormSet( instance=problem, prefix='templates')
+
+		answer_formset = AnswerInlineFormSet(instance=problem, prefix='answer')
+		
+		variable_formset = VariableInlineFormSet(instance=problem, prefix='variables')
+		hint_formset = HintInlineFormSet( instance=problem, prefix='hints')
+
+		
+	c = {
+	'problem_form' : problem_form,
+	'problem_template_formset' :problem_template_formset,
+	'answer_formset': answer_formset,
+	'variable_formset' : variable_formset,
+	'hint_formset' : hint_formset,	
+    	}
+	c.update(csrf(request))
+	return render_to_response('qtool/list.html', c)
+
+
+def edit_range(request, problem_id):
+
+	problem = get_object_or_404(Problem, id=problem_id)
+
+	class RequiredFormSet(BaseFormSet):
+		def __init__(self, *args, **kwargs):
+			super(RequiredFormSet, self).__init__(*args, **kwargs)
+			for form in self.forms:
+				form.empty_permitted = True
+	class MyInline(BaseInlineFormSet): 
+   		def __init__(self, *args, **kwargs): 
+			super(MyInline, self).__init__(*args, **kwargs) 
+			self.can_delete = False 
+
+	
+	
+	maxpt = max(0, len(ProblemTemplate.objects.filter(problem=problem)))
+	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate, max_num=maxpt)
+	maxa = max(0, len(Answer.objects.filter(problem=problem)))
+
+	AnswerInlineFormSet = inlineformset_factory(Problem, Answer, max_num =maxa)
+	maxv = max(0, len(Variable.objects.filter(problem=problem)))
+
+	VariableInlineFormSet = inlineformset_factory(Problem, Variable, max_num=maxv)
+		
+	maxh = max(0, len(Hint.objects.filter(problem=problem)))
+
+	HintInlineFormSet = inlineformset_factory(Problem, Hint, max_num=maxh)
+	if request.method == 'POST':
+		problem_form =ProblemForm(request.POST, instance=problem)
+		problem_template_formset = ProblemTemplateInlineFormSet(request.POST,request.FILES, instance=problem, prefix='templates')
+
+		answer_formset = AnswerInlineFormSet(request.POST, instance=problem, prefix='answer')
+
+		hint_formset = HintInlineFormSet(request.POST, request.FILES, instance=problem,  prefix='hints')
+		variable_formset = VariableInlineFormSet(request.POST, request.FILES,instance=problem, prefix='variables')
+		
+		if problem_form.is_valid() and variable_formset.is_valid() and problem_template_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid():
+			problem = problem_form.save()
+			answer_formset.save(commit = False)
+			problem_template_formset.save(commit =False)
+			variable_formset.save(commit = False)
+
+
+			for form in hint_formset.forms:
+				hint = form.save(commit = False)
+				hint.problem = problem
+				hint.save()
+
+
+			return HttpResponseRedirect('/qtool/problems/')
+	else:
+		problem_form = ProblemForm(instance=problem)
+		
+		problem_template_formset = ProblemTemplateInlineFormSet( instance=problem, prefix='templates')
+
+		answer_formset = AnswerInlineFormSet(instance=problem, prefix='answer')
+		
+		variable_formset = VariableInlineFormSet(instance=problem, prefix='variables')
+		hint_formset = HintInlineFormSet( instance=problem, prefix='hints')
+
+		
+	c = {
+	'problem_form' : problem_form,
+	'problem_template_formset' :problem_template_formset,
+	'answer_formset': answer_formset,
+	'variable_formset' : variable_formset,
+	'hint_formset' : hint_formset,	
+    	}
+	c.update(csrf(request))
+	return render_to_response('qtool/range.html', c)
+
+
+def edit_summative(request, problem_id):
+
+	problem = get_object_or_404(Problem, id=problem_id)
+
+	class RequiredFormSet(BaseFormSet):
+		def __init__(self, *args, **kwargs):
+			super(RequiredFormSet, self).__init__(*args, **kwargs)
+			for form in self.forms:
+				form.empty_permitted = True
+	class MyInline(BaseInlineFormSet): 
+   		def __init__(self, *args, **kwargs): 
+			super(MyInline, self).__init__(*args, **kwargs) 
+			self.can_delete = False 
+
+	
+	problems = Problem.objects.all()
+	maxpt = max(0, len(ProblemTemplate.objects.filter(problem=problem)))
+	ProblemTemplateInlineFormSet = inlineformset_factory(Problem, ProblemTemplate, max_num=maxpt)
+	maxc = max(0, len(CommonIntroduction.objects.filter(problem=problem)))
+
+	CommonIntroductionFormSet =  inlineformset_factory(Problem, CommonIntroduction, max_num =maxc )
+
+	if request.method == 'POST':
+		problem_form =ProblemForm(request.POST, instance=problem)
+		problem_template_formset = ProblemTemplateInlineFormSet(request.POST,request.FILES, instance=problem, prefix='templates')
+		common_introduction_formset = CommonIntroductionForm(request.POST, request.FILES, prefix='common_intro', instance =problem)
+		
+		if problem_form.is_valid() and variable_formset.is_valid() and problem_template_formset.is_valid() and choice_formset.is_valid() and hint_formset.is_valid() and answer_formset.is_valid() and script_formset.is_valid() and common_introduction_formset.is_valid() :
+			problem = problem_form.save()
+			
+			common_introduction_formset.save(commit = False)
+			problem_template_formset.save(commit =False)
+			
+			return HttpResponseRedirect('/qtool/problems/')
+	else:
+		problem_form = ProblemForm(instance=problem)
+		
+		problem_template_formset = ProblemTemplateInlineFormSet( instance=problem, prefix='templates')
+		common_introduction_formset = CommonIntroductionFormSet(instance=problem, prefix='common_intro')
+
+		
+	c = {
+	'problem_form' : problem_form,
+	'problem_template_formset' :problem_template_formset,
+	'common_introduction_formset' : common_introduction_formset,
+	'problems' : problems,
+    	}
+	c.update(csrf(request))
+	return render_to_response('qtool/summative.html', c)
+
+
 
 def summative_details(request, problem_id):
 	p = get_object_or_404(Problem, id=problem_id)
@@ -283,17 +706,17 @@ def summative_details(request, problem_id):
 #	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 #	h = p.hint_set.all()
-	destination = open('/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
+	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
 
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></head><body>"
+	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script></head><body>"
 	
 	for c in p.problemtemplate_set.all():
 		str += "<div class=\"exercise\" data-name=\""
 		str += c.question
 		str += "\">"
 		str += "</div>"
-	str +="</body></html>"
-	destination.write(bytes(str,'UTF-8'))
+	str += "</body></html>"
+	destination.write(bytes(str))
 	destination.close()
 
 
@@ -316,9 +739,9 @@ def ka_gen(request, problem_id):
 #	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 #	h = p.hint_set.all()
-	destination = open('/quiz/qtool/media/exercises/'+p.title+'_View.html', 'wb+')
+	destination = open('/home/annp89/quiz/qtool/media/temp/'+p.title+'_View.html', 'wb+')
 
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></script></head><body>"
+	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script></head><body>"
 	
 	
 	str += "<div class=\"exercise\" data-name=\""
@@ -326,7 +749,7 @@ def ka_gen(request, problem_id):
 	str += "\">"
 	str += "</div>"
 	str +="</body></html>"
-	destination.write(bytes(str,'UTF-8'))
+	destination.write(bytes(str))
 	destination.close()
 
 
@@ -348,7 +771,7 @@ def range_details(request, problem_id):
 	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 	h = p.hint_set.all()
-	destination = open('/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
+	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
 
 	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></head><body><div class=\"exercise\"><div class=\"vars\">" 
 	for t in p.variable_set.all():
@@ -364,7 +787,7 @@ def range_details(request, problem_id):
 	str += s.solution
 	str += "</var></div></div></div></div></body></html>"
 
-	destination.write(bytes(str,'UTF-8'))
+	destination.write(bytes(str))
 
 	destination.close()
 
@@ -386,6 +809,92 @@ def list_details(request, problem_id):
 	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 	h = p.hint_set.all()
+
+	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
+	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></head><body><div class=\"exercise\"><div class=\"vars\">"
+
+	solution_list = (s.solution).split(",")
+	index = 1
+	ans_uniq = []
+	for t in solution_list:
+		if t not in ans_uniq:
+			ans_uniq.append(t)
+			j = "A%d" %index
+			str += "<var id=\""
+			str += j
+			str += "\">"+t
+			str += "</var>"
+			index = index +1
+
+
+
+
+	count = 0
+	var_count_array = []
+	for t in p.variable_set.all():
+		str +="<var id=\""
+		str += t.var_id
+		str += "\">["	
+		str += t.var_value
+		str += "]</var>"
+
+		j = "x%d" %(count+1)
+		var_elements = (t.var_value).split(",")
+		var_count_array.append(len(var_elements))
+
+		str += "<var id=\""
+		str += j
+		str += "\">randRange(0,%d" %(len(var_elements) -1)
+		str += ")</var>"
+		count = count+1
+
+
+	eq = "x%d" % len(var_count_array)
+	var_count = count -1
+	coef = 1
+	while (var_count>0):
+		coef = coef * var_count_array[var_count]
+		var = "%d" %coef
+		var += "*x"
+		var += "%d" %var_count
+		eq = var +"+"+eq 
+		var_count = var_count-1 
+		
+		
+		
+	str += "<var id =\"INDEX\">"
+	str += eq
+	str += "</var>"
+
+	str += "<var id=\"ANSWER\">["	
+	
+	str += s.solution
+	str += "]</var>"
+
+	str += "</div><div class=\"problems\"> <div id=\"problem-type-or-description\"><p class=\"problem\"><p class=\"question\">"
+	str += q.question
+	str += "</p><div class=\"solution\"><var>ANSWER[INDEX]</var></div><ul class =\"choices\" data-category=\"true\">"
+	num=1
+
+	answer_unique = []
+	for t in solution_list:
+		if t not in answer_unique:
+			answer_unique.append(t)		
+			str += "<li><var>"
+			str += "A%d" %num
+			num = num +1
+			str += "</var></li>"
+	str += "</ul>"
+	str += "</div></div></div></body></html>"
+
+
+
+	
+	destination.write(bytes(str))
+
+	destination.close()
+
+
 	context = Context({
 		'p':p,
 		'title':p.title,	
@@ -394,7 +903,7 @@ def list_details(request, problem_id):
 	#	'choice':c,
 #		'hint':h
 	})
-	return render_to_response('qtool/simple_details.html', context)
+	return render_to_response('qtool/list_details.html', context)
 
 def write_file(request, problem_id):
 	response = HttpResponse( content_type = 'text/csv')
@@ -416,6 +925,13 @@ def write_file(request, problem_id):
 			writer.writerow(['VAR_NAME', t.var_id])
 			writer.writerow(['VAR_VALUE', t.var_value])
 			writer.writerow(['ATTR_INFO',t.attribute])
+
+		for t in p.script_set.all():
+			writer.writerow(['SCRIPT',t.script])
+		for t in p.choice_set.all():
+			writer.writerow(['CHOICE', t.choice])
+		for t in p.hint_set.all():
+			writer.writerow(['HINT', t.hint])
 	try:
 		c = CommonIntroduction.objects.get(problem = p)
 		writer.writerow(['COMMON_INTRO', c.common_intro])
@@ -426,12 +942,7 @@ def write_file(request, problem_id):
 		writer.writerow(['SOLUTION', s.solution])
 	except Answer.DoesNotExist:
 		s = None
-		for t in p.script_set.all():
-			writer.writerow(['SCRIPT',t.script])
-		for t in p.choice_set.all():
-			writer.writerow(['CHOICE', t.choice])
-		for t in p.hint_set.all():
-			writer.writerow(['HINT', t.hint])
+		
 	return response
 
 def delete(request, problem_id):
@@ -503,7 +1014,7 @@ def list(request):
 				form.empty_permitted = True
 	VariableFormSet = formset_factory(VariableForm, max_num = 10, formset = RequiredFormSet)
 	HintFormSet = formset_factory(HintForm, max_num = 10, formset = RequiredFormSet)
-	ChoiceFormSet = formset_factory(ChoiceForm, max_num = 10, formset = RequiredFormSet)
+	#ChoiceFormSet = formset_factory(ChoiceForm, max_num = 10, formset = RequiredFormSet)
 
 
 	if request.method == 'POST': # If the form has been submitted...
@@ -512,8 +1023,8 @@ def list(request):
 		answer_form = AnswerForm(request.POST, prefix='answer')
 		variable_formset = VariableFormSet(request.POST,request.FILES, prefix='variables')
 		hint_formset = HintFormSet(request.POST, request.FILES, prefix='hints')
-		choice_formset = ChoiceFormSet(request.POST, request.FILES, prefix='choices')
-		if problem_form.is_valid() and problem_template_form.is_valid() and variable_formset.is_valid() and choice_formset.is_valid() and hint_formset.is_valid() and answer_form.is_valid():
+		#choice_formset = ChoiceFormSet(request.POST, request.FILES, prefix='choices')
+		if problem_form.is_valid() and problem_template_form.is_valid() and variable_formset.is_valid() and hint_formset.is_valid() and answer_form.is_valid():
 			problem = problem_form.save()
 			problem_template = problem_template_form.save(commit = False)
 			problem_template.problem = problem
@@ -532,23 +1043,20 @@ def list(request):
 				hint = form.save(commit = False)
 				hint.problem = problem
 				hint.save()
-			for form in choice_formset.forms:
-				choice = form.save(commit = False)
-				choice.problem = problem
-				choice.save()
+			
 			return HttpResponseRedirect('/qtool/problems/')
 	else:
-		problem_form = ProblemForm()
+		problem_form = ListProblemForm()
 		problem_template_form = ProblemTemplateForm(prefix='template')
 		answer_form = AnswerForm(prefix='answer')	
 		variable_formset = VariableFormSet(prefix='variables')
-		choice_formset = ChoiceFormSet(prefix='choices')
+		#choice_formset = ChoiceFormSet(prefix='choices')
 		hint_formset = HintFormSet(prefix='hints')
 	c = {'problem_form' : problem_form,
 	     'problem_template_form' : problem_template_form,
 	     'answer_form': answer_form,
 	     'variable_formset' : variable_formset,
-	     'choice_formset': choice_formset,
+	     #'choice_formset': choice_formset,
 	     'hint_formset' : hint_formset,
 	}
 	c.update(csrf(request))

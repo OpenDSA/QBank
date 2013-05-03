@@ -1,4 +1,4 @@
-<!Doctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
+<ctype html public "-//w3c//dtd xhtml 1.0 strict//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 
@@ -173,9 +173,12 @@ border: #777 1px solid;
                	<li >
                	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
@@ -195,7 +198,7 @@ border: #777 1px solid;
 
 		{% if p.type == 'Simple' %}
 		{{p.title}}  &nbsp; &nbsp;
-			<a href="/qtool/edit/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/edit_simple/{{p.id}}/" title="View">Edit</a> ||
 			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
 			<a href="/qtool/{{p.id}}/simple_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
@@ -214,7 +217,8 @@ border: #777 1px solid;
 		{% if p.type == 'List' %}
 		{{p.title}} &nbsp; &nbsp;
 			
-			<a href="/qtool/edit/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/edit_list/{{p.id}}/" title="View">Edit</a> ||
+
 			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
 			<a href="/qtool/{{p.id}}/list_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
@@ -230,7 +234,7 @@ border: #777 1px solid;
 		{% for p in problems %}
 		{% if p.type == 'Range' %}
 		{{p.title}}  &nbsp; &nbsp;
-			<a href="/qtool/edit/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/edit_range/{{p.id}}/" title="View">Edit</a> ||
 			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
 			<a href="/qtool/{{p.id}}/range_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
@@ -250,7 +254,9 @@ border: #777 1px solid;
 		{% if p.type == 'KA' %}	
 			{{p.title}}  &nbsp; &nbsp;
 	 
-			<a href="/qtool/edit/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/edit_ka/{{p.id}}/" title="View">Edit</a> ||
+
+
 			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
 			<a href="/qtool/{{p.id}}/ka_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
@@ -268,7 +274,7 @@ border: #777 1px solid;
 		{% if p.type == 'Summative' %}	
 			{{p.title}}  &nbsp; &nbsp;
 	 
-			<a href="/qtool/edit/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/edit_summative/{{p.id}}/" title="View">Edit</a> ||
 			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
 			<a href="/qtool/{{p.id}}/summative_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
@@ -283,9 +289,9 @@ border: #777 1px solid;
 			{% endfor %}
 
 	  <div id="footer">
-         <a href="/sitelicense">About QBank</a> | 
-	 <a href="/about">Help</a> | 
-         <a href="/help/contact">Contact Us</a>
+         <a href="/qtool/about/">About QBank</a> | 
+	 <a href="/qtool/help/">Help</a> | 
+         <a href="/qtool/contact/">Contact Us</a>
       	</div>
 
 </div>

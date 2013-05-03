@@ -12,6 +12,9 @@ class VariableForm(ModelForm):
 			
 			}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(VariableForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
 
 class CommonIntroductionForm(ModelForm):
 	class Meta:
@@ -20,6 +23,10 @@ class CommonIntroductionForm(ModelForm):
           		'common_intro': forms.Textarea(attrs={'class' : 'myfieldclass'}),
         	}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(CommonIntroductionForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 class ProblemTemplateForm(ModelForm):
 	class Meta:
@@ -28,6 +35,9 @@ class ProblemTemplateForm(ModelForm):
           		'question': forms.Textarea(attrs={'class' : 'myfieldclass'}),
         	}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(ProblemTemplateForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
 
 
 class AnswerForm(ModelForm):
@@ -37,6 +47,10 @@ class AnswerForm(ModelForm):
           		'solution': forms.Textarea(attrs={'class' : 'myfieldclass'}),
         	}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(AnswerForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 
 class ChoiceForm(ModelForm):
@@ -46,6 +60,10 @@ class ChoiceForm(ModelForm):
           		'choice': forms.Textarea(attrs={'class' : 'myfieldclass'}),
         	}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(ChoiceForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 
 class HintForm(ModelForm):
@@ -55,6 +73,10 @@ class HintForm(ModelForm):
           		'hint': forms.Textarea(attrs={'class' : 'myfieldclass'}),
         	}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(HintForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 class ScriptForm(ModelForm):
 	class Meta:
@@ -63,11 +85,19 @@ class ScriptForm(ModelForm):
           		'script': forms.Textarea(attrs={'class' : 'myfieldclass'}),
         	}
 		exclude = ('problem',)
+	def __init__(self, *arg, **kwarg):
+		super(ScriptForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 class ProblemForm(ModelForm):
 	type = forms.CharField(widget = forms.HiddenInput(), initial ='KA')
 	class Meta:
 		model = Problem
+	def __init__(self, *arg, **kwarg):
+		super(ProblemForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 		
 
 
@@ -76,12 +106,20 @@ class SimpleProblemForm(ModelForm):
 	class Meta:
 		model = Problem
 		exclude = ('variable','script')
+	def __init__(self, *arg, **kwarg):
+		super(SimpleProblemForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 class ListProblemForm(ModelForm):
 	type = forms.CharField(widget = forms.HiddenInput(), initial ='List')
 	class Meta:
 		model = Problem
 		exclude = ('script', 'choice','hint')
+	def __init__(self, *arg, **kwarg):
+		super(ListProblemForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 
 class RangeProblemForm(ModelForm):
@@ -89,6 +127,10 @@ class RangeProblemForm(ModelForm):
 	class Meta:
 		model = Problem
 		exclude = ('script', 'choice','hint')
+	def __init__(self, *arg, **kwarg):
+		super(RangeProblemForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+
 
 
 		
@@ -97,3 +139,7 @@ class SummativeProblemForm(ModelForm):
 	class Meta:
 		model = Problem
 		exclude = ('script', 'choice','hint', 'answer', 'variable')
+	def __init__(self, *arg, **kwarg):
+		super(SummativeProblemForm, self).__init__(*arg, **kwarg)
+		self.empty_permitted = True
+

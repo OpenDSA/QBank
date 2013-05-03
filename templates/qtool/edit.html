@@ -160,21 +160,32 @@ a:active{color:#B22222}}
 
 	if($('#id_common_intro-0-common_intro').text() == ""){
 	$('.section_common').hide();
+
+
 	}
 
-	if($('#id_variables-0-var_id').val()== ""){
+if($('#id_answer-0-solution').text() == ""){
+	$('.section_b').hide();
+
+
+	}
+	if($('#id_variables-0-var_value').text()== ""){
 
 	$('.section').hide();
+
 	}
-	if($('#id_scripts-0-script').val()== ""){
+      
+
+	if($('#id_scripts-0-script').text()== ""){
 
 	$('.section4').hide();
 	}
-	if($('#id_choices-0-choice').val()== ""){
+	if($('#id_choices-0-choice').text()== ""){
 
 	$('.section2').hide();
 	}
-	if($('#id_hints-0-hint').val()== ""){
+	
+	if($('#id_hints-0-hint').text()== ""){
 
 	$('.section3').hide();
 	}
@@ -273,7 +284,8 @@ a:active{color:#B22222}}
 			
 	}
 
-		function deleteForm3(btn, prefix) {
+
+	function deleteForm3(btn, prefix) {
 			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
 			if (formCount > 1) {							        
 			$(btn).parents('.item3').remove();
@@ -311,6 +323,13 @@ a:active{color:#B22222}}
 			
 		}
 		function addForm(btn, prefix) {
+		
+if($('#id_variables-0-var_id').val()== ""){
+
+	$('.section').show();
+	}
+
+	
 			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
 			if (formCount < 10) {
 				var row = $(".item:first").clone(false).get(0);
@@ -414,7 +433,7 @@ a:active{color:#B22222}}
 					return addForm3(this, 'hints');
 					});
 			$("#add4").click(function() {
-					return addForm4(this, 'hints');
+					return addForm4(this, 'scripts');
 					});
 		
 		
@@ -428,7 +447,7 @@ a:active{color:#B22222}}
 			$(".delete3").click(function() {
 					return deleteForm3(this, 'hints');
 					});
-				$(".delete4").click(function() {
+			$(".delete4").click(function() {
 					return deleteForm3(this, 'scripts');
 					});
 				
@@ -437,12 +456,12 @@ a:active{color:#B22222}}
 </head>
 <body class="full-site">
    
-   <h1>QBank: Question Banking Made Easy</h1>
+   <h1>QBank: Problem Authoring Made Easy</h1>
    
    <div id="container" class='full-site'>
  <div id="header">
 
-        <a href="/" class="banner1"></a>
+        <a href="/qtool/" class="banner1"></a>
          <div id="header_right">
         
 	 <div id="tabs"> 
@@ -451,11 +470,14 @@ a:active{color:#B22222}}
                	   <a href="/qtool/">Home</a>
                	</li>
                	<li >
-               	   <a href="/qtool/problems/">Find questions</a>
+               	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
@@ -512,15 +534,40 @@ a:active{color:#B22222}}
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-				    <p>data-require = "math"</p>
-				    <p>data-require = "math graphie graphie-helpers"</p>
-				    <p>data-ensure = "A != 0"</p>
-				    <p> data-type = "multiple"</p>
-				    <p> data-require = "math math-format" data-type ="radical"</p>
+		          <div id="brands">
+
+
+<b>Variable Name</b>: The identifier that you can use later in the problem to refer to the variable. Whenever a variable is referred to, the <i>variable name</i> has to be enclosed to &lt;var&gt;...&lt;/var&gt; <p>
+<b>Variable Value</b>: The content of a &lt;var&gt;...&lt;/var&gt; block will be executed as JavaScript.<p>
+Eg.: <p>
+
+
+Variable Name: NO_OF_QUARTERS<p>
+Variable Value: 3,4,5,6<p>
+or<p>
+3+ rand(3)   &lt;!-- Random Number 3 to 6 --&gt;
+<p>
+	
+	
+<b>Attributes </b>:
+<p> This is OPTIONAL for a variable.
+Some values attributes can take are:
+ <ul>
+				    <li>data-require = "math"</li>
+				    <li>data-require = "math graphie graphie-helpers"</li>
+				    <li>data-ensure = "A != 0"</li>
+				    <li> data-type = "multiple"</li>
+				    <li> data-require = "math math-format" data-type ="radical"</li>
+
+</ul>
+They must be written like <i>key-value</i> pairs, where the key is the attribute type.
+<p>
 				   
-				    
-		            </div>
+<b>Refer to KhanAcademy Exercise writing help for the values variables can take: <a href= "https://github.com/Khan/khan-exercises/wiki/Writing-Exercises:-Home"  target="_blank">Help page</a>
+<b>
+<p>
+    
+</div>
 			         </td>
 				      </tr>
 				      <tr>
@@ -532,6 +579,8 @@ a:active{color:#B22222}}
 			</div>
 		</span>
 		{{form.as_p}}	
+		 <p style=""><a class="delete" href="#">Delete</a></p>
+
 		</div>
 		{% endfor %}
 		<p><a id="add" href="#">Add another Variable</a></p>
@@ -569,7 +618,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Attrbute types and values </b>
+            			<b>Common Introduction </b>
          			</td>
       				</tr>
       				<tr>
@@ -579,10 +628,10 @@ a:active{color:#B22222}}
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
-		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
-		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
-		            </div>
+		           The problem overview/introduction is mainly useful for word problems or any kind of problem that has important text or information that isn't explicitly part of the statement of the question. <p>
+
+You could also put information in after the question if you want to provide clarity on how to answer the question. 	<p>
+This could include formulae, etc.			</div>
 			         </td>
 				      </tr>
 				      <tr>
@@ -631,7 +680,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Attrbute types and values </b>
+            			<b>Question </b>
          			</td>
       				</tr>
       				<tr>
@@ -640,10 +689,14 @@ a:active{color:#B22222}}
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
-		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
-		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
+		           <div id="brands">
+		             Write a question with text and include variables in &lt;var&gt; &lt;/var&gt; delimiters in order to make a question dynamic.
+<p>
+The content of a &lt;var&gt;..&lt;/var&gt; block will be executed as JavaScript. <p>
+
+Eg: 
+<p>How many cents are there in &lt;var&gt;NO_OF_QUARTERS&lt;/var&gt; quarters, &lt;var&gt;NO_OF_DIMES&lt;/var&gt; dimes, &lt;var&gt;NO_OF_NICKELS&lt;/var&gt; nickels?
+<p>
 		            </div>
 			         </td>
 				      </tr>
@@ -691,7 +744,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Attrbute types and values </b>
+            			<b>Answer </b>
          			</td>
       				</tr>
       				<tr>
@@ -700,10 +753,22 @@ a:active{color:#B22222}}
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
-		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
-		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
+		           <div id="brands">
+				Specify the <i>right</i> choice here, which is the correct answer expected of the student.<p>
+This gets added as one of the choices for the student to select from.<p>
+Eg.:<p> Below are two examples of how solution can be specified differently. 
+<ul>
+<li>
+Static text<p>
+Question: What is the principle of Stacks?<p>
+Solution: Last in First Out</li>
+
+<li>Dynamic Variables : Previously defined variables with values that are the result of calculations posed in the question.<p>
+Question: What is &lt;var&gt;DISTANCE&lt;/var&gt; / &lt;var&gt;TIME &lt;/var&gt;?<p>
+Solution: &lt;var&gt;SPEED&lt;/var&gt;</li>
+
+</ul>
+
 		            </div>
 			         </td>
 				      </tr>
@@ -746,7 +811,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Attrbute types and values </b>
+            			<b>Choices</b>
          			</td>
       				</tr>
       				<tr>
@@ -756,10 +821,23 @@ a:active{color:#B22222}}
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
-		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
-		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
-		            </div>
+		              Specify options for students that act as distractors from the correct answer. <p>Do not include the correct answer. The 'Solution' is included as one of the options.<p>
+<b>Eg.:</b>
+<ul>
+<li>Static text:<p>
+O(n)<p>
+O(n^2)<p>
+</li>
+<li>Dynamic Variables:<p>
+&lt;var&gt;A&lt;/var&gt; + &lt;var&gt;B&lt;/var&gt; + 2 <p>
+&lt;var&gt;A&lt;/var&gt; + &lt;var&gt;B&lt;/var&gt; /2 <p>
+&lt;var&gt;A&lt;/var&gt; + &lt;var&gt;B&lt;/var&gt; - 2 <p>
+
+</li>
+
+</ul>
+
+</div>
 			         </td>
 				      </tr>
 				      <tr>
@@ -771,6 +849,8 @@ a:active{color:#B22222}}
 			</div>
 		</span>
 	                 {{ form.as_p }}
+				 <p style=""><a class="delete2" href="#">Delete</a></p>
+
 		 </div>
 		 {% endfor %}
 		  <p><a id="add2" href="#">Add another Choice</a></p>
@@ -804,7 +884,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Attrbute types and values </b>
+            			<b>Hints </b>
          			</td>
       				</tr>
       				<tr>
@@ -814,9 +894,8 @@ a:active{color:#B22222}}
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
-		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
-		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
+		              1 or more hints with information related to the question. <p>
+				You can use previously defined variables.
 		            </div>
 			         </td>
 				      </tr>
@@ -829,6 +908,8 @@ a:active{color:#B22222}}
 			</div>
 		</span>
 	                 {{ form.as_p }}
+ <p style=""><a class="delete3" href="#">Delete</a></p>
+
 		 </div>
 		 {% endfor %}
 		  <p><a id="add3" href="#">Add another Hint</a></p>
@@ -885,6 +966,8 @@ a:active{color:#B22222}}
 			</div>
 		</span>
 	                 {{ form.as_p }}
+ <p style=""><a class="delete4" href="#">Delete</a></p>
+
 		 </div>
 		 {% endfor %}
 		  <p><a id="add4" href="#">Add another Script tag</a></p>

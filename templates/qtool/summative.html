@@ -681,12 +681,12 @@ button.onclick = function() {
 </head>
 <body class="full-site">
    
-   <h1>QBank: Question Banking Made Easy</h1>
+   <h1>QBank: Problem Authoring Made Easy</h1>
    
    <div id="container" class='full-site'>
  <div id="header">
 
-        <a href="/" class="banner1"></a>
+        <a href="/qtool/" class="banner1"></a>
          <div id="header_right">
         
 	 <div id="tabs"> 
@@ -695,11 +695,14 @@ button.onclick = function() {
                	   <a href="/qtool/">Home</a>
                	</li>
                	<li >
-               	   <a href="/qtool/problems">Find questions</a>
+               	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
@@ -725,6 +728,9 @@ button.onclick = function() {
 
   	<div class="section_b">
 	  <h2>Common Introduction </h2>
+
+			{{ common_introduction_formset.management_form }}
+			{% for form in common_introduction_formset.forms %}
 	  <div class ="item_b">
 		  	<span style="float:right">
 				<input type="button" id="btnShowSimple3"  class="btnShowSimple3" value="What's this?" />
@@ -771,8 +777,11 @@ button.onclick = function() {
 			</div>
 		</span>
 		  {{common_introduction_form.as_p }}
-		 
+		 {{form.as_p}}
+{% endfor %}	
 	</div>
+
+
 </div>
 
 
@@ -887,12 +896,12 @@ button.onclick = function() {
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-				    Specify the names of previously authored problems.<p> Click the button "Browse/Hide Problems" to look at the existing Problems and their Problem Names.
+				    Specify the names of previously authored problems.<p> Click the button "Browse/Hide Problems" to look at the existing Problems and use the 'Add' button to add them to the Problem template.
 		            </div>
 			         </td>
 				      </tr>
 				      <tr>
-			         <td>&nbsp;</td>
+			       <td>&nbsp;</td>
          			<td>&nbsp;</td>
      				 </tr>
       
@@ -924,9 +933,9 @@ button.onclick = function() {
 		</center>
 	
 	  <div id="footer">
-         <a href="/sitelicense">About QBank</a> | 
-	 <a href="/about">Help</a> | 
-         <a href="/help/contact">Contact Us</a>
+         <a href="/qtool/">About QBank</a> | 
+	 <a href="/qtool/">Help</a> | 
+         <a href="/qtool/">Contact Us</a>
       </div>
 	</form>
 </body>

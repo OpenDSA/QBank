@@ -665,25 +665,28 @@ a:active{color:#B22222}}
 </head>
 <body class="full-site">
    
-   <h1>QBank: Question Banking Made Easy</h1>
+   <h1>QBank: Problem Authoring Made Easy</h1>
    
    <div id="container" class='full-site'>
  <div id="header">
 
-        <a href="/" class="banner1"></a>
+        <a href="/qtool/" class="banner1"></a>
          <div id="header_right">
         
-	 <div id="tabs"> 
+	  <div id="tabs"> 
                <ul>
                   <li >
                	   <a href="/qtool/">Home</a>
                	</li>
                	<li >
-               	   <a href="/qtool/problems">Find questions</a>
+               	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
@@ -722,7 +725,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Problem title </b>
+            			<b>Title and Difficulty </b>
          			</td>
       				</tr>
       				<tr>
@@ -732,7 +735,21 @@ a:active{color:#B22222}}
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-		        	Filename used to save files on the database and to refer to it.
+				    <b>Title</b>: Unique identifier 
+<ul>
+<li>Filename used to save the problem onto database</li>
+<li>Filename for the problem generated in different formats</li>
+</ul>
+<p>
+
+Eg.: 'Addition' can be used as the title. The problem is stored as Addition on the Database. When the problem is generated as a csv file, 'Addition.csv' gets created. <p>
+
+				
+				    <b>Difficulty</b>: Pick a difficulty level which denotes the level of hardness of the authored problem.<p>
+<ul>
+<li>Useful when the problem is published in a system that handles interlligent tutoring.
+</li>
+</ul>
 		            </div>
 			         </td>
 				      </tr>
@@ -783,8 +800,14 @@ a:active{color:#B22222}}
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-				    Specify the variables in the &lt;var&gt; &lt;/var&gt; delimiters.
+		             <div id="brands">
+		             Write a question with text and include variables in &lt;var&gt; &lt;/var&gt; delimiters in order to make a question dynamic.
+<p>
+The content of a &lt;var&gt;..&lt;/var&gt; block will be executed as JavaScript. <p>
+
+Eg: 
+<p>How many cents are there in &lt;var&gt;NO_OF_QUARTERS&lt;/var&gt; quarters, &lt;var&gt;NO_OF_DIMES&lt;/var&gt; dimes, &lt;var&gt;NO_OF_NICKELS&lt;/var&gt; nickels?
+<p>
 		            </div>
 			         </td>
 				      </tr>
@@ -951,8 +974,11 @@ a:active{color:#B22222}}
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-				    This type of question is tailored to be used for arithmetic problem authoring to vary the values the varibles can take<br>
-				    The answer is typicallly the aithemetic calculation within &lt;var&gt; &lt;/var&gt; delimiters. E.g. &lt;var&gt; A + B / 4.5 &lt;/var&gt;
+				This type of question is tailored to be used for arithmetic problem authoring to vary the values the varibles can take<p>
+				The answer is typicallly the aithemetic calculation within &lt;var&gt; ... &lt;/var&gt; delimiters.
+
+<p> Eg.:
+<p> &lt;var&gt; A + B / 4.5 &lt;/var&gt;<p>
 		            </div>
 			         </td>
 				      </tr>

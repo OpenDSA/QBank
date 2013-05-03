@@ -158,6 +158,32 @@ a:active{color:#B22222}}
 		var A = new Array();
 		A = [];
 		
+		
+	function getAnsTable(){
+		var ans_tab = "";
+		
+		for(var i=0; i<A.length; i++){
+		var var_name = "ans"+i;
+			
+			
+			if(i>=1){
+		ans_tab = ans_tab+ ","+ document.getElementById(var_name).value;
+			
+			}
+			else{
+			ans_tab = ans_tab+ document.getElementById(var_name).value;
+			
+			}
+			
+		console.log(ans_tab);
+		}
+		
+		console.log("hey");
+		document.getElementById('id_answer-solution').value=ans_tab;
+		
+	}
+	
+		
 		$("#addAnswer").click(function(){
 
 		var list_var_num = parseInt($('#id_variables-TOTAL_FORMS').val());	
@@ -249,10 +275,16 @@ a:active{color:#B22222}}
 			r1c1.appendChild(text1);
 			row1.appendChild(r1c1);
 		}
+		
+		
+		var r1c1 = document.createElement("td");
+		var text1 = document.createElement("div");
+		text1.innerHTML= "Answer";
+		
 		r1c1.appendChild(text1);
 		row1.appendChild(r1c1);
 		tbl.appendChild(row1);
-
+		var col_count = 0;
 		for(var i=0; i<A.length ; i++){
 			var row1 = document.createElement("tr");
 		
@@ -263,13 +295,43 @@ a:active{color:#B22222}}
 					text1.innerHTML=A[i][j];
 					r1c1.appendChild(text1);
 					row1.appendChild(r1c1);
-					tbl.appendChild(row1);
+					col_count++;
+				//	tbl.appendChild(row1);
 				}
+				
+				
 			
 			}
+			var var_name = "ans"+i;
+			var r2c1 = document.createElement("td");			
+			var cellText = document.createElement("input");
+			cellText.setAttribute("type",'text');
+			cellText.setAttribute("name",var_name);
+			cellText.setAttribute("id",var_name);
+			r2c1.appendChild(cellText);
+            row1.appendChild(r2c1);
+			tbl.appendChild(row1);
+			col_count++;
 		
 		}	
+		
+		var row2 = document.createElement("tr");
+		var r3c1 = document.createElement("td");
+		r3c1.setAttribute("colspan",col_count);
+		var button = document.createElement("input");
+		button.setAttribute("type",'button');
+		button.setAttribute("name",'btn');
+		button.setAttribute("id",'btn');
+		button.setAttribute("class",'btn');
+		button.setAttribute("onclick",getAnsTable); 
+		button.setAttribute("value",'Generate Solution');
+		button.onclick= getAnsTable;
+		r3c1.appendChild(button);
+		row2.appendChild(r3c1);
+		tbl.appendChild(row2);
+		
 		document.getElementById('var2').appendChild(tbl);
+		
 		
 	});
 
@@ -436,8 +498,88 @@ a:active{color:#B22222}}
       $("#dialog3").fadeOut(300);
    } 
         
-        
+   
+   
+	$(".btnShowSimple4").click(function (e)
+      	{
+         ShowDialog4(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose4").click(function (e)
+      	{
+         HideDialog4();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog4(modal)
+   {
+      $("#overlay4").show();
+      $("#dialog4").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay4").unbind("click");
+      }
+      else
+      {
+         $("#overlay4").click(function (e)
+         {
+            HideDialog4();
+         });
+      }
+   }
+
+   function HideDialog4()
+   {
+      $("#overlay4").hide();
+      $("#dialog4").fadeOut(300);
+   }      
       
+   
+	$(".btnShowSimple5").click(function (e)
+      	{
+         ShowDialog5(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose5").click(function (e)
+      	{
+         HideDialog5();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog5(modal)
+   {
+      $("#overlay5").show();
+      $("#dialog5").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay5").unbind("click");
+      }
+      else
+      {
+         $("#overlay5").click(function (e)
+         {
+            HideDialog5();
+         });
+      }
+   }
+
+   function HideDialog5()
+   {
+      $("#overlay5").hide();
+      $("#dialog5").fadeOut(300);
+   } 
 
 
 		function updateElementIndex(el, prefix, ndx) {
@@ -657,25 +799,28 @@ a:active{color:#B22222}}
 </head>
 <body class="full-site">
    
-   <h1>QBank: Question Banking Made Easy</h1>
+   <h1>QBank: Problem Authoring Made Easy</h1>
    
    <div id="container" class='full-site'>
  <div id="header">
 
-        <a href="/" class="banner1"></a>
+        <a href="/qtool/" class="banner1"></a>
          <div id="header_right">
         
-	 <div id="tabs"> 
+	<div id="tabs"> 
                <ul>
                   <li >
                	   <a href="/qtool/">Home</a>
                	</li>
                	<li >
-               	   <a href="/qtool/problems/">Find questions</a>
+               	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
@@ -715,7 +860,7 @@ a:active{color:#B22222}}
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Problem Title </b>
+            			<b>Title and Difficulty </b>
          			</td>
       				</tr>
       				<tr>
@@ -724,10 +869,24 @@ a:active{color:#B22222}}
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-		             	Refers to the name the problem is going to be referred to and stored as in the database.
+		             <div id="brands">
+				    <b>Title</b>: Unique identifier 
+<ul>
+<li>Filename used to save the problem onto database</li>
+<li>Filename for the problem generated in different formats</li>
+</ul>
+<p>
+
+Eg.: 'Addition' can be used as the title. The problem is stored as Addition on the Database. When the problem is generated as a csv file, 'Addition.csv' gets created. <p>
+
+				
+				    <b>Difficulty</b>: Pick a difficulty level which denotes the level of hardness of the authored problem.<p>
+<ul>
+<li>Useful when the problem is published in a system that handles interlligent tutoring.
+</li>
+</ul>
 		            </div>
-			         </td>
+   			         </td>
 				      </tr>
 				      <tr>
 			         <td>&nbsp;</td>
@@ -777,9 +936,10 @@ a:active{color:#B22222}}
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
 		              	This can include text and variables. <br>
-				Variables: They need to be enclosed in delimiters &lt;var&gt;&lt;/var&gt;.
+				Variables: They need to be enclosed in delimiters &lt;var&gt;&lt;/var&gt;. <p>
+The variable name should be followed by an identifier which requires 'x' appended with a number depending on the order of how you specify the variables wihtin square brackets.<p>
 				For eg:
-				What is the sum of &lt;var&gt;A&lt;/var&gt; and &lt;var&gt;B&lt;/var&gt;?
+				What is the principle of &lt;var&gt;DATA_STRUCTURE[x1]&lt;/var&gt;?
 		            </div>
 			         </td>
 				      </tr>
@@ -794,53 +954,7 @@ a:active{color:#B22222}}
 			{{problem_template_form.as_p }}
 			{{ problem_template_formset.management_form }}
 			{% for form in problem_template_formset.forms %}
-			<span style="float:right">
-				<input type="button1" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
-				<br /><br />       
-    
-				<div id="output"></div>
-    
-				<div id="overlay" class="web_dialog_overlay"></div>
-    
-				<div id="dialog" class="web_dialog">
-				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
-				<tr>
-         			<td class="web_dialog_title">Help</td>
-         			<td class="web_dialog_title align_right">
-            			<a href="#" id="btnClose">Close</a>
-        			</td>
-      				</tr>
-      				<tr>
-				         <td>&nbsp;</td>
-				         <td>&nbsp;</td>
-			      	</tr>
-			     	 <tr>
-         			<td colspan="2" style="padding-left: 15px;">
-            			<b>Attrbute types and values </b>
-         			</td>
-      				</tr>
-      				<tr>
-         			<td>&nbsp;</td>
-         			<td>&nbsp;</td>
-     				 </tr>
-      				<tr>
-         			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
-		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
-		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
-		            </div>
-			         </td>
-				      </tr>
-				      <tr>
-			         <td>&nbsp;</td>
-         			<td>&nbsp;</td>
-     				 </tr>
-      
-  			 </table>
-			</div>
-		</span>
-				{{ form.as_p }}
+			{{ form.as_p }}
 			{% endfor %}
 
 		</div>		
@@ -883,14 +997,21 @@ a:active{color:#B22222}}
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-				    The variable name is the variable tha was previously used in the problem template<br>
-				    The variable value shouls include a comma separated list of values. <br>
-				    For e.g.:Variable Name: A Variable Value: 3,56,111,2 
-				    <p> Variable Name: B Variable Value: 45
-				    
-		            </div>
-			         </td>
+		           	<div id="brands">
+
+
+<b>Variable Name</b>: The identifier that you can use later in the problem to refer to the variable. Whenever a variable is referred to, the <i>variable name</i> has to be enclosed to &lt;var&gt;...&lt;/var&gt; <p>
+<b>Variable Value</b>: The values that need to be separated using commas and specified within double quotes.<p>
+Eg.: <p>
+
+
+Variable Name: NO_OF_QUARTERS<p>
+Variable Value: "3","4","5","6"<p>
+
+Variable Name: DATA_STRUCTURE<p>
+Variable Value: "Stack", "Queue", "Binary Tree"<p>
+    
+</div>			         </td>
 				      </tr>
 				      <tr>
 			         <td>&nbsp;</td>
@@ -997,11 +1118,20 @@ a:active{color:#B22222}}
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
 	Based on the combination of variables, provide a list in the correct order of the answer depending on the variables values that can be instantiated.
-	<p>For e.g. Variable Name: A Variable Value: 3,56,111,2 
-				   <p> Variable Name: B Variable Value: 45<p> 
-				   [48,101,156,47]
-				    
-		            </div>
+	<p>Eg. :<p>
+Question: What is the sum of &lt;var&gt; A &lt;/var&gt; and &lt;var&gt; B &lt;/var&gt;?<p>
+ Variable Name: A<p>
+ Variable Value: "3","56","111","2" <p>
+ Variable Name: B<p> 
+Variable Value: "45"<p> 
+Solution:"48","101","156","47"<p>
+
+Question: What is the principle used in &lt;var&gt; A &lt;/var&gt;?<p>
+ Variable Name: A<p>
+ Variable Value: "Stack","Queue"<p>
+Solution:"LIFO","FIFO"
+
+</div>
 			         </td>
 				      </tr>
 				      <tr>
@@ -1020,62 +1150,6 @@ a:active{color:#B22222}}
 		  {% endfor %}
 	</div>
 </div>
-
-	<div class = "section2">
-		<h2>Choices</h2>
-		 {{ choice_formset.management_form }}
-	         {% for form in choice_formset.forms %}
-	         <div class="item2"><span style="float:right">
-				<input type="button" id="btnShowSimple4"  class="btnShowSimple4" value="What's this?" />
-				<br /><br />       
-    
-				<div id="output4"></div>
-    
-				<div id="overlay4" class="web_dialog_overlay"></div>
-    
-				<div id="dialog4" class="web_dialog">
-				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
-				<tr>
-         			<td class="web_dialog_title">Help</td>
-         			<td class="web_dialog_title align_right">
-            			<a href="#" id="btnClose4">Close</a>
-        			</td>
-      				</tr>
-      				<tr>
-				         <td>&nbsp;</td>
-				         <td>&nbsp;</td>
-			      	</tr>
-			     	 <tr>
-         			<td colspan="2" style="padding-left: 15px;">
-            			<b>Choices</b>
-         			</td>
-      				</tr>
-      				<tr>
-         			<td>&nbsp;</td>
-         			<td>&nbsp;</td>
-     				 </tr>
-				 <tr>
-
-         			<td colspan="2" style="padding-left: 15px;">
-		            <div id="brands">
-		              Include 3 or 4 choices of answers inclusive of the correct answer specified
-		            </div>
-			         </td>
-				      </tr>
-				      <tr>
-			         <td>&nbsp;</td>
-         			<td>&nbsp;</td>
-     				 </tr>
-      
-  			 </table>
-			</div>
-		</span>
-	                 {{ form.as_p }}
-	                 <p style=""><a class="delete2" href="#">Delete</a></p>
-		 </div>
-		 {% endfor %}
-		  <p><a id="add2" href="#">Add another Choice</a></p>
-		 </div>	
 
 
 
@@ -1115,8 +1189,9 @@ a:active{color:#B22222}}
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
 		            <div id="brands">
-		              1 or more hints with information related to the question
-		            </div>
+		               1 or more hints with information related to the question. <p>
+				You can use previously defined variables.
+ 			   </div>
 			         </td>
 				      </tr>
 				      <tr>
@@ -1140,9 +1215,9 @@ a:active{color:#B22222}}
 		</center>
 	
 	  <div id="footer">
-         <a href="/sitelicense">About QBank</a> | 
-	 <a href="/about">Help</a> | 
-         <a href="/help/contact">Contact Us</a>
+         <a href="/qtool/">About QBank</a> | 
+	  <a href="/qtool/">Help</a> | 
+         <a href="/qtool/">Contact Us</a>
       </div>
 	</form>
 </body>

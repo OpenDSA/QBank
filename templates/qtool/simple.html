@@ -576,25 +576,28 @@ $(".btnShowSimple1").click(function (e)
 </head>
 <body class="full-site">
    
-   <h1>QBank: Question Banking Made Easy</h1>
+   <h1>QBank: Problem Authoring Made Easy</h1>
    
    <div id="container" class='full-site'>
  <div id="header">
 
-        <a href="/" class="banner1"></a>
+        <a href="/qtool/" class="banner1"></a>
          <div id="header_right">
         
-	 <div id="tabs"> 
+	  <div id="tabs"> 
                <ul>
                   <li >
                	   <a href="/qtool/">Home</a>
                	</li>
                	<li >
-               	   <a href="/qtool/problems">Find questions</a>
+               	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            	
+                            <li >
+               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	</li>
+	
                	<li >
-               	   <a href="/help"> Help</a>
+               	   <a href="qtool/help/"> Help</a>
                	</li>
 
         
@@ -631,26 +634,34 @@ $(".btnShowSimple1").click(function (e)
 			      	</tr>
 			     	 <tr>
          			<td colspan="2" style="padding-left: 15px;">
-            			<b>Title </b>
-         			</td>
-				</tr>
-				 <tr>
-         			<td colspan="2" style="padding-left: 15px;">
-            			Use a meaningful title, e.g. Age_Word_Problem
+					<b>Title and Difficulty </b>
          			</td>
       				</tr>
       				<tr>
          			<td>&nbsp;</td>
          			<td>&nbsp;</td>
-			</tr>
-			 <tr>
-         			<td colspan="2" style="padding-left: 15px;">
-            			<b>Difficulty </b>
-         			</td>
-				</tr>
-				 <tr>
-         			<td colspan="2" style="padding-left: 15px;">
-            			Specify the difficulty level of this exercise which can be used by Intelligent Tutoring Systems
+     				 </tr>
+      				<tr>
+
+			 <td colspan="2" style="padding-left: 15px;">
+            			<div id="brands">
+				    <b>Title</b>: Unique identifier 
+<ul>
+<li>Filename used to save the problem onto database</li>
+<li>Filename for the problem generated in different formats</li>
+</ul>
+<p>
+
+Eg.: 'Addition' can be used as the title. The problem is stored as Addition on the Database. When the problem is generated as a csv file, 'Addition.csv' gets created. <p>
+
+				
+				    <b>Difficulty</b>: Pick a difficulty level which denotes the level of hardness of the authored problem.<p>
+<ul>
+<li>Useful when the problem is published in a system that handles interlligent tutoring.
+</li>
+</ul>
+		            </div>
+
          			</td>
       				</tr>
       				<tr>
@@ -701,7 +712,14 @@ $(".btnShowSimple1").click(function (e)
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            	Static text which is the problem statment.
+		            	 <div id="brands">
+		             Write a question with static text. <p>
+
+Eg: 
+<p>How many cents are there in 4 quarters, 10 dimes, 7 nickels?
+<p>
+		            </div>
+
 			         </td>
 				      </tr>
 				      <tr>
@@ -757,9 +775,24 @@ $(".btnShowSimple1").click(function (e)
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            	Static text which is stored as the correct choice/ answer to the problem.
-			         </td>
-				      </tr>
+		            	 <div id="brands">
+				Specify the <i>right</i> choice here, which is the correct answer expected of the student.<p>
+This gets added as one of the choices for the student to select from.<p>
+Eg.:<p> Below are two examples of how solution can be specified differently. 
+<ul>
+<li>
+Static text<p>
+Question: What is the principle of Stacks?<p>
+Solution: Last in First Out</li>
+<p>
+<li>
+Question: How many cents are there in 4 quarters, 10 dimes, 7 nickels?<p>
+Solution: 235
+</li>
+</ul>
+</div>
+</td>
+</tr>
 				      <tr>
 			         <td>&nbsp;</td>
          			<td>&nbsp;</td>
@@ -812,9 +845,25 @@ $(".btnShowSimple1").click(function (e)
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		            1 or more incorrect choices which is written as static text
-			         </td>
-				      </tr>
+		              <div id="brands">
+		              Specify options for students that act as distractors from the correct answer. <p>Do not include the correct answer. The 'Solution' is included as one of the options.<p>
+<b>Eg.:</b>
+<ul>
+<li>Which is better Big O value:<p>
+Choices:<p>
+O(n)<p>
+O(n^2)<p>
+O(logn)<p>
+</li>
+<li>How many cents are there in 4 quarters, 10 dimes, 7 nickels? <p>
+Choices:<p>
+220<p>
+195<p>
+</li>
+</ul>
+</div>
+ </td>
+</tr>
 				      <tr>
 			         <td>&nbsp;</td>
          			<td>&nbsp;</td>
@@ -867,8 +916,7 @@ $(".btnShowSimple1").click(function (e)
      				 </tr>
       				<tr>
          			<td colspan="2" style="padding-left: 15px;">
-		           1 or more hints which is written as static text. If the question does not require a hint, write a text string to specify that in the first hint option e.g. None, No Hint, etc.
-			         </td>
+		           1 or more hints with text information related to the question. <p>			         </td>
 				      </tr>
 				      <tr>
 			         <td>&nbsp;</td>
@@ -891,9 +939,9 @@ $(".btnShowSimple1").click(function (e)
 		</center>
 	
 	  <div id="footer">
-         <a href="/sitelicense">About QBank</a> | 
-	 <a href="/about">Help</a> | 
-         <a href="/help/contact">Contact Us</a>
+         <a href="/qtool/">About QBank</a> | 
+	 <a href="/qtool/">Help</a> | 
+         <a href="/qtool/">Contact Us</a>
       </div>
 	</form>
 </body>
