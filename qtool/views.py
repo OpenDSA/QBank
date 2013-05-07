@@ -713,14 +713,14 @@ def summative_details(request, problem_id):
 #	h = p.hint_set.all()
 	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
 
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script></head><body>"
+	str ="<!DOCTYPE html>"+"\n"+"<html data-require=\"math\">"+"\n"+"<head>"+"\n"+"<title>"+"\n"+p.title+"</title>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">"+"\n"+"</script>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\">"+"\n"+"</script>"+"\n"+"<script>urlBaseOverride = \"../home/ann89/qtool/\";</script>"+"\n"+"<script src=\"../home/ann89/qtool/khan-exercise.js\">"+"\n"+"</script>"+"\n"+"</head>"+"\n"+"<body>"+"\n"
 	
 	for c in p.problemtemplate_set.all():
 		str += "<div class=\"exercise\" data-name=\"/qtool/exercises/"
 		str += c.question
 		str += "\">"
-		str += "</div>"
-	str += "</body></html>"
+		str += "</div>"+"\n"
+	str += "</body>"+"\n"+"</html>"
 	destination.write(bytes(str))
 	destination.close()
 
@@ -744,16 +744,16 @@ def ka_gen(request, problem_id):
 #	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 #	h = p.hint_set.all()
-	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'_View.html', 'wb+')
+	destination = open('/home/annp89/quiz/qtool/media/temp/'+p.title+'_View.html', 'wb+')
 
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/annp89/qtool/\";</script><script src=\"../home/annp89/qtool/khan-exercise.js\"></script></head><body>"
+	str ="<!DOCTYPE html>"+"\n"+"<html data-require=\"math\">"+"\n"+"<head>"+"\n"+"<title>"+"\n"+p.title+"</title>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">"+"\n"+"</script>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\">"+"\n"+"</script>"+"\n"+"<script>urlBaseOverride = \"../home/annp89/qtool/\";</script>"+"\n"+"<script src=\"../home/annp89/qtool/khan-exercise.js\"></script>"+"\n"+"</head>"+"\n"+"<body>"+"\n"
 	
 	
 	str += "<div class=\"exercise\" data-name=\"/qtool/exercises/"
 	str += p.title
 	str += "\">"
-	str += "</div>"
-	str +="</body></html>"
+	str += "\n"+"</div>"
+	str +="</body>"+"\n"+"</html>"
 	destination.write(bytes(str))
 	destination.close()
 
@@ -778,19 +778,19 @@ def range_details(request, problem_id):
 	h = p.hint_set.all()
 	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
 
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></head><body><div class=\"exercise\"><div class=\"vars\">" 
+	str ="<!DOCTYPE html>"+"\n"+"<html data-require=\"math\">"+"\n"+"<head>"+"\n"+"<title>"+"\n"+p.title+"</title>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">"+"\n"+"</script>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\">"+"\n"+"</script>"+"\n"+"<script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\">"+"\n"+"</script></head>"+"\n"+"<body>"+"\n"+"<div class=\"exercise\"><div class=\"vars\">" 
 	for t in p.variable_set.all():
 		str +="<var id=\""
 		str += t.var_id
 		str += "\">"	
 		str += t.var_value
-		str += "</var>"
+		str += "</var>"+"\n"
 
-	str += "</div><div class=\"problems\"> <div id=\"problem-type-or-description\"><p class=\"problem\"><p class=\"question\">"
+	str += "</div>"+"\n"+"<div class=\"problems\"> "+"\n"+"<div id=\"problem-type-or-description\">"+"\n"+"<p class=\"problem\">"+"\n"+"<p class=\"question\">"
 	str += q.question
-	str += "</p><div class=\"solution\"><var>"
+	str += "</p>"+"\n"+"<div class=\"solution\">"+"\n"+"<var>"
 	str += s.solution
-	str += "</var></div></div></div></div></body></html>"
+	str += "</var>"+"\n"+"</div>"+"\n"+"</div>"+"\n"+"</div>"+"\n"+"</div>"+"\n"+"</body>"+"\n"+"</html>"
 
 	destination.write(bytes(str))
 
@@ -816,7 +816,7 @@ def list_details(request, problem_id):
 	h = p.hint_set.all()
 
 	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../qtool/\";</script><script src=\"../qtool/khan-exercise.js\"></script></head><body><div class=\"exercise\"><div class=\"vars\">"
+	str ="<!DOCTYPE html>"+"\n"+"<html data-require=\"math\">"+"\n"+"<head>"+"\n"+"<title>"+"\n"+p.title+"</title>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script>"+"\n"+"<script>urlBaseOverride = \"../qtool/\";</script>"+"\n"+"<script src=\"../qtool/khan-exercise.js\"></script>"+"\n"+"</head>"+"\n"+"<body>"+"\n"+"<div class=\"exercise\">"+"\n"+"<div class=\"vars\">"
 
 	solution_list = (s.solution).split(",")
 	index = 1
@@ -828,7 +828,7 @@ def list_details(request, problem_id):
 			str += "<var id=\""
 			str += j
 			str += "\">"+t
-			str += "</var>"
+			str += "</var>"+"\n"
 			index = index +1
 
 
@@ -841,7 +841,7 @@ def list_details(request, problem_id):
 		str += t.var_id
 		str += "\">["	
 		str += t.var_value
-		str += "]</var>"
+		str += "]</var>"+"\n"
 
 		j = "x%d" %(count+1)
 		var_elements = (t.var_value).split(",")
@@ -850,7 +850,7 @@ def list_details(request, problem_id):
 		str += "<var id=\""
 		str += j
 		str += "\">randRange(0,%d" %(len(var_elements) -1)
-		str += ")</var>"
+		str += ")</var>"+"\n"
 		count = count+1
 
 
@@ -869,16 +869,16 @@ def list_details(request, problem_id):
 		
 	str += "<var id =\"INDEX\">"
 	str += eq
-	str += "</var>"
+	str += "</var>"+"\n"
 
 	str += "<var id=\"ANSWER\">["	
 	
 	str += s.solution
-	str += "]</var>"
+	str += "]</var>"+"\n"
 
-	str += "</div><div class=\"problems\"> <div id=\"problem-type-or-description\"><p class=\"problem\"><p class=\"question\">"
+	str += "</div>"+"\n"+"<div class=\"problems\"> "+"\n"+"<div id=\"problem-type-or-description\">"+"\n"+"<p class=\"problem\">"+"\n"+"<p class=\"question\">"
 	str += q.question
-	str += "</p><div class=\"solution\"><var>ANSWER[INDEX]</var></div><ul class =\"choices\" data-category=\"true\">"
+	str += "</p>"+"\n"+"<div class=\"solution\"><var>ANSWER[INDEX]</var>"+"\n"+"</div>"+"\n"+"<ul class =\"choices\" data-category=\"true\">"
 	num=1
 
 	answer_unique = []
@@ -890,7 +890,7 @@ def list_details(request, problem_id):
 			num = num +1
 			str += "</var></li>"
 	str += "</ul>"
-	str += "</div></div></div></body></html>"
+	str += "</div>"+"\n"+"</div>"+"\n"+"</div>"+"\n"+"</body>"+"\n"+"</html>"
 
 
 
