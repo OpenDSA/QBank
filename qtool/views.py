@@ -14,7 +14,6 @@ import csv
 
 def index(request):
     # This class is used to make empty formset forms required
-    # See http://stackoverflow.com/questions/2406537/django-formsets-make-first-required/4951032#4951032
 	class RequiredFormSet(BaseFormSet):
 		def __init__(self, *args, **kwargs):
 			super(RequiredFormSet, self).__init__(*args, **kwargs)
@@ -209,15 +208,16 @@ def ka_details(request, problem_id):
 	h = p.hint_set.all()
 	
 	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'.html', 'wb+')
-	str ="<!DOCTYPE html><html data-require=\"math math-format word-problems spin\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script><script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\"></script>"
+	str ="<!DOCTYPE html>"+"\n"+"<html data-require=\"math math-format word-problems spin\"><head>"+"\n"+"<title>"+"\n"+p.title+"\n"+"</title>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\">"+"\n"+"</script>"+"\n"+"<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\">"+"\n"+"</script>"+"\n"+"<script>urlBaseOverride = \"../home/ann89/qtool/\";</script>"+"\n"+"<script src=\"../home/ann89/qtool/khan-exercise.js\">"+"\n"+"</script>"+"\n"+"<script type=\"text/javascript\"src=\"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\">"+"\n"+"</script>"+"\n"
 	for scr in p.script_set.all():
 		str += "<p>"
 		str += scr.script
 		str += "</p>"
+		str += "\n"
 
 
 
-	str += "</head><body><div class=\"exercise\"><div class=\"problems\"><div id=\"1\"><div class=\"vars\">"
+	str += "</head>"+"\n"+"<body>"+"\n"+"<div class=\"exercise\">"+"\n"+"<div class=\"problems\">"+"\n"+"<div id=\"1\">"+"\n"+"<div class=\"vars\">"+"\n"
 
 	for t in p.variable_set.all():
 		str +="<var id=\""
@@ -225,14 +225,16 @@ def ka_details(request, problem_id):
 		str += "\">"	
 		str += t.var_value
 		str += "</var>"
+		str += "\n"
 
 
-	str += "</div> <div class=\"question\">"
+	str += "</div>"+"\n"+" <div class=\"question\">"+"\n"
 	str += q.question
-	str += "</div>"
-	str += "<div class=\"solution\"><var>"
+	str += "</div>"+"\n"
+	str += "<div class=\"solution\">"+"\n"+"<var>"
 	str += s.solution
-	str += "</var></div>"
+	str += "</var>"+"\n"+"</div>"
+	str += "\n"
 
 	
 	for c in p.choice_set.all():
@@ -250,6 +252,7 @@ def ka_details(request, problem_id):
 			str += "<li><var>"
 			str += c.choice
 			str += "</var></li>"
+			str += "\n"
 
 	for c in p.choice_set.all():
 
@@ -261,12 +264,14 @@ def ka_details(request, problem_id):
 
 
 	str += "<div class=\"hints\">"
+	str += "\n"
 	for h in p.hint_set.all():
 		str += "<p>"
 		str += h.hint
 		str += "</p>"
-	str += "</div>"
-	str += "</div></div></div></body></html>"	
+		str += "\n"
+	str += "</div>"+"\n"
+	str += "</div>"+"\n"+"</div>"+"\n"+"</div>"+"\n"+"</body>"+"\n"+"</html>"+"\n"	
 	destination.write(bytes(str))
 	destination.close()
 
@@ -711,7 +716,7 @@ def summative_details(request, problem_id):
 	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script></head><body>"
 	
 	for c in p.problemtemplate_set.all():
-		str += "<div class=\"exercise\" data-name=\""
+		str += "<div class=\"exercise\" data-name=\"/qtool/exercises/"
 		str += c.question
 		str += "\">"
 		str += "</div>"
@@ -739,12 +744,12 @@ def ka_gen(request, problem_id):
 #	s = Answer.objects.get(problem = p)
 #	c = Choice.objects.get(problem = p)
 #	h = p.hint_set.all()
-	destination = open('/home/annp89/quiz/qtool/media/temp/'+p.title+'_View.html', 'wb+')
+	destination = open('/home/annp89/quiz/qtool/media/exercises/'+p.title+'_View.html', 'wb+')
 
-	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/ann89/qtool/\";</script><script src=\"../home/ann89/qtool/khan-exercise.js\"></script></head><body>"
+	str ="<!DOCTYPE html><html data-require=\"math\"><head>"+"\n"+"<title>"+"\n"+p.title+"</title><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\"></script><script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js\"></script><script>urlBaseOverride = \"../home/annp89/qtool/\";</script><script src=\"../home/annp89/qtool/khan-exercise.js\"></script></head><body>"
 	
 	
-	str += "<div class=\"exercise\" data-name=\""
+	str += "<div class=\"exercise\" data-name=\"/qtool/exercises/"
 	str += p.title
 	str += "\">"
 	str += "</div>"
