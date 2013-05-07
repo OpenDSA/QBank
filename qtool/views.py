@@ -2,6 +2,7 @@
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
+from django.utils.encoding import smart_str
 from django.template import RequestContext, loader,Context
 from django.forms.formsets import formset_factory, BaseFormSet
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
@@ -9,7 +10,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from qtool.forms import *
 from qtool.models import *
 
+import mimetypes
+from django.core.servers.basehttp import FileWrapper
 import csv
+import os
 
 
 def index(request):
@@ -190,7 +194,10 @@ def problems(request):
 	problems = Problem.objects.all()
 	context = Context({'problems':problems})
 	return render_to_response('qtool/problems.html', context)
-
+def export(request):
+	problems = Problem.objects.all()
+	context = Context({'problems':problems})
+	return render_to_response('qtool/export.html', context)
 
 
 def problems_Summary(request):
@@ -1154,4 +1161,15 @@ def summative(request):
 	return render_to_response('qtool/summative.html', c)
 
 
+
+def download(request, file_name):
+
+    file_path = "/home/annp89/quiz/qtool/media/exercises/"+file_name+".html"
+    file_wrapper = FileWrapper(file(file_path,'rb'))
+    file_mimetype = mimetypes.guess_type(file_path)
+    response = HttpResponse(file_wrapper, content_type=file_mimetype )
+    response['X-Sendfile'] = file_path
+    response['Content-Length'] = os.stat(file_path).st_size
+    response['Content-Disposition'] = 'attachment; filename=%s/' % smart_str(file_name) 
+    return response
 

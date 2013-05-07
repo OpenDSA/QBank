@@ -14,12 +14,15 @@ urlpatterns = patterns('',
 	url(r'^list/$',  'qtool.views.list'),
 	url(r'^range/$', 'qtool.views.range'),
 	url(r'^summative/$', 'qtool.views.summative'),
+	url(r'^download/(?P<file_name>.+\d+)$', 'qtool.views.download'),
+
 
 	url(r'^edit/(?P<problem_id>\d+)/$',  'qtool.views.edit'),
 	
 	url(r'^delete/(?P<problem_id>\d+)/$',  'qtool.views.delete'),
 
 	url(r'^problems/$', 'qtool.views.problems'),
+	url(r'^export/$', 'qtool.views.export'),
 	url(r'^problems_Summary/$', 'qtool.views.problems_Summary'),
 	
 	url(r'^(?P<problem_id>\d+)/ka_details', 'qtool.views.ka_details'),
