@@ -167,20 +167,22 @@ border: #777 1px solid;
         
 	 <div id="tabs"> 
                <ul>
-                  <li >
+                 	<li>
                	   <a href="/qtool/">Home</a>
                	</li>
-               	<li >
+               	<li>
                	   <a href="/qtool/index/">Write a question!</a>
                	</li>
-                            <li >
+                     <li>
                	   <a href="/qtool/problems/">Find questions</a>
                	</li>
-	
-               	<li >
-               	   <a href="qtool/help/"> Help</a>
+			<li>
+               	   <a href="/qtool/export/">Export</a>
                	</li>
 
+               	<li>
+               	   <a href="qtool/help/"> Help</a>
+               	</li>
         
                </ul>
             </div>
@@ -198,14 +200,13 @@ border: #777 1px solid;
 
 		{% if p.type == 'Simple' %}
 		{{p.title}}  &nbsp; &nbsp;
-			<a href="/qtool/edit_simple/{{p.id}}/" title="View">Edit</a> ||
-			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
-			<a href="/qtool/{{p.id}}/simple_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
 
 			<div id="CSV">
-			<a title = "Exports in CSV format"  href="/qtool/{{p.id}}/write_file">Download</a> 
-			 || <a target="_blank" href="/qtool/{{p.id}}/ka_gen.html" title="Khan Academy Exercise View">View</a>
+			<a href="/qtool/edit_simple/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/{{p.id}}/simple_details.html" title="Khan Academy Exercise">Generate KA Exercise</a> ||
+			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> 
+
 			</div>
 			<br>
 		
@@ -217,15 +218,15 @@ border: #777 1px solid;
 		{% if p.type == 'List' %}
 		{{p.title}} &nbsp; &nbsp;
 			
-			<a href="/qtool/edit_list/{{p.id}}/" title="View">Edit</a> ||
-
-			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
-			
-			<a href="/qtool/{{p.id}}/list_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
 
 			<div id="CSV">
-			<a title = "Exports in CSV format"  href="/qtool/{{p.id}}/write_file">Download</a> 
-			 || <a target="_blank" href="/qtool/{{p.id}}/ka_gen.html" title="Khan Academy Exercise View">View</a>
+			
+			<a href="/qtool/edit_list/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/{{p.id}}/list_details.html" title="Khan Academy Exercise">Generate KA Exercise</a> ||
+
+			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> 
+			
+			
 			</div>
 			<br>
 			{% endif %}
@@ -234,14 +235,12 @@ border: #777 1px solid;
 		{% for p in problems %}
 		{% if p.type == 'Range' %}
 		{{p.title}}  &nbsp; &nbsp;
-			<a href="/qtool/edit_range/{{p.id}}/" title="View">Edit</a> ||
-			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
-			<a href="/qtool/{{p.id}}/range_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
-
 			<div id="CSV">
-			<a title = "Exports in CSV format"  href="/qtool/{{p.id}}/write_file">Download</a> 
-			 || <a target="_blank" href="/qtool/{{p.id}}/ka_gen.html" title="Khan Academy Exercise View">View</a>
+			<a href="/qtool/edit_range/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/{{p.id}}/range_details.html" title="Khan Academy Exercise">Generate KA Exercise</a> ||
+			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> 
+
 			</div>
 			<br>
 			
@@ -254,16 +253,12 @@ border: #777 1px solid;
 		{% if p.type == 'KA' %}	
 			{{p.title}}  &nbsp; &nbsp;
 	 
-			<a href="/qtool/edit_ka/{{p.id}}/" title="View">Edit</a> ||
-
-
-			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
-			<a href="/qtool/{{p.id}}/ka_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
-
 			<div id="CSV">
-			<a title = "Exports in CSV format"  href="/qtool/{{p.id}}/write_file">Download</a> 
-			 || <a target="_blank" href="/qtool/{{p.id}}/ka_gen.html" title="Khan Academy Exercise View">View</a>
+			<a href="/qtool/edit_ka/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/{{p.id}}/ka_details.html" title="Khan Academy Exercise">Generate KA Exercise</a> ||
+			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> 		
+
 			</div>
 			<br>
 			{% endif %}
@@ -274,14 +269,14 @@ border: #777 1px solid;
 		{% if p.type == 'Summative' %}	
 			{{p.title}}  &nbsp; &nbsp;
 	 
-			<a href="/qtool/edit_summative/{{p.id}}/" title="View">Edit</a> ||
-			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> ||
 			
-			<a href="/qtool/{{p.id}}/summative_details.html" title="Khan Academy Exercise">Generate KA Exercise</a>
 
 			<div id="CSV">
-			<a title = "Exports in CSV format"  href="/qtool/{{p.id}}/write_file">Download</a> 
-			 || <a target="_blank" href="/qtool/{{p.id}}/ka_gen.html" title="Khan Academy Exercise View">View</a>
+			<a href="/qtool/edit_summative/{{p.id}}/" title="View">Edit</a> ||
+			<a href="/qtool/{{p.id}}/summative_details.html" title="Khan Academy Exercise">Generate KA Exercise</a> ||
+			<a href="/qtool/delete/{{p.id}}/" title="Delete">Delete</a> 
+			
+
 			</div>
 			<br>
 			

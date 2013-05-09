@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from django.utils.encoding import smart_str
 from django.template import RequestContext, loader,Context
 from django.forms.formsets import formset_factory, BaseFormSet
+from django.core.management.base import BaseCommand, CommandError
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.http import HttpResponse, HttpResponseRedirect
 from qtool.forms import *
@@ -194,6 +195,13 @@ def problems(request):
 	problems = Problem.objects.all()
 	context = Context({'problems':problems})
 	return render_to_response('qtool/problems.html', context)
+
+
+def ka_error(request, problem_id):
+	problems = Problem.objects.all()
+	p = get_object_or_404(Problem, id=problem_id)
+	context = Context({'p':p})
+	return render_to_response('qtool/ka_error.html', context)
 def export(request):
 	problems = Problem.objects.all()
 	context = Context({'problems':problems})
@@ -1164,7 +1172,10 @@ def summative(request):
 def d(request, problem_id):
     p = get_object_or_404(Problem, id=problem_id)
     file_path = "qtool/media/exercises/"+p.title+".html"
-    file_wrapper = FileWrapper(file(file_path,'rb'))
+    try:
+	file_wrapper = FileWrapper(file(file_path,'rb'))
+    except:
+	return HttpResponseRedirect('ka_error/')
     file_mimetype = mimetypes.guess_type(file_path)
     response = HttpResponse(file_wrapper, content_type=file_mimetype)
     response['X-Sendfile'] = file_path

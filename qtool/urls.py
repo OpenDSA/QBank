@@ -40,6 +40,7 @@ urlpatterns = patterns('',
 	url(r'^edit_summative/(?P<problem_id>\d+)/$',  'qtool.views.edit_summative'),
 	
 	url(r'^(?P<problem_id>\d+)/write_file', 'qtool.views.write_file'),
+	url(r'^(?P<problem_id>\d+)/ka_error', 'qtool.views.ka_error'),
 	url(r'^(?P<problem_id>\d+)/d$',  'qtool.views.d'),
 	url(r'^(?P<path>.*)$', 'django.views.static.serve',
 	{'document_root': '/home/annp89/quiz/qtool/media/'}),
