@@ -174,7 +174,7 @@ border: #777 1px solid;
                	   <a href="/qtool/index/">Write a question!</a>
                	</li>
                             <li >
-               	   <a href="/home/annp89/qtool/problems/">Find questions</a>
+               	   <a href="/qtool/problems/">Find questions</a>
                	</li>
 	
                	<li >
@@ -193,10 +193,12 @@ border: #777 1px solid;
     <center><h2>List of Existing Problems</h2></center>
 
 	<div class = "item">
+
+
 	
 		{% for p in problems %}
 
-		{% if p.type == 'Simple' %}
+		{% if p.type == 'Simple' or p.type == 'List' %}
 		{{p.title}}  &nbsp; &nbsp;
 
 			<a href="/qtool/download/{{p.title}}">Download KA exercise</a>
@@ -210,20 +212,7 @@ border: #777 1px solid;
 			{% endif %}
 			{% endfor %}
 
-		{% for p in problems %}
-				
-		{% if p.type == 'List' %}
-		{{p.title}} &nbsp; &nbsp;
-			
-			<a href="/qtool/download/{{p.title}}">Download KA exercise</a>
-			
-
-			<div id="CSV">
-			<a title = "Exports in CSV format"  href="/qtool/{{p.id}}/write_file">Download</a> 
-			</div>
-			<br>
-			{% endif %}
-			{% endfor %}
+		
 	
 		{% for p in problems %}
 		{% if p.type == 'Range' %}
