@@ -14,8 +14,6 @@ urlpatterns = patterns('',
 	url(r'^list/$',  'qtool.views.list'),
 	url(r'^range/$', 'qtool.views.range'),
 	url(r'^summative/$', 'qtool.views.summative'),
-	url(r'^download/(?P<file_name>.+\d+)$', 'qtool.views.download'),
-
 
 	url(r'^edit/(?P<problem_id>\d+)/$',  'qtool.views.edit'),
 	
@@ -42,9 +40,9 @@ urlpatterns = patterns('',
 	url(r'^edit_summative/(?P<problem_id>\d+)/$',  'qtool.views.edit_summative'),
 	
 	url(r'^(?P<problem_id>\d+)/write_file', 'qtool.views.write_file'),
-
+	url(r'^(?P<problem_id>\d+)/d$',  'qtool.views.d'),
 	url(r'^(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': '/home/annp89/quiz/qtool/media/'}),
+	{'document_root': '/home/annp89/quiz/qtool/media/'}),
 	)
 
 

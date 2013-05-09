@@ -1161,15 +1161,13 @@ def summative(request):
 	return render_to_response('qtool/summative.html', c)
 
 
-
-def download(request, file_name):
-
-    file_path = "qtool/media/exercises/"+file_name+".html"
+def d(request, problem_id):
+    p = get_object_or_404(Problem, id=problem_id)
+    file_path = "qtool/media/exercises/"+p.title+".html"
     file_wrapper = FileWrapper(file(file_path,'rb'))
     file_mimetype = mimetypes.guess_type(file_path)
-    response = HttpResponse(file_wrapper, content_type=file_mimetype )
+    response = HttpResponse(file_wrapper, content_type=file_mimetype)
     response['X-Sendfile'] = file_path
     response['Content-Length'] = os.stat(file_path).st_size
-    response['Content-Disposition'] = 'attachment; filename=%s/' % smart_str(file_name) 
+    response['Content-Disposition'] = 'attachment; filename=%s/' % smart_str(p.title) 
     return response
-

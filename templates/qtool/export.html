@@ -201,7 +201,7 @@ border: #777 1px solid;
 		{% if p.type == 'Simple' or p.type == 'List' %}
 		{{p.title}}  &nbsp; &nbsp;
 
-			<a href="/qtool/download/{{p.title}}">Download KA exercise</a>
+			<a href="/qtool/{{p.id}}/d">Download KA exercise</a>
 			
 
 			<div id="CSV">
@@ -217,7 +217,7 @@ border: #777 1px solid;
 		{% for p in problems %}
 		{% if p.type == 'Range' %}
 		{{p.title}}  &nbsp; &nbsp;
-			<a href="/qtool/download/{{p.title}}">Download KA exercise</a>
+			<a href="/qtool/{{p.id}}/d">Download KA exercise</a>
 			
 
 			<div id="CSV">
@@ -234,7 +234,7 @@ border: #777 1px solid;
 		{% if p.type == 'KA' %}	
 			{{p.title}}  &nbsp; &nbsp;
 	 
-			<a href="/qtool/download/{{p.title}}">Download KA exercise</a>
+			<a href="/qtool/{{p.id}}/d">Download KA exercise</a>
 			
 
 			<div id="CSV">
@@ -249,7 +249,7 @@ border: #777 1px solid;
 		{% if p.type == 'Summative' %}	
 			{{p.title}}  &nbsp; &nbsp;
 	 
-		<a href="/qtool/download/{{p.title}}">Download KA exercise</a>
+		<a href="/qtool/{{p.id}}/d">Download KA exercise</a>
 			
 
 			<div id="CSV">

@@ -179,7 +179,13 @@ a:active{color:#B22222}}
 		}
 		
 		console.log("hey");
+
+		if(document.getElementById('id_answer-solution')!= null){
 		document.getElementById('id_answer-solution').value=ans_tab;
+		}
+		else{
+		document.getElementById('id_answer-0-solution').value=ans_tab;
+		}
 		
 	}
 	
