@@ -60,39 +60,32 @@ a:link{color:#B22222;text-decoration:none}a:visited{color:#B22222;text-decoratio
 a:hover{color:#000}
 a:active{color:#B22222}}
 </style>	    
-<meta name="Description" content="Problem Authoring Tool">
+<meta name="Description" content="A bank of test questions">
 
   
 </head>
 <body class="full-site">
    
-   <h1>QBank: Problem Authoring Made Easy</h1>
+   <h1>QBank: Question Banking Made Easy</h1>
    
    <div id="container" class='full-site'>
       
       <div id="header">
 
-        <a href="/qtool" class="banner1"></a>
+        <a href="{{ BASE_URL }}/" class="banner1"></a>
          <div id="header_right">
         
-	  <div id="tabs"> 
+	 <div id="tabs"> 
                <ul>
                   <li >
-               	   <a href="/qtool/">Home</a>
+               	   <a href="{{ BASE_URL }}/index/">Write a question!</a>
                	</li>
                	<li >
-               	   <a href="/qtool/index/">Write a question!</a>
-               	</li>
-                            <li>
-               	   <a href="/qtool/problems/">Find questions</a>
-               	</li>
-			<li>
-               	   <a href="/qtool/export/">Export</a>
+               	   <a href="{{ BASE_URL }}/problems/">Find questions</a>
                	</li>
 
-	
                	<li >
-               	   <a href="qtool/help/"> Help</a>
+               	   <a href="{{ BASE_URL }}/help"> Help</a>
                	</li>
 
         
@@ -122,32 +115,33 @@ a:active{color:#B22222}}
          Create simple, multiple choice, multi response, 
          and summative questions in any subject area!
          <div style="font-size:20px; padding-top: 10px;">
-           <a href="/qtool/index/"> Write a question!</a>
+           <a href="{{ BASE_URL }}/index/"> Write a question!</a>
 			
          </div>
        </div>
        <div class="infoBox">
          <h2>Find</h2>
-         Search for questions, Modify them or Download them in CSV / Khan Academy Exercise format!
+         Search for questions related to e-texts, concepts,
+         interactive simulations, or other questions.
          <div style="font-size:20px; padding-top: 10px">
-           <a href="/qtool/problems/"> Search for questions!</a>
+           <a href="{{ BASE_URL }}/problems/"> Search for questions!</a>
 		
          </div>
        </div>
      </div>
      <div style="clear:both">
        <div class="infoBox">
-         <h2>Export</h2>
-         Easily convert problems into CSV or the Khan Academy exercise format.
+         <h2>View</h2>
+         Easily use questions in tests and homeworks by converting it into the Khan Academy exercise format.
          <div style="font-size:20px; padding-top: 10px">
-           <a href="/qtool/export/" > Generate!</a>
+           <a href="{{ BASE_URL }}/" onclick="alert(&#x27;Coming soon!&#x27;);"> See examples!</a>
          </div>
        </div>
        <div class="infoBox">
          <h2>Instructions</h2>
-        Dcoumentation on the question authoring conventions, overall fuctionality and FAQs about the tool!
+        Details on the question authoring convention, overall fucntionality and how to use the tool effectively
          <div style="font-size:20px; padding-top: 10px">
-           <a href="/qtool/" onclick="alert(&#x27;Coming soon!&#x27;);"> Learn more!</a>
+           <a href="{{ BASE_URL }}/" onclick="alert(&#x27;Coming soon!&#x27;);"> Learn more!</a>
          </div>
        </div>
      </div>
@@ -160,9 +154,9 @@ a:active{color:#B22222}}
 </div>
    
       <div id="footer">
-         <a href="/qtool/about/">About QBank</a> | 
-	 <a href="/qtool/">Help</a> | 
-         <a href="/qtool/">Contact Us</a>
+         <a href="{{ BASE_URL }}/sitelicense">About QBank</a> | 
+	 <a href="{{ BASE_URL }}/about">Help</a> | 
+         <a href="{{ BASE_URL }}/help/contact">Contact Us</a>
       </div>
    
    </div>
