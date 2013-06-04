@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>QBANK</title>
+
+<style type="text/css">
+
+html {
+	background-color: #8596AA;
+}
+
+body {
+      font-family:sans-serif;font-size:12px;font-weight:normal;font-color:#000;
+      width: 700px;
+      padding: 40px 40px 40px;
+      margin: 0 auto;
+      margin-top: 15px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px 10px #888888;
+      }
+   
+h1 {
+	color: #356397;
+      }
+textarea { vertical-align: top; }?
+
+.section_a, .section_b, .section_c, .section, .section2, .section3, .section4, .item {
+ 	 padding: 0px 15px;
+ }
+
+.item, .item2, .item3, .item4, .item_a, .item_b, .item_c {
+
+     	border: 1px solid #ddd;
+      	margin-bottom: 4px;
+      	padding: 5px 15px;
+	}
+	
+.attr {
+	font-size: 11pt;
+
+}
+
+.helptext {
+	color: #999;
+       	padding-left: 10px;
+}
+
+a:link{color:#B22222;text-decoration:none}a:visited{color:#B22222;text-decoration:none}
+a:hover{color:#000}
+a:active{color:#B22222}}
+
+
+
+#id_message {
+	color:#C0C0C0;
+	}
+	#footer{padding-top:25px;padding-bottom:1px;border-color:#000;text-align:center;font-family:sans-serif;font-size:10px;font-weight:normal;font-color:#000000;margin-top:10px;margin-bottom:20px;clear:both;color:#777}
+
+#footer a:link{color:#777;text-decoration:none}
+#footer a:visited{color:#777;text-decoration:none}
+#footer a:hover{color:#b22222}
+#footer a:active{color:#000}
+
+.web_dialog_overlay
+{
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   background: #000000;
+   opacity: .15;
+   filter: alpha(opacity=15);
+   -moz-opacity: .15;
+   z-index: 101;
+   display: none;
+}
+.web_dialog
+{
+   display: none;
+   position: fixed;
+   width: 380px;
+   height: 200px;
+   top: 50%;
+   left: 50%;
+   margin-left: -190px;
+   margin-top: -100px;
+   background-color: #ffffff;
+   border: 2px solid #336699;
+   padding: 0px;
+   z-index: 102;
+   font-family: Verdana;
+   font-size: 10pt;
+   overflow:scroll;
+   }
+.web_dialog_title
+{
+   border-bottom: solid 2px #336699;
+   background-color: #336699;
+   padding: 4px;
+   color: White;
+   font-weight:bold;
+}
+.web_dialog_title a
+{
+   color: White;
+   text-decoration: none;
+}
+.align_right
+{
+   text-align: right;
+}
+
+#tabs{position:absolute;right:0em;top:77px}
+#tabs ul{list-style:none;padding:0;margin:0}
+
+#tabs li{display:inline;border:solid #b9bbbb 1px;border-right:solid;border-bottom:1px #dfdfdf;margin:0 0.5em 0 .3em;padding-top:5px;padding-bottom:4px;background:white}
+
+#tabs li a{padding:0em 1em}
+#tabs .selected{padding-bottom:4px;background:white;border-bottom:white 1px solid}
+#account_info{float:right;text-align:right;color:#000;clear:none}
+#header_right{position:relative}
+#header .logo{border:1 none;opacity:1;float:left; no-repeat transparent;height:78px;width:83px}
+
+
+.banner1{border:0 none;opacity:1;float:left;no-repeat transparent;height:78px;width:600px}
+
+#header{border-bottom:medium none;margin-bottom:0;height:95px;margin:0 auto 0px;width:700px}
+
+#container{font-family:sans-serif;font-size:12px;font-weight:normal;font-color:#000;  border: 1px solid #ccc;}
+#container.full-site{width:700px;margin-left:auto;margin-right:auto;margin-top:14px}
+
+.myfieldclass
+{
+	border: #777 1px solid; 
+        font-family: courier, monospace; 
+        font-size: 14px; 
+        height: 50px; 
+        padding: 4px;
+}
+
+
+
+
+
+</style>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+	if($('#id_common_intro-0-common_intro').text() == ""){
+	$('.section_common').hide();
+
+
+	}
+
+if($('#id_answer-0-solution').text() == ""){
+	$('.section_b').hide();
+
+
+	}
+	if($('#id_variables-0-var_value').text()== ""){
+
+	$('.section').hide();
+
+	}
+      
+
+	if($('#id_scripts-0-script').text()== ""){
+
+	$('.section4').hide();
+	}
+	if($('#id_choices-0-choice').text()== ""){
+
+	$('.section2').hide();
+	}
+	
+	if($('#id_hints-0-hint').text()== ""){
+
+	$('.section3').hide();
+	}
+
+
+	$(".btnShowSimple").click(function (e)
+      	{
+         ShowDialog(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose").click(function (e)
+      	{
+         HideDialog();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog(modal)
+   {
+      $("#overlay").show();
+      $("#dialog").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay").unbind("click");
+      }
+      else
+      {
+         $("#overlay").click(function (e)
+         {
+            HideDialog();
+         });
+      }
+   }
+
+   function HideDialog()
+   {
+      $("#overlay").hide();
+      $("#dialog").fadeOut(300);
+   } 
+        
+      
+
+
+		function updateElementIndex(el, prefix, ndx) {
+			var id_regex = new RegExp('(' + prefix + '-\\d+-)');
+			var replacement = prefix + '-' + ndx + '-';
+			if ($(el).attr("for")) 
+				$(el).attr("for", $(el).attr("for").replace(id_regex,replacement));
+			if (el.id) 
+				el.id = el.id.replace(id_regex, replacement);
+			if (el.name) 
+				el.name = el.name.replace(id_regex, replacement);
+
+		}
+		
+		function deleteForm(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							       
+			       	$(btn).parents('.item').remove();
+			var forms = $('.item'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function(){ 
+						updateElementIndex(this, prefix, i);				          
+						});
+
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+		}
+	function deleteForm2(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							        	
+				$(btn).parents('.item2').remove();
+			var forms = $('.item2'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function() {					
+						updateElementIndex(this, prefix, i);				           
+						});										        
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+	}
+
+
+	function deleteForm3(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							        
+			$(btn).parents('.item3').remove();
+			var forms = $('.item3'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function() {
+						updateElementIndex(this, prefix, i);				          
+						});										         
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+		}
+
+			function deleteForm4(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							        
+			$(btn).parents('.item4').remove();
+			var forms = $('.item4'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function() {
+						updateElementIndex(this, prefix, i);				          
+						});										         
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+		}
+		function addForm(btn, prefix) {
+		
+if($('#id_variables-0-var_id').val()== ""){
+
+	$('.section').show();
+	}
+
+	
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}	
+
+		function addForm2(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item2:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item2:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete2').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}
+
+		function addForm3(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			console.log($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item3:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item3:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete3').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}
+	
+	function addForm4(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			console.log($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item4:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item4:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete4').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}
+			$("#add").click(function() {
+					return addForm(this, 'variables');
+					});
+
+			$("#add2").click(function() {
+					return addForm2(this, 'choices');
+					});
+			$("#add3").click(function() {
+					return addForm3(this, 'hints');
+					});
+			$("#add4").click(function() {
+					return addForm4(this, 'scripts');
+					});
+		
+		
+
+			$(".delete").click(function() {
+					return deleteForm(this, 'variables');
+					});
+			$(".delete2").click(function() {
+					return deleteForm2(this, 'choices');
+					});
+			$(".delete3").click(function() {
+					return deleteForm3(this, 'hints');
+					});
+			$(".delete4").click(function() {
+					return deleteForm3(this, 'scripts');
+					});
+				
+});	
+</script>
+</head>
+<body class="full-site">
+   
+   <h1>QBank: Problem Authoring Made Easy</h1>
+   
+   <div id="container" class='full-site'>
+ <div id="header">
+
+        <a href="/qbank/" class="banner1"></a>
+         <div id="header_right">
+        
+	 <div id="tabs"> 
+               <ul>
+                 	<li>
+               	   <a href="/qbank/">Home</a>
+               	</li>
+               	<li>
+               	   <a href="/qbank/index/">Write a problem</a>
+               	</li>
+                     <li>
+               	   <a href="/qbank/problems/">Search for problems</a>
+               	</li>
+			<li>
+               	   <a href="/qbankexport/">Export a problem</a>
+               	</li>
+
+               	<li>
+               	   <a href="/qbank/help/">Help</a>
+               	</li>
+               </ul>
+            </div>
+         </div>
+       
+      </div>
+
+    </div>
+    <center><h3>Editing a question</h3></center>
+	<h2>Problem</h2>
+	<form action="" method="POST" >
+		{% csrf_token %}
+		<div class="section_a">
+			<div class ="item_a">
+				{{ problem_form.as_p }}
+			</div>
+		</div>
+
+		<div class ="section">
+		<h2>Variables</h2>
+		{{ variable_formset.management_form }}
+		{% for form in variable_formset.forms %}
+		<div class="item">
+				<span style="float:right">
+				<input type="button" id="btnShowSimple" class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Attrbute types and values </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		          <div id="brands">
+
+
+<b>Variable Name</b>: The identifier that you can use later in the problem to refer to the variable. Whenever a variable is referred to, the <i>variable name</i> has to be enclosed to &lt;var&gt;...&lt;/var&gt; <p>
+<b>Variable Value</b>: The content of a &lt;var&gt;...&lt;/var&gt; block will be executed as JavaScript.<p>
+Eg.: <p>
+
+
+Variable Name: NO_OF_QUARTERS<p>
+Variable Value: 3,4,5,6<p>
+or<p>
+3+ rand(3)   &lt;!-- Random Number 3 to 6 --&gt;
+<p>
+	
+	
+<b>Attributes </b>:
+<p> This is OPTIONAL for a variable.
+Some values attributes can take are:
+ <ul>
+				    <li>data-require = "math"</li>
+				    <li>data-require = "math graphie graphie-helpers"</li>
+				    <li>data-ensure = "A != 0"</li>
+				    <li> data-type = "multiple"</li>
+				    <li> data-require = "math math-format" data-type ="radical"</li>
+
+</ul>
+They must be written like <i>key-value</i> pairs, where the key is the attribute type.
+<p>
+				   
+<b>Refer to KhanAcademy Exercise writing help for the values variables can take: <a href= "https://github.com/Khan/khan-exercises/wiki/Writing-Exercises:-Home"  target="_blank">Help page</a>
+<b>
+<p>
+    
+</div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+		{{form.as_p}}	
+		 <p style=""><a class="delete" href="#">Delete</a></p>
+
+		</div>
+		{% endfor %}
+		<p><a id="add" href="#">Add another Variable</a></p>
+
+
+
+
+	</div>
+
+	<div class="section_common">
+		<h2>Common Introduction</h2>
+		<div class ="item_c">
+			{{common_introduction_form.as_p }}
+			{{common_introduction_formset.management_form }}
+			{% for form in common_introduction_formset.forms %}
+			<span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Common Introduction </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		            <div id="brands">
+		           The problem overview/introduction is mainly useful for word problems or any kind of problem that has important text or information that isn't explicitly part of the statement of the question. <p>
+
+You could also put information in after the question if you want to provide clarity on how to answer the question. 	<p>
+This could include formulae, etc.			</div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+				{{ form.as_p }}
+			{% endfor %}
+
+		</div>		
+			
+		</div>
+
+
+
+
+	<div class="section_c">
+		<h2>Problem Template </h2>
+		<div class ="item_c">
+			{{problem_template_form.as_p }}
+			{{ problem_template_formset.management_form }}
+			{% for form in problem_template_formset.forms %}
+			<span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Question </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		           <div id="brands">
+		             Write a question with text and include variables in &lt;var&gt; &lt;/var&gt; delimiters in order to make a question dynamic.
+<p>
+The content of a &lt;var&gt;..&lt;/var&gt; block will be executed as JavaScript. <p>
+
+Eg: 
+<p>How many cents are there in &lt;var&gt;NO_OF_QUARTERS&lt;/var&gt; quarters, &lt;var&gt;NO_OF_DIMES&lt;/var&gt; dimes, &lt;var&gt;NO_OF_NICKELS&lt;/var&gt; nickels?
+<p>
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+				{{ form.as_p }}
+			{% endfor %}
+
+		</div>		
+			
+		</div>
+
+
+  	<div class="section_b">
+	  <h2>Solution </h2>
+	  <div class ="item_b">
+		   {{answer_form.as_p }}
+		  {{ answer_formset.management_form }}
+		  {% for form in answer_formset.forms %}
+		  <span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Answer </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		           <div id="brands">
+				Specify the <i>right</i> choice here, which is the correct answer expected of the student.<p>
+This gets added as one of the choices for the student to select from.<p>
+Eg.:<p> Below are two examples of how solution can be specified differently. 
+<ul>
+<li>
+Static text<p>
+Question: What is the principle of Stacks?<p>
+Solution: Last in First Out</li>
+
+<li>Dynamic Variables : Previously defined variables with values that are the result of calculations posed in the question.<p>
+Question: What is &lt;var&gt;DISTANCE&lt;/var&gt; / &lt;var&gt;TIME &lt;/var&gt;?<p>
+Solution: &lt;var&gt;SPEED&lt;/var&gt;</li>
+
+</ul>
+
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+		  	{{ form.as_p }}
+		  {% endfor %}
+	</div>
+</div>
+
+	<div class = "section2">
+		<h2>Choices</h2>
+		 {{ choice_formset.management_form }}
+	         {% for form in choice_formset.forms %}
+	         <div class="item2"><span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Choices</b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		            <div id="brands">
+		              Specify options for students that act as distractors from the correct answer. <p>Do not include the correct answer. The 'Solution' is included as one of the options.<p>
+<b>Eg.:</b>
+<ul>
+<li>Static text:<p>
+O(n)<p>
+O(n^2)<p>
+</li>
+<li>Dynamic Variables:<p>
+&lt;var&gt;A&lt;/var&gt; + &lt;var&gt;B&lt;/var&gt; + 2 <p>
+&lt;var&gt;A&lt;/var&gt; + &lt;var&gt;B&lt;/var&gt; /2 <p>
+&lt;var&gt;A&lt;/var&gt; + &lt;var&gt;B&lt;/var&gt; - 2 <p>
+
+</li>
+
+</ul>
+
+</div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+	                 {{ form.as_p }}
+				 <p style=""><a class="delete2" href="#">Delete</a></p>
+
+		 </div>
+		 {% endfor %}
+		  <p><a id="add2" href="#">Add another Choice</a></p>
+		 </div>	
+
+
+
+		 <div class = "section3">
+		 <h2>Hints</h2>
+		 {{ hint_formset.management_form }}
+	         {% for form in hint_formset.forms %}
+	         <div class="item3"><span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Hints </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		            <div id="brands">
+		              1 or more hints with information related to the question. <p>
+				You can use previously defined variables.
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+	                 {{ form.as_p }}
+ <p style=""><a class="delete3" href="#">Delete</a></p>
+
+		 </div>
+		 {% endfor %}
+		  <p><a id="add3" href="#">Add another Hint</a></p>
+	  </div>	
+
+	   <div class = "section4">
+		 <h2>Scripts</h2>
+		 {{ script_formset.management_form }}
+	         {% for form in script_formset.forms %}
+	         <div class="item4"><span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Attrbute types and values </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		            <div id="brands">
+		               <input id="brand1" name="brand" type="radio" checked="checked" value="Nokia" />data-require
+		               <input id="brand2" name="brand" type="radio" value="Sony" />data-ensure 
+		               <input id="brand3" name="brand" type="radio" value="Motorola" />data-forms
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+	                 {{ form.as_p }}
+ <p style=""><a class="delete4" href="#">Delete</a></p>
+
+		 </div>
+		 {% endfor %}
+		  <p><a id="add4" href="#">Add another Script tag</a></p>
+		 </div>	
+
+
+		
+		
+		
+		 <center>		
+			 <input type="submit" style="text-align:center; " value=" Save and Generate " />
+		</center>
+	
+	  <div id="footer">
+         <a href="/qbank/about/">About QBank</a> | 
+	 <a href="/qbank/help/">Help</a> | 
+         <a href="/qbank/contact/">Contact Us</a>
+      </div>
+	</form>
+</body>
+</html>
+
+

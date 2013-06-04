@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>QBANK</title>
+
+<style type="text/css">
+
+html {
+	background-color: #8596AA;
+}
+
+body {
+      font-family:sans-serif;font-size:12px;font-weight:normal;font-color:#000;
+      width: 700px;
+      padding: 40px 40px 40px;
+      margin: 0 auto;
+      margin-top: 15px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px 10px #888888;
+      }
+   
+h1 {
+	color: #356397;
+      }
+textarea { vertical-align: top; }?
+
+.section_a, .section_b, .section_c, .section, .section2, .section3, .section4, .item {
+ 	 padding: 0px 15px;
+ }
+
+.item, .item2, .item3, .item4, .item_a, .item_b, .item_c {
+
+     	border: 1px solid #ddd;
+      	margin-bottom: 4px;
+      	padding: 5px 15px;
+	}
+	
+.attr {
+	font-size: 11pt;
+
+}
+
+.helptext {
+	color: #999;
+       	padding-left: 10px;
+}
+
+a:link{color:#B22222;text-decoration:none}a:visited{color:#B22222;text-decoration:none}
+a:hover{color:#000}
+a:active{color:#B22222}}
+
+
+
+#id_message {
+	color:#C0C0C0;
+	}
+	#footer{padding-top:25px;padding-bottom:1px;border-color:#000;text-align:center;font-family:sans-serif;font-size:10px;font-weight:normal;font-color:#000000;margin-top:10px;margin-bottom:20px;clear:both;color:#777}
+
+#footer a:link{color:#777;text-decoration:none}
+#footer a:visited{color:#777;text-decoration:none}
+#footer a:hover{color:#b22222}
+#footer a:active{color:#000}
+
+.web_dialog_overlay
+{
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   background: #000000;
+   opacity: .15;
+   filter: alpha(opacity=15);
+   -moz-opacity: .15;
+   z-index: 101;
+   display: none;
+}
+.web_dialog
+{
+   display: none;
+   position: fixed;
+   width: 380px;
+   height: 200px;
+   top: 50%;
+   left: 50%;
+   margin-left: -190px;
+   margin-top: -100px;
+   background-color: #ffffff;
+   border: 2px solid #336699;
+   padding: 0px;
+   z-index: 102;
+   font-family: Verdana;
+   font-size: 10pt;
+   overflow:scroll;
+   }
+.web_dialog_title
+{
+   border-bottom: solid 2px #336699;
+   background-color: #336699;
+   padding: 4px;
+   color: White;
+   font-weight:bold;
+}
+.web_dialog_title a
+{
+   color: White;
+   text-decoration: none;
+}
+.align_right
+{
+   text-align: right;
+}
+
+
+
+#tabs{position:absolute;right:0em;top:77px}
+#tabs ul{list-style:none;padding:0;margin:0}
+
+#tabs li{display:inline;border:solid #b9bbbb 1px;border-right:solid;border-bottom:1px #dfdfdf;margin:0 0.5em 0 .3em;padding-top:5px;padding-bottom:4px;background:white}
+
+#tabs li a{padding:0em 1em}
+#tabs .selected{padding-bottom:4px;background:white;border-bottom:white 1px solid}
+#account_info{float:right;text-align:right;color:#000;clear:none}
+#header_right{position:relative}
+#header .logo{border:1 none;opacity:1;float:left; no-repeat transparent;height:78px;width:83px}
+
+
+.banner1{border:0 none;opacity:1;float:left;no-repeat transparent;height:78px;width:600px}
+
+#header{border-bottom:medium none;margin-bottom:0;height:95px;margin:0 auto 0px;width:700px}
+
+#container{font-family:sans-serif;font-size:12px;font-weight:normal;font-color:#000;  border: 1px solid #ccc;}
+#container.full-site{width:700px;margin-left:auto;margin-right:auto;margin-top:14px}
+.myfieldclass
+{
+	border: #777 1px solid; 
+        font-family: courier, monospace; 
+        font-size: 14px; 
+        height: 50px; 
+        padding: 4px;
+}
+
+
+
+
+
+</style>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+			var names = new Array();
+			names= {};
+			var values =[];
+			values = {};
+		var num_rows = 1;
+		var A = new Array();
+		A = {};
+
+		
+		$("#addAnswer").click(function(){
+		$("#var2").innerHTML ="HEY";
+
+		var list_var_num = parseInt($('#id_variables-TOTAL_FORMS').val());	
+		
+		list_var_num = list_var_num +1;
+	
+	
+		for(var i = 1; i<list_var_num ; i++){
+			
+			var var_name = "#id_variables-"+(i-1)+"-var_id";
+			names[i-1] = $(var_name).val();
+			var var_val = "#id_variables-"+(i-1)+"-var_value";	
+			var new_val = $(var_val).val();
+		
+			values[i-1] =[];
+			values[i-1] = new_val.split(",");
+			
+			
+			
+		}	
+		var num_cols = values[(list_var_num-2)].length;
+		var row_col = "(" + num_rows + ", " + num_cols + ")";
+	
+
+	console.log(row_col);
+		for(var i=0; i<num_rows; i++){
+		
+			
+			A[i] =  new Array();
+			A[i] = {};
+		}
+
+
+		var combination = [];
+		var comb = [];
+		for(var i=0; i< list_var_num-1; i++){
+			combination[i]=0;
+			comb[i]=0;
+			
+		}
+		
+		combination[list_var_num-2] = 1;
+		comb[0]=1;
+		for(var i=list_var_num-3; i>=0 ; i--){
+			combination[i]=values[i+1].length*combination[i+1];
+			
+		}		
+		for(var i=1; i<list_var_num-1; i++){
+			comb[i] = comb[i-1]*values[i-1].length;
+			console.log(comb[i]);
+		}
+	
+			
+		for(var i=1; i<list_var_num; i++){
+			for(var l=1; l<=comb[i-1] ; l++){
+				for(var j=1; j<=values[i-1].length ;j++){
+					for(var k=1; k<=combination[i-1]; k++){
+						console.log("Combination in for"+combination[i-1]);
+					
+						var temp3 = (l-1)*values[i-1].length*combination[i-1];
+						console.log("Temp3"+temp3);
+						var temp = (j-1)*combination[i-1];
+						console.log("Temp"+temp);
+						var temp2 = temp3+temp+(k-1);
+						console.log("Temp2"+temp2);
+						console.log("["+temp2+"]["+(i-1)+"]");
+						console.log(values[i-1][j-1]);
+						A[temp2]={};
+						A[temp2][i-1] = values[i-1][j-1];
+
+						console.log("A["+temp2+"]["+(i-1)+"]"+A[temp2][i-1]);
+					
+					}
+				}
+			}
+		}
+		
+		// creates a <table> element and a <tbody> element
+       		var tbl     = document.createElement("table");
+		tbl.setAttribute("border",'2');
+		tbl.setAttribute("align", 'right');
+		// creates a table row
+		var row1 = document.createElement("tr");
+		for(var i=1; i<list_var_num; i++){		    
+			var r1c1 = document.createElement("td");
+			var text1 = document.createElement("div");
+			text1.innerHTML= names[i-1];
+			r1c1.appendChild(text1);
+			row1.appendChild(r1c1);
+		}
+		var r1c1 = document.createElement("td");
+		var text1 = document.createElement("div");
+		text1.innerHTML= "Answer";
+		r1c1.appendChild(text1);
+		row1.appendChild(r1c1);
+		tbl.appendChild(row1);
+
+	
+		for(var i=0; i<2 ; i++){
+			var row1 = document.createElement("tr");
+		
+			for(var j=0; j<A[0].length; j++){
+				var r1c1 = document.createElement("td");
+				var text1 = document.createElement("div");
+				console.log(A[1][0]);
+				text1.innerHTML=A[i][j];
+				r1c1.appendChild(text1);
+				row1.appendChild(r1c1);
+			
+			}
+			tbl.appendChild(row1);
+		}	
+		document.getElementById('var2').appendChild(tbl);
+		
+	});
+
+
+	$(".btnShowSimple").click(function (e)
+      	{
+         ShowDialog(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose").click(function (e)
+      	{
+         HideDialog();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog(modal)
+   {
+      $("#overlay").show();
+      $("#dialog").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay").unbind("click");
+      }
+      else
+      {
+         $("#overlay").click(function (e)
+         {
+            HideDialog();
+         });
+      }
+   }
+
+   function HideDialog()
+   {
+      $("#overlay").hide();
+      $("#dialog").fadeOut(300);
+   } 
+        
+   $(".btnShowSimple1").click(function (e)
+      	{
+         ShowDialog1(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose1").click(function (e)
+      	{
+         HideDialog1();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog1(modal)
+   {
+      $("#overlay1").show();
+      $("#dialog1").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay1").unbind("click");
+      }
+      else
+      {
+         $("#overlay1").click(function (e)
+         {
+            HideDialog1();
+         });
+      }
+   }
+
+   function HideDialog1()
+   {
+      $("#overlay1").hide();
+      $("#dialog1").fadeOut(300);
+   } 
+
+   	$(".btnShowSimple2").click(function (e)
+      	{
+         ShowDialog2(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose2").click(function (e)
+      	{
+         HideDialog2();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog2(modal)
+   {
+      $("#overlay2").show();
+      $("#dialog2").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay2").unbind("click");
+      }
+      else
+      {
+         $("#overlay2").click(function (e)
+         {
+            HideDialog2();
+         });
+      }
+   }
+
+   function HideDialog2()
+   {
+      $("#overlay2").hide();
+      $("#dialog2").fadeOut(300);
+   } 
+
+   	$(".btnShowSimple3").click(function (e)
+      	{
+         ShowDialog3(false);
+         e.preventDefault();
+      	});
+
+     
+      	$("#btnClose3").click(function (e)
+      	{
+         HideDialog3();
+         e.preventDefault();
+      	});
+
+     
+
+
+ function ShowDialog3(modal)
+   {
+      $("#overlay3").show();
+      $("#dialog3").fadeIn(300);
+
+      if (modal)
+      {
+         $("#overlay3").unbind("click");
+      }
+      else
+      {
+         $("#overlay3").click(function (e)
+         {
+            HideDialog3();
+         });
+      }
+   }
+
+   function HideDialog3()
+   {
+      $("#overlay3").hide();
+      $("#dialog3").fadeOut(300);
+   } 
+       
+      
+
+
+		function updateElementIndex(el, prefix, ndx) {
+			var id_regex = new RegExp('(' + prefix + '-\\d+-)');
+			var replacement = prefix + '-' + ndx + '-';
+			if ($(el).attr("for")) 
+				$(el).attr("for", $(el).attr("for").replace(id_regex,replacement));
+			if (el.id) 
+				el.id = el.id.replace(id_regex, replacement);
+			if (el.name) 
+				el.name = el.name.replace(id_regex, replacement);
+
+		}
+		
+		function deleteForm(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							       
+			       	$(btn).parents('.item').remove();
+			var forms = $('.item'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function(){ 
+						updateElementIndex(this, prefix, i);				          
+						});
+
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+		}
+	function deleteForm2(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							        	
+				$(btn).parents('.item2').remove();
+			var forms = $('.item2'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function() {					
+						updateElementIndex(this, prefix, i);				           
+						});										        
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+	}
+
+		function deleteForm3(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							        
+			$(btn).parents('.item3').remove();
+			var forms = $('.item3'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function() {
+						updateElementIndex(this, prefix, i);				          
+						});										         
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+		}
+
+			function deleteForm4(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount > 1) {							        
+			$(btn).parents('.item4').remove();
+			var forms = $('.item4'); 
+			$('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+			var i = 0;
+			for (formCount = forms.length; i < formCount; i++) {
+				$(forms.get(i)).children().children().each(function() {
+						updateElementIndex(this, prefix, i);				          
+						});										         
+			}
+			}
+			else {
+				alert("You have to enter at least one todo item!"); 
+			}return false;
+			
+		}
+		function addForm(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}	
+
+		function addForm2(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item2:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item2:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete2').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}
+
+		function addForm3(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			console.log($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item3:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item3:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete3').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}
+	
+	function addForm4(btn, prefix) {
+			var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+			console.log($('#id_' + prefix + '-TOTAL_FORMS').val());
+			if (formCount < 10) {
+				var row = $(".item4:first").clone(false).get(0);
+				$(row).removeAttr('id').hide().insertAfter(".item4:last").slideDown(300);
+				$(".errorlist", row).remove();
+				$(row).children().removeClass('error');
+				$(row).children().children().each(function() {
+						updateElementIndex(this, prefix, formCount);
+						if ( $(this).attr('type') == 'text' )
+						$(this).val('');
+						});
+				$(row).find('.delete4').click(function() {
+						return deleteForm(this, prefix);
+						});
+				$('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1); 
+			} // End if
+			else {
+				alert("Sorry, you can only enter a maximum of ten items.");
+			}
+			return false;
+		}
+			$("#add").click(function() {
+					return addForm(this, 'variables');
+					});
+
+			$("#add2").click(function() {
+					return addForm2(this, 'choices');
+					});
+			$("#add3").click(function() {
+					return addForm3(this, 'hints');
+					});
+			$("#add4").click(function() {
+					return addForm4(this, 'hints');
+					});
+		
+		
+
+			$(".delete").click(function() {
+					return deleteForm(this, 'variables');
+					});
+			$(".delete2").click(function() {
+					return deleteForm2(this, 'choices');
+					});
+			$(".delete3").click(function() {
+					return deleteForm3(this, 'hints');
+					});
+			$(".delete4").click(function() {
+					return deleteForm3(this, 'scripts');
+					});
+
+
+		
+				
+});	
+</script>
+</head>
+<body class="full-site">
+   
+   <h1>QBank: Problem Authoring Made Easy</h1>
+   
+   <div id="container" class='full-site'>
+ <div id="header">
+
+        <a href="/qbank/" class="banner1"></a>
+         <div id="header_right">
+        
+	  <div id="tabs"> 
+               <ul>
+                  	<li>
+               	   <a href="/qbank/">Home</a>
+               	</li>
+               	<li>
+               	   <a href="/qbank/index/">Write a problem</a>
+               	</li>
+                     <li>
+               	   <a href="/qbank/problems/">Search for problems</a>
+               	</li>
+			<li>
+               	   <a href="/qbank/export/">Export a problem</a>
+               	</li>
+
+               	<li>
+               	   <a href="/qbank/help/">Help</a>
+               	</li>        
+               </ul>
+            </div>
+         </div>
+       
+      </div>
+
+    </div>
+
+	<h2>Problem</h2>
+	<form action="" method="POST" >
+		{% csrf_token %}
+		<div class="section_a">
+			<div class ="item_a">
+					<span style="float:right">
+				<input type="button" id="btnShowSimple"  class="btnShowSimple" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output"></div>
+    
+				<div id="overlay" class="web_dialog_overlay"></div>
+    
+				<div id="dialog" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Problem Name and Difficulty </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		            <div id="brands">
+				    <b>Problem Name</b>: Unique identifier 
+<ul>
+<li>Filename used to save the problem onto database</li>
+<li>Filename for the problem exported in different formats</li>
+</ul>
+<p>
+
+Eg.: 'Addition' can be used as the title. The problem is stored as Addition on the Database. When the problem is generated as a csv file, 'Addition.csv' gets created. <p>
+
+				
+				    <b>Difficulty</b>: Pick a difficulty level which denotes the level of hardness of the authored problem.<p>
+<ul>
+<li>Useful when the problem is published in an intelligent tutoring system.
+</li>
+</ul>
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+				{{ problem_form.as_p }}
+			</div>
+		</div>
+
+	
+	<div class="section_c">
+		<h2>Problem Template </h2>
+		<div class ="item_c">
+				<span style="float:right">
+				<input type="button" id="btnShowSimple1"  class="btnShowSimple1" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output1"></div>
+    
+				<div id="overlay1" class="web_dialog_overlay"></div>
+    
+				<div id="dialog1" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose1">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b> Write a question with the variables  </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		             <div id="brands">
+Specify the variables in &lt;var&gt; .. &lt;/var&gt; delimiters.
+		             
+Example: 
+<p>How many cents are there in &lt;var&gt;NO_OF_QUARTERS&lt;/var&gt; quarters, &lt;var&gt;NO_OF_DIMES&lt;/var&gt; dimes, &lt;var&gt;NO_OF_NICKELS&lt;/var&gt; nickels?
+<p>
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+			{{problem_template_form.as_p }}
+			{{ problem_template_formset.management_form }}
+			{% for form in problem_template_formset.forms %}
+			{{ form.as_p }}
+			{% endfor %}
+
+		</div>		
+			
+		</div>
+	
+		<div class ="section">
+		<h2>Variables</h2>
+		{{ variable_formset.management_form }}
+		{% for form in variable_formset.forms %}
+		<div class="item">
+				<span style="float:right">
+				<input type="button" id="btnShowSimple2" class="btnShowSimple2" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output2"></div>
+    
+				<div id="overlay2" class="web_dialog_overlay"></div>
+    
+				<div id="dialog2" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose2">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Variables </b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+					<div id="brands">
+						The value for the variables has to be specified with randRange(min, max) including min and max values.<p>
+Example: <br>
+Variable Name : NO_OF_QUARTERS<br>
+Variable Value : randRange(34,70)
+				   
+				    
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+		<p>Variable name:{{form.var_id}}
+		</p>	
+		<p>Variable value:{{form.var_value}}
+		<span class="helptext">Use randRange(min,max)</span>
+		</p>
+		
+	                 <p style=""><a class="delete" href="#">Delete</a></p>
+		</div>
+		{% endfor %}
+		<p><a id="add" href="#">Add another Variable</a></p>
+		</div>
+
+  	<div class="section_b">
+	  <h2>Solution </h2>
+	  <div class ="item_b">
+		  <span style="float:right">
+				<input type="button" id="btnShowSimple3"  class="btnShowSimple3" value="What's this?" />
+				<br /><br />       
+    
+				<div id="output3"></div>
+    
+				<div id="overlay3" class="web_dialog_overlay"></div>
+    
+				<div id="dialog3" class="web_dialog">
+				<table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+				<tr>
+         			<td class="web_dialog_title">Help</td>
+         			<td class="web_dialog_title align_right">
+            			<a href="#" id="btnClose3">Close</a>
+        			</td>
+      				</tr>
+      				<tr>
+				         <td>&nbsp;</td>
+				         <td>&nbsp;</td>
+			      	</tr>
+			     	 <tr>
+         			<td colspan="2" style="padding-left: 15px;">
+            			<b>Answer</b>
+         			</td>
+      				</tr>
+      				<tr>
+         			<td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      				<tr>
+         			<td colspan="2" style="padding-left: 15px;">
+		            <div id="brands">
+				
+				The answer is typically the calculation within &lt;var&gt; ... &lt;/var&gt; delimiters.
+
+<p> Eg.:
+<p> &lt;var&gt; A + B / 4.5 &lt;/var&gt;<p>
+
+Individual variables need not be surrounded with &lt;var&gt;...&lt;/var&gt; delimiters.
+		            </div>
+			         </td>
+				      </tr>
+				      <tr>
+			         <td>&nbsp;</td>
+         			<td>&nbsp;</td>
+     				 </tr>
+      
+  			 </table>
+			</div>
+		</span>
+		  {{answer_form.as_p }}
+		  {{ answer_formset.management_form }}
+		  {% for form in answer_formset.forms %}
+		  
+		  	{{ form.as_p }}
+		  {% endfor %}
+	</div>
+</div>
+
+	
+		
+		
+		 <center>		
+			 <input type="submit" style="text-align:center; " value=" Save and Generate " />
+		</center>
+	
+	  <div id="footer">
+         <a href="/qbank/about/">About QBank</a> | 
+	 <a href="/qbank/help/">Help</a> | 
+         <a href="/qbank/contact/">Contact Us</a>
+      </div>
+	</form>
+</body>
+</html>
+
+
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html data-require="math">
+<head>
+
+
+<style type ="text/css">
+#loading {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  background-color: #fff;
+  z-index: 99;
+  text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top: 100px;
+  left: 240px;
+  z-index: 100;
+}
+</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>{{title}}</title>
+
+
+<script src="/qbank/lib/jquery.min.js">
+</script>
+<script src="/qbank/lib/jquery-ui.min.js">
+</script>
+<script>urlBaseOverride = "/qbank/ODSAkhan-exercises/";</script>
+<script src="/qbank/lib/khan-exercise-min.js">
+</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/dev/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js">
+  </script>
+
+ 
+  <script src="/qbank/JSAV/lib/jquery.transform.light.js"></script>
+  <script src="/qbank/JSAV/lib/raphael.js"></script>
+ 
+
+  <script src="/qbank/JSAV/build/JSAV-min.js"></script>
+  <link rel="stylesheet" href="/qbank/JSAV/css/JSAV.css" type="text/css" />
+
+  <style>
+    .jsavcontainer {
+      border: 0px;
+    }
+    #reset { margin-right: 20px;}
+  </style>
+
+
+</head>
+<body>
+<div id="loading">
+  <img id="loading-image" src="/qbank/ajax-loader.gif" alt="Loading..." />
+</div>
+<div class="exercise" data-name="/qbank/exercises/{{p.title}}">
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+  $(window).load(function() {
+    $('#loading').hide();
+  });
+</script>
+	
+</body>
+
+  <script type="text/javascript"
+     src="http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=http://algoviz.org/OpenDSA/ODSAkhan-exercises/KAthJax-77111459c7d82564a705f9c5480e2c88.js">
+  </script>
+
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['&','&'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+</html>
+
+
+

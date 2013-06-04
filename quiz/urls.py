@@ -8,9 +8,9 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'quiz.views.home', name='home'),
 		
-	url(r'^qtool/', include('qtool.urls')),
-	url(r'^/', include('qtool.urls')),
-	url(r'^home/annp89/qtool/', include('qtool.urls')),
+	url(r'^qbank/', include('qbank.urls')),
+	url(r'^/', include('qbank.urls')),
+	url(r'^home/annp89/qbank/', include('qbank.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
