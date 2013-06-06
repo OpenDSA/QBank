@@ -745,7 +745,7 @@ def summative_details(request, problem_id):
 	str ="<!DOCTYPE html>"+"\n"+"<html data-require=\"math math-format word-problems spin\">"+"\n"+"<head>"+"\n"+"<title>"+"\n"+p.title+"</title>"+"\n"+"<script src=\"../../lib/jquery.min.js\">"+"\n"+"</script>"+"\n"+"<script src=\"../../lib/jquery-ui.min.js\">"+"\n"+"</script>"+"\n"+"<script>urlBaseOverride = \"../../ODSAkhan-exercises/\";</script>"+"\n"+"<script src=\"../../lib/khan-exercise-min.js\">"+"\n"+"</script>"+"\n"+"</head>"+"\n"+"<body>"+"\n"
 	
 	for c in p.problemtemplate_set.all():
-		str += "<div class=\"exercise\" data-name=\"/qbank/exercises/"
+		str += "<div class=\"exercise\" data-name=\"/exercises/"
 		str += c.question
 		str += "\">"
 		str += "</div>"+"\n"
