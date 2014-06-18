@@ -53,7 +53,7 @@ var MODULE_ORIGIN = getURLParam('moduleOrigin');
 var MODULE_NAME = getURLParam('module');
 
 // The name of the book
-var BOOK_NAME = getURLParam('bookName');
+var BOOK_ID = getURLParam('book');
 
 var Khan = (function() {
   function warn( message, showClose ) {
@@ -722,7 +722,7 @@ var Khan = (function() {
 
     } else {
       var jsonData = {};
-      jsonData.book = BOOK_NAME;
+      jsonData.book = BOOK_ID;
       jsonData.module = MODULE_NAME;
       jsonData.key = 'phantom-key';
 
@@ -1880,7 +1880,7 @@ var Khan = (function() {
 
       return {
         key: key,
-        book: BOOK_NAME,
+        book: BOOK_ID,
 
         // The user answered correctly
         complete: pass === true ? 1 : 0,
